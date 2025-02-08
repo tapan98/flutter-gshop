@@ -1,5 +1,8 @@
 class GTexts {
 
+  // Generic Texts
+  static const String skip = "Skip";
+
   // Onboarding Texts
   static const String onboardingTitle1 = "Search your favorite products";
   static const String onboardingTitle2 = "Easy to pay online";

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gshop/util/logger/logger.dart';
 
+/// Controls the Onboarding navigation
+///
+/// Instantiated in OnboardingScreen
 class OnboardingController extends GetxController {
-  // Instantiated in OnboardingScreen
   static OnboardingController get instance => Get.find();
 
   // Variables
@@ -14,16 +17,28 @@ class OnboardingController extends GetxController {
   // Update current page index on scroll
   void updatePageIndex(int index) => pageIndex.value = index;
 
-
-
   // Update current page index on next page
+  void next() {
+    if (pageIndex.value < 2) {
+      pageIndex.value++;
+      pageController.nextPage(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut);
+    }
+  }
 
   // Update current page index on skip
+  void skip() {
+    if (pageIndex.value < 2) {
+      pageIndex.value = 2;
+      pageController.jumpToPage(2);
+    }
+  }
 
   @override
   void onClose() {
+    Log.debug("disposing PageController...");
     pageController.dispose();
     super.onClose();
   }
-
 }

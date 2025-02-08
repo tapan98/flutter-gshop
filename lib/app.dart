@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gshop/features/authentication/screens/onboarding_screen.dart';
 import 'package:gshop/util/theme/theme.dart';
 
 class App extends StatelessWidget {
@@ -10,11 +11,7 @@ class App extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: GTheme.lightTheme,
       darkTheme: GTheme.darkTheme,
-      home: Scaffold(
-        body: Center(
-          child: Text("Hello"),
-        ),
-      ),
+      home: const OnboardingScreen(),
     );
   }
 }

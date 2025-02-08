@@ -39,9 +39,7 @@ flutter:
   # Local Assets
   assets:
     - assets/logos/
-    - assets/logos/splash-orange.png
-    - assets/logos/splash-white.png
-    - assets/images/onboarding
+    - assets/images/onboarding/
 
   fonts:
     - family: Poppins

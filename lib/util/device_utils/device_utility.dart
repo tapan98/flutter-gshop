@@ -110,4 +110,6 @@ class DeviceUtils {
       throw 'Could not launch $url';
     }
   }
+
+  DeviceUtils._();
 }

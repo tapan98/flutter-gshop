@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gshop/features/authentication/controllers/onboarding/onboarding_controller.dart';
+import 'package:gshop/features/authentication/screens/widgets/onboarding_next_button.dart';
+import 'package:gshop/features/authentication/screens/widgets/onboarding_page.dart';
+import 'package:gshop/features/authentication/screens/widgets/onboarding_skip_button.dart';
 import 'package:gshop/util/constants/image_strings.dart';
+import 'package:gshop/util/constants/text_strings.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -16,20 +20,28 @@ class OnboardingScreen extends StatelessWidget {
           PageView(
             controller: controller.pageController,
             onPageChanged: controller.updatePageIndex,
-            children: const [
+            children: [
               // Images, Titles & Subtitles
-              Column(
-                children: [
-                  // Image
-                  Image(image: AssetImage(GImages.onboardingImage1)),
-                  // Title
-                  Text("data")
-
-                  // Subtitle
-                ],
-              )
+              OnboardingPage(
+                  title: GTexts.onboardingTitle1,
+                  subtitle: GTexts.onboardingSubtitle1,
+                  image: GImages.onboardingImage1),
+              OnboardingPage(
+                  title: GTexts.onboardingTitle2,
+                  subtitle: GTexts.onboardingSubtitle2,
+                  image: GImages.onboardingImage2),
+              OnboardingPage(
+                  title: GTexts.onboardingTitle3,
+                  subtitle: GTexts.onboardingSubtitle3,
+                  image: GImages.onboardingImage3),
             ],
-          )
+          ),
+
+          // Next Button
+          OnboardingNextButton(),
+
+          // Skip button
+          OnboardingSkipButton(),
         ],
       ),
     );
