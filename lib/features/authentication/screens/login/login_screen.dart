@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:gshop/common/styles/padding_styles.dart';
-import 'package:gshop/common/widgets/form_divider.dart';
-import 'package:gshop/common/widgets/social_buttons.dart';
+import 'package:gshop/common/widgets/authentication/form_divider.dart';
+import 'package:gshop/common/widgets/authentication/social_buttons.dart';
 import 'package:gshop/features/authentication/screens/login/widgets/login_form.dart';
 import 'package:gshop/features/authentication/screens/login/widgets/login_header.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
+import 'package:gshop/util/helpers/helper_functions.dart';
+import 'package:gshop/util/theme/theme.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    HelperFunctions.setDynamicStatusBarTheme(context);
     return Scaffold(
         body: SingleChildScrollView(
       child: Padding(

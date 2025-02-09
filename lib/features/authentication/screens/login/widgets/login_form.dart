@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:gshop/features/authentication/screens/signup/signup_screen.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 
@@ -39,7 +41,7 @@ class LoginForm extends StatelessWidget {
               // Remember me checkbox
               GestureDetector(
                 // TODO: toggle checkbox
-                onTap: (){},
+                onTap: () {},
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -48,11 +50,22 @@ class LoginForm extends StatelessWidget {
                       // TODO: toggle checkbox
                       onChanged: (value) {},
                     ),
-                    const Text(GTexts.rememberEmail),
+                    const Text(
+                      GTexts.rememberEmail,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ],
                 ),
               ),
-              TextButton(onPressed: (){}, child: Text(GTexts.forgotPassword)),
+              Flexible(
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    GTexts.forgotPassword,
+                    textAlign: TextAlign.end,
+                  ),
+                ),
+              ),
             ],
           ),
 
@@ -62,7 +75,8 @@ class LoginForm extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: (){},
+              // TODO: Login on pressed
+              onPressed: () {},
               child: Text(GTexts.signIn),
             ),
           ),
@@ -73,7 +87,7 @@ class LoginForm extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: OutlinedButton(
-              onPressed: (){},
+              onPressed: () => Get.to(() => const SignupScreen()),
               child: Text(GTexts.createAccount),
             ),
           ),

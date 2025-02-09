@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -64,6 +65,16 @@ class HelperFunctions {
 
   static List<T> removeDuplicates<T>(List<T> list) {
     return list.toSet().toList();
+  }
+
+  static void setDynamicStatusBarTheme(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarBrightness: Theme.of(context).brightness,
+      statusBarIconBrightness:
+      isDarkMode(context)
+          ? Brightness.light
+          : Brightness.dark,
+    ));
   }
 
   HelperFunctions._();

@@ -2,7 +2,7 @@ class GImages {
 
   // App Logos
   static const String lightAppLogo = "assets/logos/splash-white.png";
-  static const String darkAppLogo = "assets/logos/splash-orange.png";
+  static const String orangeAppLogo = "assets/logos/splash-orange.png";
 
   // Onboarding Images
   static const String onboardingImage1 = "assets/images/onboarding/shop-phone.png";

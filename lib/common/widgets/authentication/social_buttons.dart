@@ -12,8 +12,6 @@ class SocialButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          // width: GSizes.,
-          // height: GSizes.iconMd,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
               border: Border.all(color: GColors.grey)),
