@@ -23,7 +23,7 @@ class GElevatedButtonTheme {
   /* -- Dark Theme -- */
   static final darkElevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      elevation: 0,
+      elevation: GSizes.buttonElevation,
       foregroundColor: GColors.light,
       backgroundColor: GColors.primary,
       disabledForegroundColor: GColors.darkGrey,

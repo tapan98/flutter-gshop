@@ -11,7 +11,7 @@ class GSizes {
   static const double iconXs = 12.0;
   static const double iconSm = 16.0;
   static const double iconMd = 24.0;
-  static const double iconLg = 32.0;
+  static const double iconLg = 36.0;
 
   // Font sizes
   static const double fontSizeSm = 14.0;
@@ -20,7 +20,7 @@ class GSizes {
 
   // Button sizes
   static const double buttonHeight = 18.0;
-  static const double buttonRadius = 12.0;
+  static const double buttonRadius = 6.0;
   static const double buttonWidth = 120.0;
   static const double buttonElevation = 4.0;
 
@@ -49,7 +49,7 @@ class GSizes {
   static const double productItemHeight = 160.0;
 
   // Input field
-  static const double inputFieldRadius = 12.0;
+  static const double inputFieldRadius = 6.0;
   static const double spaceBtwInputFields = 16.0;
 
   // Card sizes

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gshop/features/authentication/controllers/onboarding/onboarding_controller.dart';
-import 'package:gshop/features/authentication/screens/widgets/onboarding_next_button.dart';
-import 'package:gshop/features/authentication/screens/widgets/onboarding_page.dart';
-import 'package:gshop/features/authentication/screens/widgets/onboarding_skip_button.dart';
 import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/text_strings.dart';
+
+import 'widgets/onboarding_next_button.dart';
+import 'widgets/onboarding_page.dart';
+import 'widgets/onboarding_skip_button.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});

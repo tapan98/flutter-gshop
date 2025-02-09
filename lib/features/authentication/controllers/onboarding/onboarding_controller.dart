@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gshop/features/authentication/screens/login/login_screen.dart';
 import 'package:gshop/util/logger/logger.dart';
 
 /// Controls the Onboarding navigation
@@ -24,7 +25,11 @@ class OnboardingController extends GetxController {
       pageController.nextPage(
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut);
+    } else {
+      Get.off(() => const LoginScreen());
+
     }
+
   }
 
   // Update current page index on skip
@@ -32,6 +37,8 @@ class OnboardingController extends GetxController {
     if (pageIndex.value < 2) {
       pageIndex.value = 2;
       pageController.jumpToPage(2);
+    } else {
+      Get.off(() => const LoginScreen());
     }
   }
 

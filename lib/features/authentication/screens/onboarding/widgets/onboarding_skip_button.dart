@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gshop/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
@@ -10,6 +11,7 @@ class OnboardingSkipButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = OnboardingController.instance;
     final isDark = HelperFunctions.isDarkMode(context);
     return Positioned(
       top: DeviceUtils.getAppBarHeight(),
@@ -18,8 +20,7 @@ class OnboardingSkipButton extends StatelessWidget {
         style: TextButton.styleFrom(
           foregroundColor: isDark ? GColors.white : GColors.black,
         ),
-        // TODO: update index to last page
-        onPressed: () {},
+        onPressed: controller.skip,
         child: Text(GTexts.skip),
       ),
     );

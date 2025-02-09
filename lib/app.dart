@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gshop/features/authentication/screens/onboarding_screen.dart';
+import 'package:get/get.dart';
+import 'package:gshop/features/authentication/screens/onboarding/onboarding_screen.dart';
 import 'package:gshop/util/theme/theme.dart';
 
 class App extends StatelessWidget {
@@ -7,7 +8,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       themeMode: ThemeMode.system,
       theme: GTheme.lightTheme,
       darkTheme: GTheme.darkTheme,
