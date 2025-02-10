@@ -9,6 +9,9 @@ class GImages {
   static const String onboardingImage2 = "assets/images/onboarding/online-payment.png";
   static const String onboardingImage3 = "assets/images/onboarding/delivery.png";
 
+  // Authentication Images
+  static const String emailDelivered = "assets/images/authentication/email-delivered.png";
+
   // Icons
   static const String googleIcon = "assets/icons/google-icon.png";
 

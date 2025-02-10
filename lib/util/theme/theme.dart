@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gshop/util/helpers/helper_functions.dart';
 import 'package:gshop/util/theme/custom_themes/text_theme.dart';
 
 import '../constants/colors.dart';

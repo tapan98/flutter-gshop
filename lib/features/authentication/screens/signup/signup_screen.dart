@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gshop/common/widgets/appbar/appbar.dart';
+import 'package:gshop/common/widgets/authentication/form_divider.dart';
+import 'package:gshop/common/widgets/authentication/social_buttons.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
@@ -26,6 +28,16 @@ class SignupScreen extends StatelessWidget {
 
               // Create Account Form
               CreateAccountForm(),
+
+              const SizedBox(height: GSizes.spaceBtwSections),
+
+              // Footer
+              FormDivider(text: GTexts.orSignInWith),
+
+              const SizedBox(height: GSizes.spaceBtwSections),
+
+              SocialButtons(),
+
             ],
           ),
         ),

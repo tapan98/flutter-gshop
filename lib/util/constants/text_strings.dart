@@ -3,6 +3,8 @@ class GTexts {
   // Generic Texts
   static const String skip = "skip";
   static const String and = "and";
+  static const String done = "done";
+  static const String continueText = "continue";
 
   // Onboarding Texts
   static const String onboardingTitle1 = "Search your favorite products";
@@ -29,11 +31,19 @@ class GTexts {
   static const String byCreatingAnAccountYouAgreeToOur = 'By creating an account, you agree to our ';
   static const String privacyPolicy = "Privacy Policy";
   static const String termsOfUse = "Terms of Use";
+  static const String submit = "Submit";
+  static const String resendEmail = "Resend Email";
 
   // Authentication Headings
   static const String welcomeTitle = "Hello!";
   static const String welcomeSubtitle = "Let’s sign you in to continue.";
   static const String createAccountTitle = "Let's create your Account!";
+  static const String forgotPasswordTitle = "Forgot Password?";
+  static const String forgotPasswordSubtitle = "Enter your email address and we'll send you a link to reset your password.";
+  static const String passwordResetLinkSent = "Password reset link sent to your email.";
+  static const String verifyEmailTitle = "Verify Email";
+  static const String verifyEmailSubtitle = "We've sent a verification link to your email.";
+
 
   GTexts._();
 }

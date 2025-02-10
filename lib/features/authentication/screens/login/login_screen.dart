@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gshop/common/styles/padding_styles.dart';
 import 'package:gshop/common/widgets/authentication/form_divider.dart';
 import 'package:gshop/common/widgets/authentication/social_buttons.dart';
-import 'package:gshop/features/authentication/screens/login/widgets/login_form.dart';
+import 'package:gshop/features/authentication/screens/login/password_screen.dart';
 import 'package:gshop/features/authentication/screens/login/widgets/login_header.dart';
-import 'package:gshop/util/constants/colors.dart';
-import 'package:gshop/util/constants/image_strings.dart';
+import 'package:gshop/features/authentication/screens/signup/signup_screen.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
-import 'package:gshop/util/theme/theme.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -27,12 +26,69 @@ class LoginScreen extends StatelessWidget {
             // Header: Welcome Title & Subtitle
             const LoginHeader(),
 
-            // Form: Email, Password, Remember me, Forgot Password, Sign In & Create Account
-            const Padding(
-              padding:
-                  EdgeInsets.symmetric(vertical: GSizes.spaceBtwSections),
-              child: LoginForm(),
+            HelperFunctions.spaceBtwSections(),
+
+            // Email Input & Continue Button
+            Form(
+              child: Column(
+                children: [
+                  // Email Input
+                  TextFormField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.email),
+                      labelText: GTexts.email,
+                    ),
+                  ),
+
+                  HelperFunctions.spaceBtwItems(),
+
+                  // Remember Email Checkbox
+                  GestureDetector(
+                    // TODO: toggle checkbox
+                    onTap: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Checkbox(
+                          value: true,
+                          // TODO: toggle checkbox
+                          onChanged: (value) {},
+                        ),
+                        const Text(
+                          GTexts.rememberEmail,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  HelperFunctions.spaceBtwItems(),
+
+                  // Continue Button
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      // TODO: Check Email input
+                      onPressed: () => Get.to(() => const PasswordScreen()),
+                      child: Text(GTexts.continueText.capitalize!),
+                    ),
+                  )
+                ],
+              ),
             ),
+
+            HelperFunctions.spaceBtwItems(),
+
+            // Create Account Button
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: () => Get.to(() => const SignupScreen()),
+                child: Text(GTexts.createAccount),
+              ),
+            ),
+
+            HelperFunctions.spaceBtwSections(),
 
             // Footer
             const FormDivider(text: GTexts.orSignInWith),

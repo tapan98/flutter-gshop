@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gshop/common/widgets/authentication/form_divider.dart';
-import 'package:gshop/common/widgets/authentication/social_buttons.dart';
+import 'package:get/get.dart';
+import 'package:gshop/features/authentication/screens/signup/verify_email_screen.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 
@@ -113,20 +113,12 @@ class CreateAccountForm extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
               // TODO: Create Account
-              onPressed: (){},
+              onPressed: () => Get.to(() => const VerifyEmailScreen()),
               child: Text(GTexts.createAccount),
             ),
           ),
 
-          const SizedBox(height: GSizes.spaceBtwSections),
 
-          // Footer
-          FormDivider(text: GTexts.orSignInWith),
-          
-          const SizedBox(height: GSizes.spaceBtwSections),
-
-
-          SocialButtons(),
         ],
       ),
     );

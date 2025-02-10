@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../constants/sizes.dart';
+
 class HelperFunctions {
 
   static Color? getColor(String value) {
@@ -35,6 +37,18 @@ class HelperFunctions {
     } else {
       return null;
     }
+  }
+
+  static SizedBox spaceBtwItems(){
+    return const SizedBox(height: GSizes.spaceBtwItems);
+  }
+
+  static SizedBox spaceBtwSections(){
+    return const SizedBox(height: GSizes.spaceBtwSections);
+  }
+
+  static SizedBox spaceBtwInputFields() {
+    return const SizedBox(height: GSizes.spaceBtwInputFields);
   }
 
   static void showSnackBar(String message) {
