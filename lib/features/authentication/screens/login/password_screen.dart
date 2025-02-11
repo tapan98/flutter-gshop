@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gshop/common/widgets/appbar/appbar.dart';
 import 'package:gshop/features/authentication/screens/login/widgets/login_header.dart';
-import 'package:gshop/features/authentication/screens/signup/verify_email_screen.dart';
-import 'package:gshop/util/constants/image_strings.dart';
+import 'package:gshop/navigation_menu.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
@@ -51,8 +50,6 @@ class PasswordScreen extends StatelessWidget {
                         ),
                       ),
 
-                      HelperFunctions.spaceBtwItems(),
-
                       // Forgot Password Button
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -68,14 +65,14 @@ class PasswordScreen extends StatelessWidget {
                         ],
                       ),
 
-                      HelperFunctions.spaceBtwItems(),
+                      HelperFunctions.spaceBtwItemsHeight(),
 
                       // Sign In Button
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           // TODO: Login on pressed
-                          onPressed: () {},
+                          onPressed: () => Get.offAll(() => const NavigationMenu()),
                           child: Text(GTexts.signIn),
                         ),
                       ),

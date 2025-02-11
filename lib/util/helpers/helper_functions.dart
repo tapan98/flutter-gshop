@@ -39,17 +39,28 @@ class HelperFunctions {
     }
   }
 
-  static SizedBox spaceBtwItems(){
+  static SizedBox spaceBtwItemsHeight(){
     return const SizedBox(height: GSizes.spaceBtwItems);
   }
 
-  static SizedBox spaceBtwSections(){
-    return const SizedBox(height: GSizes.spaceBtwSections);
+  static SizedBox spaceBtwItemsWidth(){
+    return const SizedBox(width: GSizes.spaceBtwItems);
   }
 
-  static SizedBox spaceBtwInputFields() {
+  static SizedBox spaceBtwSectionsHeight(){
+    return const SizedBox(height: GSizes.spaceBtwSections);
+  }
+  static SizedBox spaceBtwSectionsWidth(){
+    return const SizedBox(width: GSizes.spaceBtwSections);
+  }
+
+  static SizedBox spaceBtwInputFieldsHeight() {
     return const SizedBox(height: GSizes.spaceBtwInputFields);
   }
+    static SizedBox spaceBtwInputFieldsWidth() {
+    return const SizedBox(width: GSizes.spaceBtwInputFields);
+  }
+
 
   static void showSnackBar(String message) {
     ScaffoldMessenger.of(Get.context!).showSnackBar(

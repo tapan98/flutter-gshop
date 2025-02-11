@@ -33,25 +33,25 @@ class VerifyEmailScreen extends StatelessWidget {
                 GImages.emailDelivered,
               ),
 
-              HelperFunctions.spaceBtwSections(),
+              HelperFunctions.spaceBtwSectionsHeight(),
 
               // Verify Email Text
               Text(GTexts.verifyEmailTitle,
                   style: Theme.of(context).textTheme.headlineMedium),
 
-              HelperFunctions.spaceBtwItems(),
+              HelperFunctions.spaceBtwItemsHeight(),
 
               // User's Email
               Text("Some@email.com",
                   style: Theme.of(context).textTheme.labelLarge),
 
-              HelperFunctions.spaceBtwItems(),
+              HelperFunctions.spaceBtwItemsHeight(),
 
               // Verify Email Subtitle
               Text(GTexts.verifyEmailSubtitle,
                   style: Theme.of(context).textTheme.labelMedium),
 
-              HelperFunctions.spaceBtwSections(),
+              HelperFunctions.spaceBtwSectionsHeight(),
 
               // Continue Button
               SizedBox(
@@ -63,7 +63,7 @@ class VerifyEmailScreen extends StatelessWidget {
                 ),
               ),
 
-              HelperFunctions.spaceBtwItems(),
+              HelperFunctions.spaceBtwItemsHeight(),
 
               // Resend Email Button
               TextButton(

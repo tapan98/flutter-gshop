@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gshop/common/widgets/appbar/appbar.dart';
-import 'package:gshop/features/authentication/screens/password_reset/email_verification_screen.dart';
+import 'package:gshop/features/authentication/screens/password_reset/password_reset_screen.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 

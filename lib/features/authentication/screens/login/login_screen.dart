@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
             // Header: Welcome Title & Subtitle
             const LoginHeader(),
 
-            HelperFunctions.spaceBtwSections(),
+            HelperFunctions.spaceBtwSectionsHeight(),
 
             // Email Input & Continue Button
             Form(
@@ -40,7 +40,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
 
-                  HelperFunctions.spaceBtwItems(),
+                  const SizedBox(height: GSizes.spaceBtwItems),
 
                   // Remember Email Checkbox
                   GestureDetector(
@@ -62,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
 
-                  HelperFunctions.spaceBtwItems(),
+                  const SizedBox(height: GSizes.spaceBtwItems),
 
                   // Continue Button
                   SizedBox(
@@ -77,7 +77,7 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
 
-            HelperFunctions.spaceBtwItems(),
+            const SizedBox(height: GSizes.spaceBtwItems),
 
             // Create Account Button
             SizedBox(
@@ -88,7 +88,7 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
 
-            HelperFunctions.spaceBtwSections(),
+            const SizedBox(height: GSizes.spaceBtwSections),
 
             // Footer
             const FormDivider(text: GTexts.orSignInWith),

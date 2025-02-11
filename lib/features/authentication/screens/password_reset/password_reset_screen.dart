@@ -26,20 +26,21 @@ class PasswordResetScreen extends StatelessWidget {
                 width: HelperFunctions.screenWidth(context),
               ),
 
-              HelperFunctions.spaceBtwSections(),
+              HelperFunctions.spaceBtwSectionsHeight(),
 
               // Email Text
               Text("Some@email.com",
                   style: Theme.of(context).textTheme.labelLarge),
 
-              HelperFunctions.spaceBtwItems(),
+              HelperFunctions.spaceBtwItemsHeight(),
 
               // Email sent subtitle
               Text(GTexts.passwordResetLinkSent,
                   style: Theme.of(context).textTheme.headlineMedium),
 
-              HelperFunctions.spaceBtwSections(),
+              HelperFunctions.spaceBtwSectionsHeight(),
 
+              // Done Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -48,7 +49,7 @@ class PasswordResetScreen extends StatelessWidget {
                 ),
               ),
 
-              HelperFunctions.spaceBtwItems(),
+              HelperFunctions.spaceBtwItemsHeight(),
 
               // Resend
               TextButton(

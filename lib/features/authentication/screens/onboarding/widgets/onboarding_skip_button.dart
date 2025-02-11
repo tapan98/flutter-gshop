@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gshop/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/sizes.dart';
@@ -21,7 +22,7 @@ class OnboardingSkipButton extends StatelessWidget {
           foregroundColor: isDark ? GColors.white : GColors.black,
         ),
         onPressed: controller.skip,
-        child: Text(GTexts.skip),
+        child: Text(GTexts.skip.capitalize!),
       ),
     );
   }
