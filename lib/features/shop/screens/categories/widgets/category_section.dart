@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gshop/common/widgets/custom_shapes/container/circular_container.dart';
 import 'package:gshop/common/widgets/custom_shapes/container/circular_image_text.dart';
 import 'package:gshop/common/widgets/texts/section_heading.dart';
 import 'package:gshop/features/shop/controllers/category_controller.dart';
@@ -23,6 +22,8 @@ class CategorySection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          HelperFunctions.spaceBtwSectionsHeight(),
+
           // Section Heading
           SectionHeading(title: sectionTitle),
 

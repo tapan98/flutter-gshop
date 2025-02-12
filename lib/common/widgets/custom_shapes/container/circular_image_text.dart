@@ -15,6 +15,7 @@ class CircularImageText extends StatelessWidget {
     required this.text,
     this.onTap,
     this.imageBackgroundColor,
+    this.maxLines = 1,
   });
 
   final double width, height, imagePadding;
@@ -24,6 +25,7 @@ class CircularImageText extends StatelessWidget {
   final BoxFit fit;
   final VoidCallback? onTap;
   final Color? imageBackgroundColor;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,7 @@ class CircularImageText extends StatelessWidget {
 
           // Text
           Text(text,
-              maxLines: 1,
+              maxLines: maxLines,
               style: Theme.of(context).textTheme.labelLarge,
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis),

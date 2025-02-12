@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:gshop/common/widgets/custom_shapes/container/circular_container.dart';
-import 'package:gshop/common/widgets/custom_shapes/container/circular_image_text.dart';
 import 'package:gshop/features/shop/models/category_model.dart';
 import 'package:gshop/features/shop/screens/categories/widgets/category_section.dart';
-import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/logger/logger.dart';
 
 /// Instantiated in CategoriesScreen

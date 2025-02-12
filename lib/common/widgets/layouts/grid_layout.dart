@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/sizes.dart';
 
-import '../products/product_cards/product_card_vertical.dart';
 
 class GridLayout extends StatelessWidget {
   /// GridView for Products

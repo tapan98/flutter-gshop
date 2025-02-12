@@ -13,11 +13,12 @@ class RoundedCornerImage extends StatelessWidget {
     this.borderRadius = GSizes.md,
     this.isNetworkImage = false,
     this.fit = BoxFit.contain,
-    this.onTap,
+    this.onTap, this.backgroundColor,
   });
 
   final String imageUrl;
   final double? width, height;
+  final Color? backgroundColor;
   final BoxBorder? border;
   final double borderRadius;
   final bool isNetworkImage;
@@ -36,6 +37,7 @@ class RoundedCornerImage extends StatelessWidget {
         decoration: BoxDecoration(
           border: border,
           borderRadius: BorderRadius.circular(borderRadius),
+          color: backgroundColor,
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(borderRadius),

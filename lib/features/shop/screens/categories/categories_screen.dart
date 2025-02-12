@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:gshop/common/widgets/appbar/appbar.dart';
-import 'package:gshop/common/widgets/custom_shapes/container/search_bar.dart';
 import 'package:gshop/features/shop/screens/categories/widgets/category_panel.dart';
 import 'package:gshop/util/constants/colors.dart';
-import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/sizes.dart';
-import 'package:gshop/util/device_utils/device_utility.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
 
 import '../../controllers/category_controller.dart';

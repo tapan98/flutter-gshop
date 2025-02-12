@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:gshop/common/widgets/custom_shapes/container/circular_container.dart';
+import 'package:gshop/features/shop/screens/cart/cart_screen.dart';
 import 'package:gshop/features/shop/screens/categories/categories_screen.dart';
 import 'package:gshop/features/shop/screens/home/home_screen.dart';
 import 'package:gshop/util/constants/colors.dart';
@@ -57,7 +57,7 @@ class NavigationController extends GetxController {
   final List<StatelessWidget> screens = <StatelessWidget>[
     const HomeScreen(),
     const CategoriesScreen(),
-    Container(color: Colors.green),
+    const CartScreen(),
     Container(color: Colors.purple),
   ];
 }

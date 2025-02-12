@@ -30,22 +30,32 @@ class CategoryPanel extends StatelessWidget {
               // TODO: set index & navigate to selected category section
               onTap: () => controller.onCategorySelected(index),
               child: Obx(
-                () => Container(
-                  width: 56,
-                  height: 90,
-                  padding: EdgeInsets.all(GSizes.sm),
-                  decoration: BoxDecoration(
-                    // Highlight selected Category
-                    color: index == controller.selectedIndex.value ? selectedItemColor : panelBackgroundColor,
-                  ),
-                  child: CircularImageText(
-                    width: 40,
-                    height: 40,
-                    image: GImages.product1,
-                    imageBackgroundColor: Colors.transparent,
-                    text: "category $index",
-                  ),
-                ),
+                () {
+                  final bool isSelected = index == controller.selectedIndex.value;
+                  return Container(
+                    width: 56,
+                    height: 100,
+                    padding: EdgeInsets.symmetric(horizontal: GSizes.sm),
+                    decoration: BoxDecoration(
+                      // Highlight selected Category
+                      color: isSelected
+                          ? selectedItemColor
+                          : panelBackgroundColor,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(GSizes.md),
+                        bottomRight: Radius.circular(GSizes.md),
+                      ),
+                    ),
+                    child: CircularImageText(
+                      width: 50,
+                      height: 50,
+                      maxLines: 1,
+                      image: GImages.product1,
+                      imageBackgroundColor: Colors.transparent,
+                      text: "category $index",
+                    ),
+                  );
+                },
               ),
             ),
           ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gshop/common/widgets/images/vertical_image_text.dart';
 import 'package:gshop/util/constants/image_strings.dart';
-import 'package:gshop/util/constants/sizes.dart';
 
 class HomeProductCategories extends StatelessWidget {
   const HomeProductCategories({super.key});
