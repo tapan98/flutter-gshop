@@ -5,6 +5,7 @@ import 'package:gshop/common/widgets/products/product_cards/product_card_vertica
 import 'package:gshop/common/widgets/texts/section_heading.dart';
 import 'package:gshop/features/shop/screens/home/widgets/home_product_categories.dart';
 import 'package:gshop/features/shop/screens/home/widgets/promo_slider.dart';
+import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/device_utils/device_utility.dart';
@@ -28,7 +29,8 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: DeviceUtils.getAppBarHeight()),
-                  AddressBar(),
+                  AddressBar(foregroundColor: GColors.black),
+                  HelperFunctions.spaceBtwItemsHeight(),
                   GSearchBar(text: "Search for Products"),
                 ],
               ),

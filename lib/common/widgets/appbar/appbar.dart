@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/sizes.dart';
@@ -20,12 +21,10 @@ class GAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    HelperFunctions.setDynamicStatusBarTheme(context);
     final isDark = HelperFunctions.isDarkMode(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: GSizes.md),
       child: AppBar(
-        backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         leading: showBackArrow
             ? IconButton(

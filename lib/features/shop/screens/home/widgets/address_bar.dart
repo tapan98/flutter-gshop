@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/sizes.dart';
 
@@ -20,7 +21,8 @@ class AddressBar extends StatelessWidget {
         children: [
           // Icon
           // TODO: change change icon based on location type, e.g. Home, Office
-          Icon(Icons.location_on, color: foregroundColor, size: GSizes.iconSm),
+          // Icon(Icons.location_on, color: foregroundColor, size: GSizes.iconSm),
+          FaIcon(FontAwesomeIcons.locationDot, color: foregroundColor, size: GSizes.iconSm),
 
           const SizedBox(width: GSizes.spaceBtwItems / 2),
 
@@ -29,7 +31,7 @@ class AddressBar extends StatelessWidget {
             "Home",
             style: Theme.of(context)
                 .textTheme
-                .labelLarge!
+                .bodyMedium!
                 .apply(color: foregroundColor),
           ),
 
@@ -40,7 +42,7 @@ class AddressBar extends StatelessWidget {
             child: Text(
               "Ama Colony, Vin Building, Delhi, India - 110001",
               style: Theme.of(context).textTheme.labelMedium!.apply(
-                    color: foregroundColor.withValues(alpha: 0.7),
+                    color: foregroundColor,
                   ),
               overflow: TextOverflow.ellipsis,
             ),

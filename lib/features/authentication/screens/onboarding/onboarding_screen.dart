@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:gshop/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/text_strings.dart';
+import 'package:gshop/util/helpers/helper_functions.dart';
 
 import 'widgets/onboarding_next_button.dart';
 import 'widgets/onboarding_page.dart';
@@ -13,6 +14,7 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HelperFunctions.setDynamicStatusBarTheme(context);
     final controller = Get.put(OnboardingController());
     return Scaffold(
       body: Stack(

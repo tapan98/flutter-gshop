@@ -14,6 +14,7 @@ dependencies:
 
   # Icons
   cupertino_icons: ^1.0.8
+  font_awesome_flutter: ^10.8.0
 
   # State Management
   get: ^4.6.6
@@ -64,3 +65,5 @@ flutter:
           weight: 600
         - asset: assets/fonts/Poppins-Bold.ttf
           weight: 800
+
+

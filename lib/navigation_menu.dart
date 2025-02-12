@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:gshop/common/widgets/custom_shapes/container/circular_container.dart';
+import 'package:gshop/features/shop/screens/categories/categories_screen.dart';
 import 'package:gshop/features/shop/screens/home/home_screen.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
@@ -23,19 +26,21 @@ class NavigationMenu extends StatelessWidget {
               : GColors.black.withValues(alpha: 0.1),
           destinations: [
             NavigationDestination(
-              icon: Icon(Icons.home),
+              // icon: Icon(Icons.home),
+              icon: FaIcon(FontAwesomeIcons.house),
               label: "Home",
             ),
             NavigationDestination(
-              icon: Icon(Icons.view_list),
+              icon: FaIcon(FontAwesomeIcons.cubesStacked),
               label: "Categories",
             ),
             NavigationDestination(
-              icon: Icon(Icons.shopping_cart),
-              label: "Cart",
+              icon: FaIcon(FontAwesomeIcons.cartShopping),
+              // TODO: Fetch Cart items
+              label: "Cart (3)",
             ),
             NavigationDestination(
-              icon: Icon(Icons.person),
+              icon: FaIcon(FontAwesomeIcons.idCard),
               label: "Account",
             ),
           ],
@@ -51,7 +56,7 @@ class NavigationController extends GetxController {
 
   final List<StatelessWidget> screens = <StatelessWidget>[
     const HomeScreen(),
-    Container(color: Colors.blue),
+    const CategoriesScreen(),
     Container(color: Colors.green),
     Container(color: Colors.purple),
   ];

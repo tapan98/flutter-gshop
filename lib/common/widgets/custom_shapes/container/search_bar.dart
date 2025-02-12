@@ -13,6 +13,7 @@ class GSearchBar extends StatelessWidget {
     this.showBorder = true,
     this.onTap,
     this.padding = const EdgeInsets.symmetric(horizontal: GSizes.defaultSpace),
+    this.height,
   });
 
   final String text;
@@ -20,6 +21,7 @@ class GSearchBar extends StatelessWidget {
   final bool transparentBackground, showBorder;
   final VoidCallback? onTap;
   final EdgeInsetsGeometry padding;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +30,12 @@ class GSearchBar extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          HelperFunctions.spaceBtwItemsHeight(),
+          // HelperFunctions.spaceBtwItemsHeight(),
           Padding(
             padding: padding,
             child: Container(
               width: DeviceUtils.getScreenWidth(context),
+              height: height,
               padding: EdgeInsets.all(GSizes.md),
               decoration: BoxDecoration(
                 color: transparentBackground

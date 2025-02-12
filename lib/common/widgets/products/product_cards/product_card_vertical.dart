@@ -38,11 +38,7 @@ class ProductCardVertical extends StatelessWidget {
                 Positioned(
                   bottom: 12,
                   left: 12,
-                  child: RoundedCornerContainer(
-                    padding: EdgeInsets.all(GSizes.xs),
-                    radius: GSizes.xs,
-                    child: RatingChip(rating: productRating,totalRatings: totalRatings),
-                  ),
+                  child: RatingChip(rating: productRating,totalRatings: totalRatings),
                 ),
               ],
             ),
@@ -81,6 +77,7 @@ class ProductCardVertical extends StatelessWidget {
                 Text(
                   offerText!,
                   style: Theme.of(context).textTheme.bodyLarge,
+                  overflow: TextOverflow.ellipsis,
                 ),
             ],
           ),

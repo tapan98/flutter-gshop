@@ -94,7 +94,7 @@ class HelperFunctions {
 
   static void setDynamicStatusBarTheme(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarBrightness: Theme.of(context).brightness,
+      // statusBarBrightness: Theme.of(context).brightness,
       statusBarIconBrightness:
       isDarkMode(context)
           ? Brightness.light
