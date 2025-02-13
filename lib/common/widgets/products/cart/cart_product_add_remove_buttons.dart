@@ -32,7 +32,7 @@ class CartProductQuantityWithAddRemoveButtons extends StatelessWidget {
 
         // Add Button
         CircularIcon(
-          icon: Icons.remove,
+          icon: Icons.add,
           width: 32,
           height: 32,
           size: GSizes.md,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gshop/common/widgets/appbar/appbar.dart';
+import 'package:gshop/features/shop/screens/checkout/order_summary_screen.dart';
 import 'package:gshop/util/constants/sizes.dart';
 
 import 'widgets/cart_items.dart';
@@ -15,12 +17,15 @@ class CartScreen extends StatelessWidget {
         title: Text("My Cart"),
       ),
       body: const Padding(
-        padding: EdgeInsets.all(GSizes.defaultSpace),
+        padding: EdgeInsets.symmetric(horizontal: GSizes.defaultSpace),
         child: CartItems(),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: GSizes.defaultSpace),
-        child: ElevatedButton(onPressed: (){}, child: Text("Checkout ₹71,000")),
+        child: ElevatedButton(
+          onPressed: () => Get.to(() => const OrderSummaryScreen()),
+          child: Text("Checkout ₹71,000"),
+        ),
       ),
     );
   }

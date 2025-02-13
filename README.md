@@ -18,3 +18,6 @@ An E-commerce app.
 
 ### Cart Screen
 <img src="screenshots/cart_screen_dark.jpg" width="40%" alt="Cart Screen dark"/> <img src="screenshots/cart_screen_light.jpg" width="40%" alt="Cart Screen light"/>
+
+### Order Summary Screen
+<img src="screenshots/order_summary_dark.jpg" width="40%" alt="Order Summary Screen dark"/> <img src="screenshots/order_summary_light.jpg" width="40%" alt="Order Summary Screen light"/>

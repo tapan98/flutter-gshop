@@ -9,9 +9,14 @@ import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({super.key, this.showAddRemoveButton = false});
+  const CartItem({
+    super.key,
+    this.showAddRemoveButton = false,
+    this.offersText,
+  });
 
   final bool showAddRemoveButton;
+  final String? offersText;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +44,10 @@ class CartItem extends StatelessWidget {
             children: [
               // Brand Text
               const BrandTitleTextWithVerifiedIcon(title: "Samsung"),
-          
+
               // Product Name
               ProductTitleText(title: "Samsung Galaxy S24 Ultra"),
-          
+
               // Variant 1
               RichText(
                 text: TextSpan(
@@ -74,6 +79,21 @@ class CartItem extends StatelessWidget {
                   ],
                 ),
               ),
+
+              // Applied Offers
+              if (offersText != null)
+                Column(
+                  children: [
+                    const SizedBox(height: GSizes.spaceBtwItems/2),
+                    Text(
+                      offersText!,
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge
+                          ?.apply(color: GColors.success),
+                    ),
+                  ],
+                ),
 
               HelperFunctions.spaceBtwItemsHeight(),
 

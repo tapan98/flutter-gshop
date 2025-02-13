@@ -5,6 +5,8 @@ class GTexts {
   static const String and = "and";
   static const String done = "done";
   static const String continueText = "continue";
+  static const String deliverTo = "deliver to";
+  static const String change = "change";
 
   // Onboarding Texts
   static const String onboardingTitle1 = "Search your favorite products";
@@ -43,6 +45,19 @@ class GTexts {
   static const String passwordResetLinkSent = "Password reset link sent to your email.";
   static const String verifyEmailTitle = "Verify Email";
   static const String verifyEmailSubtitle = "We've sent a verification link to your email.";
+
+  // Product
+  static const String priceDetails = "Price Details";
+  static const String price = "price";
+  static const String item = "item";
+  static const String orderSummary = "Order Summary";
+  static const String discount = "discount";
+  static const String deliveryCharges = "Delivery Charges";
+  static const String freeDelivery = "FREE Delivery";
+  static const String deliveryBy = "Delivery by";
+  static const String totalAmount = "Total Amount";
+  static const String youWillSave = "You will save";
+  static const String onThisOrder = "on this order";
 
 
   GTexts._();

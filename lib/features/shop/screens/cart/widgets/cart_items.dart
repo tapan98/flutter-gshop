@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gshop/common/widgets/products/cart/cart_item.dart';
+import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
 
 class CartItems extends StatelessWidget {
   const CartItems({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,9 @@ class CartItems extends StatelessWidget {
       },
       itemCount: 1,
       separatorBuilder: (_, __) => HelperFunctions.spaceBtwSectionsHeight(),
-      shrinkWrap: true,
+      // Add extra space at the end of list
+      padding: EdgeInsets.only(bottom: GSizes.spaceBtwSections),
+      shrinkWrap: false,
     );
   }
 }
