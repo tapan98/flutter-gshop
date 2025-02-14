@@ -21,3 +21,6 @@ An E-commerce app.
 
 ### Order Summary Screen
 <img src="screenshots/order_summary_dark.jpg" width="40%" alt="Order Summary Screen dark"/> <img src="screenshots/order_summary_light.jpg" width="40%" alt="Order Summary Screen light"/>
+
+### Product Details Screen
+<img src="screenshots/product_details_dark.jpg" width="40%" alt="Product Details Screen dark"/> <img src="screenshots/product_details_light.jpg" width="40%" alt="Product Details Screen light"/>

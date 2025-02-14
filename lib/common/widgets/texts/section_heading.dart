@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gshop/util/constants/sizes.dart';
 
 class SectionHeading extends StatelessWidget {
@@ -37,7 +38,7 @@ class SectionHeading extends StatelessWidget {
             if (onTap != null)
               buttonTitle != null
                   ? TextButton(onPressed: onTap, child: Text(buttonTitle!))
-                  : Icon(Icons.arrow_right_alt),
+                  : FaIcon(FontAwesomeIcons.arrowRight),
           ],
         ),
       ),

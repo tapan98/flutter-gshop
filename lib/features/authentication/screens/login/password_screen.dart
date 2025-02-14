@@ -14,7 +14,7 @@ class PasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = HelperFunctions.isDarkMode(context);
+    HelperFunctions.isDarkMode(context);
     return Scaffold(
       appBar: GAppBar(),
       body: SingleChildScrollView(
@@ -25,16 +25,10 @@ class PasswordScreen extends StatelessWidget {
             children: [
               // Logo
               LoginHeader(),
-              // Image.asset(
-              //   isDark ? GImages.lightAppLogo : GImages.orangeAppLogo,
-              //   height: 100,
-              // ),
 
               // User's Email text
               Text("some@email.com",
                   style: Theme.of(context).textTheme.labelLarge),
-
-              // Enter password Title
 
               // Password Input Form
               Padding(

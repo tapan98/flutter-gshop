@@ -53,7 +53,6 @@ class PromoSlider extends StatelessWidget {
                   ? GColors.primary
                     : Colors.grey,
                   ),
-
                 )
             ],
           ),
