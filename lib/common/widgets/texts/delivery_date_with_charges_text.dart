@@ -20,7 +20,7 @@ class DeliveryDateWithChargesText extends StatelessWidget {
   Widget build(BuildContext context) {
     final String weekDay = DateFormat('E').format(deliveryDate);
     final String month = DateFormat("MMM").format(deliveryDate);
-    return Row(
+    return Wrap(
       children: [
         // Delivery Date
         Text(

@@ -72,7 +72,8 @@ class HomeScreen extends StatelessWidget {
           // Vertical Product Cards
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: GSizes.defaultSpace),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: GSizes.defaultSpace),
               child: GridLayout(
                 itemBuilder: (context, index) => ProductCardVertical(
                   productTitle: "Samsung Galaxy S24 Ultra",
@@ -86,7 +87,6 @@ class HomeScreen extends StatelessWidget {
           ),
 
           SliverToBoxAdapter(child: HelperFunctions.spaceBtwSectionsHeight()),
-
         ],
       ),
     );

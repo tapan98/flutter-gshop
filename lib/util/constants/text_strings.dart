@@ -7,6 +7,11 @@ class GTexts {
   static const String continueText = "continue";
   static const String deliverTo = "deliver to";
   static const String change = "change";
+  static const String logout = "logout";
+  static const String home = "home";
+  static const String categories = "categories";
+  static const String cart = "cart";
+  static const String profile = "profile";
 
   // Onboarding Texts
   static const String onboardingTitle1 = "Search your favorite products";
@@ -58,6 +63,26 @@ class GTexts {
   static const String totalAmount = "Total Amount";
   static const String youWillSave = "You will save";
   static const String onThisOrder = "on this order";
+  static const String buyNow = "Buy Now";
+  static const String addToCart = "Add to Cart";
+
+  // Profile
+  static const String orders = "orders";
+  static const String wishlist = "wishlist";
+  static const String savedAddressesTitle = "Addresses";
+  static const String savedAddressesSubtitle = "Manage your saved addresses";
+  static const String paymentMethodsTitle = "Payment Methods";
+  static const String paymentMethodsSubtitle = "Set your payment methods";
+  static const String notificationSettingsTitle = "Notification Settings";
+  static const String notificationSettingsSubtitle = "Manage your notification settings";
+  static const String ordersSubtitle = "Manage your orders";
+  static const String wishListSubtitle = "View your wishlist";
+  static const String privacyTitle = "Privacy";
+  static const String privacySubtitle = "Manage your privacy settings";
+  static const String accountSettings = "Account Settings";
+  static const String appSettings = "App Settings";
+  static const String colorSchemeTitle = "App Color Scheme";
+  static const String colorSchemeSubtitle = "Choose between light and dark mode";
 
 
   GTexts._();

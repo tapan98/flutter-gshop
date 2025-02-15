@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:gshop/util/constants/colors.dart';
+import 'package:gshop/common/styles/gradient_styles.dart';
 
 import '../clip_path_shapes/curved_bottom_widget.dart';
 
 class PrimaryHeaderContainer extends StatelessWidget {
-  const PrimaryHeaderContainer({super.key, this.child});
+  const PrimaryHeaderContainer({
+    super.key,
+    this.padding,
+    this.child,
+  });
 
+  final EdgeInsetsGeometry? padding;
   final Widget? child;
 
   @override
   Widget build(BuildContext context) {
-    final gradient = LinearGradient(
-      colors: [
-        GColors.primary,
-        GColors.primaryBackground,
-      ],
-      begin: Alignment.topLeft,
-      end: Alignment(3.5,2),
-    );
     return Column(
       children: [
         // Content
         Container(
+          padding: padding,
           // color: GColors.primary,
           decoration: BoxDecoration(
-            gradient: gradient,
+            gradient: GradientStyles.primaryGradient,
           ),
           child: child,
         ),
@@ -37,7 +35,7 @@ class PrimaryHeaderContainer extends StatelessWidget {
               child: CurvedBottomWidget(
                 child: Container(
                   decoration: BoxDecoration(
-                    gradient: gradient,
+                    gradient: GradientStyles.primaryGradient,
                   ),
                   height: 30,
                 ),
@@ -46,7 +44,7 @@ class PrimaryHeaderContainer extends StatelessWidget {
             CurvedBottomWidget(
               child: Container(
                 decoration: BoxDecoration(
-                  gradient: gradient,
+                  gradient: GradientStyles.primaryGradient,
                 ),
                 height: 20,
               ),
