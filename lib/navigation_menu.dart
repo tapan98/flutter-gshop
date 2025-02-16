@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:gshop/features/personalization/screens/profile/profile_screen.dart';
 import 'package:gshop/features/shop/screens/cart/cart_screen.dart';
 import 'package:gshop/features/shop/screens/categories/categories_screen.dart';
 import 'package:gshop/features/shop/screens/home/home_screen.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
+
+import 'features/personalization/screens/settings/settings_screen.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
@@ -42,8 +43,8 @@ class NavigationMenu extends StatelessWidget {
               label: "${GTexts.cart.capitalize!} (3)",
             ),
             NavigationDestination(
-              icon: FaIcon(FontAwesomeIcons.idCard),
-              label: GTexts.profile.capitalize!,
+              icon: FaIcon(FontAwesomeIcons.bars),
+              label: GTexts.settings.capitalize!,
             ),
           ],
         ),
@@ -60,6 +61,6 @@ class NavigationController extends GetxController {
     const HomeScreen(),
     const CategoriesScreen(),
     const CartScreen(),
-    const ProfileScreen(),
+    const SettingsScreen(),
   ];
 }

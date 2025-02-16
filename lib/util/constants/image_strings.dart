@@ -11,6 +11,7 @@ class GImages {
 
   // Authentication Images
   static const String emailDelivered = "assets/images/authentication/email-delivered.png";
+  static const String dummyPersonImage = "assets/images/authentication/person-dummy.jpg";
 
   // Banner Images
   static const String banner1 = "assets/images/banners/diwali-sale-banner.jpg";

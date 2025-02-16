@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:gshop/features/personalization/screens/profile/widgets/profile_account_settings_section.dart';
-import 'package:gshop/features/personalization/screens/profile/widgets/profile_app_settings_section.dart';
-import 'package:gshop/features/personalization/screens/profile/widgets/profile_header.dart';
+import 'package:gshop/common/widgets/appbar/appbar.dart';
+import 'package:gshop/common/widgets/texts/section_heading.dart';
+import 'package:gshop/features/personalization/screens/profile/widgets/profile_menu.dart';
+import 'package:gshop/features/personalization/screens/profile/widgets/profile_picture_widget.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
@@ -12,39 +12,92 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HelperFunctions.setDynamicStatusBarTheme(context);
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(GSizes.defaultSpace),
-            child: Column(
-              children: [
-                ProfileHeader(),
+      appBar: GAppBar(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(GSizes.defaultSpace),
+          child: Column(
+            children: [
+              // Profile Pictures
+              ProfilePictureWidget(),
 
-                HelperFunctions.spaceBtwSectionsHeight(),
+              const SizedBox(height: GSizes.spaceBtwSections / 2),
+              Divider(),
+              const SizedBox(height: GSizes.spaceBtwSections / 2),
 
-                ProfileAccountSettingsSection(),
+              // ---- Profile Information ---- //
+              SectionHeading(title: "Profile Information"),
 
-                const SizedBox(height: GSizes.spaceBtwSections / 2),
+              HelperFunctions.spaceBtwItemsHeight(),
 
-                const SizedBox(height: GSizes.spaceBtwSections / 2),
+              // First Name
+              ProfileMenu(
+                title: GTexts.firstName,
+                value: "Tapan",
+                onTap: () {},
+              ),
 
-                ProfileAppSettingsSection(),
+              // Last Name
+              ProfileMenu(
+                title: GTexts.lastName,
+                value: "B",
+                onTap: () {},
+              ),
 
-                HelperFunctions.spaceBtwSectionsHeight(),
+              const SizedBox(height: GSizes.spaceBtwSections / 2),
+              Divider(),
+              const SizedBox(height: GSizes.spaceBtwSections / 2),
 
-                // Logout Button
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton(
-                    // TODO: logout the user
-                    onPressed: () {},
-                    child: Text(GTexts.logout.capitalize!),
-                  ),
+              // ---- Personal Information ---- //
+              SectionHeading(title: "Personal Information"),
+
+              HelperFunctions.spaceBtwItemsHeight(),
+
+              // Mobile Number
+              ProfileMenu(
+                title: GTexts.phoneNumber,
+                value: "+91 99999 99999",
+                onTap: () {},
+              ),
+
+              // Email ID
+              ProfileMenu(
+                title: GTexts.email,
+                value: "tapanboro98@gmail.com",
+                onTap: () {},
+              ),
+
+              // Gender
+              ProfileMenu(
+                title: GTexts.gender,
+                value: "Male",
+                onTap: () {},
+              ),
+
+              const SizedBox(height: GSizes.spaceBtwSections / 2),
+              Divider(),
+              const SizedBox(height: GSizes.spaceBtwSections / 2),
+
+              // ---- Buttons ---- //
+              // Deactivate Account Button
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  GTexts.deactivateAccount,
+                  style: TextStyle(color: Colors.red),
                 ),
-              ],
-            ),
+              ),
+
+              // Delete Account Button
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  GTexts.deleteAccount,
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+            ],
           ),
         ),
       ),

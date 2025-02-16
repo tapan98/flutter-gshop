@@ -6,10 +6,10 @@ import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
 
-import 'profile_menu_tile.dart';
+import 'settings_menu_tile.dart';
 
-class ProfileAccountSettingsSection extends StatelessWidget {
-  const ProfileAccountSettingsSection({super.key});
+class AccountSettingsSection extends StatelessWidget {
+  const AccountSettingsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ProfileAccountSettingsSection extends StatelessWidget {
         HelperFunctions.spaceBtwItemsHeight(),
 
         // Orders
-        ProfileMenuTile(
+        SettingsMenuTile(
           icon: FaIcon(
             FontAwesomeIcons.boxesPacking,
             color: GColors.primary,
@@ -35,7 +35,7 @@ class ProfileAccountSettingsSection extends StatelessWidget {
         ),
 
         // WishList
-        ProfileMenuTile(
+        SettingsMenuTile(
           icon: FaIcon(
             FontAwesomeIcons.solidHeart,
             color: GColors.primary,
@@ -46,7 +46,7 @@ class ProfileAccountSettingsSection extends StatelessWidget {
         ),
 
         // Saved Addresses
-        ProfileMenuTile(
+        SettingsMenuTile(
           icon: FaIcon(
             FontAwesomeIcons.solidAddressBook,
             color: GColors.primary,
@@ -58,7 +58,7 @@ class ProfileAccountSettingsSection extends StatelessWidget {
         ),
 
         // Payment Methods
-        ProfileMenuTile(
+        SettingsMenuTile(
           icon: FaIcon(
             FontAwesomeIcons.wallet,
             color: GColors.primary,
@@ -70,7 +70,7 @@ class ProfileAccountSettingsSection extends StatelessWidget {
         ),
 
         // Notification Settings
-        ProfileMenuTile(
+        SettingsMenuTile(
           icon: FaIcon(
             FontAwesomeIcons.solidBell,
             color: GColors.primary,
@@ -82,7 +82,7 @@ class ProfileAccountSettingsSection extends StatelessWidget {
         ),
 
         // Privacy Settings
-        ProfileMenuTile(
+        SettingsMenuTile(
           icon: FaIcon(
             FontAwesomeIcons.shieldHalved,
             color: GColors.primary,

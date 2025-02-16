@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gshop/common/widgets/texts/section_heading.dart';
-import 'package:gshop/features/personalization/screens/profile/widgets/profile_menu_tile.dart';
+import 'package:gshop/features/personalization/screens/settings/widgets/settings_theme_choice.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
 
-class ProfileAppSettingsSection extends StatelessWidget {
-  const ProfileAppSettingsSection({super.key});
+import 'settings_menu_tile.dart';
+
+class AppSettingsSection extends StatelessWidget {
+  const AppSettingsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +24,19 @@ class ProfileAppSettingsSection extends StatelessWidget {
         HelperFunctions.spaceBtwItemsHeight(),
 
         // App Theme Color
-        ProfileMenuTile(
+        SettingsMenuTile(
           icon: FaIcon(
             FontAwesomeIcons.palette,
             color: GColors.primary,
           ),
           title: GTexts.colorSchemeTitle,
           subtitle: GTexts.colorSchemeSubtitle,
-          // TODO: Bottom sheet to choose between color scheme
-          onTap: (){},
+          onTap: () {
+            HelperFunctions.dialog(
+              context,
+              SettingsThemeChoice(),
+            );
+          },
         )
       ],
     );

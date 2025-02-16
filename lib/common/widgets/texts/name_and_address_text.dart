@@ -16,7 +16,7 @@ class NameAndAddressText extends StatelessWidget {
         Row(
           children: [
             // Name
-            Text("Anuj Kumar",
+            Text("Tapan",
                 style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.start),
             HelperFunctions.spaceBtwItemsWidth(),

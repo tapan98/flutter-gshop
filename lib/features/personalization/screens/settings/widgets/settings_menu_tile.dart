@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ProfileMenuTile extends StatelessWidget {
-  const ProfileMenuTile({
+class SettingsMenuTile extends StatelessWidget {
+  const SettingsMenuTile({
     super.key,
     required this.icon,
     required this.title,

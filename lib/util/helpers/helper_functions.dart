@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import '../constants/sizes.dart';
 
 class HelperFunctions {
-
   static Color? getColor(String value) {
     if (value == 'Green') {
       return Colors.green;
@@ -39,28 +38,29 @@ class HelperFunctions {
     }
   }
 
-  static SizedBox spaceBtwItemsHeight(){
+  static SizedBox spaceBtwItemsHeight() {
     return const SizedBox(height: GSizes.spaceBtwItems);
   }
 
-  static SizedBox spaceBtwItemsWidth(){
+  static SizedBox spaceBtwItemsWidth() {
     return const SizedBox(width: GSizes.spaceBtwItems);
   }
 
-  static SizedBox spaceBtwSectionsHeight(){
+  static SizedBox spaceBtwSectionsHeight() {
     return const SizedBox(height: GSizes.spaceBtwSections);
   }
-  static SizedBox spaceBtwSectionsWidth(){
+
+  static SizedBox spaceBtwSectionsWidth() {
     return const SizedBox(width: GSizes.spaceBtwSections);
   }
 
   static SizedBox spaceBtwInputFieldsHeight() {
     return const SizedBox(height: GSizes.spaceBtwInputFields);
   }
-    static SizedBox spaceBtwInputFieldsWidth() {
+
+  static SizedBox spaceBtwInputFieldsWidth() {
     return const SizedBox(width: GSizes.spaceBtwInputFields);
   }
-
 
   static void showSnackBar(String message) {
     ScaffoldMessenger.of(Get.context!).showSnackBar(
@@ -84,7 +84,8 @@ class HelperFunctions {
     return MediaQuery.of(context).size.width;
   }
 
-  static String getFormattedDate(DateTime date, {String format = 'dd MMM yyyy'}) {
+  static String getFormattedDate(DateTime date,
+      {String format = 'dd MMM yyyy'}) {
     return DateFormat(format).format(date);
   }
 
@@ -96,10 +97,17 @@ class HelperFunctions {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       // statusBarBrightness: Theme.of(context).brightness,
       statusBarIconBrightness:
-      isDarkMode(context)
-          ? Brightness.light
-          : Brightness.dark,
+          isDarkMode(context) ? Brightness.light : Brightness.dark,
     ));
+  }
+
+  static void dialog(BuildContext context, Widget child) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => Dialog(
+        child: child,
+      ),
+    );
   }
 
   HelperFunctions._();

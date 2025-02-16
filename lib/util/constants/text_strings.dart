@@ -11,7 +11,7 @@ class GTexts {
   static const String home = "home";
   static const String categories = "categories";
   static const String cart = "cart";
-  static const String profile = "profile";
+  static const String settings = "settings";
 
   // Onboarding Texts
   static const String onboardingTitle1 = "Search your favorite products";
@@ -66,7 +66,7 @@ class GTexts {
   static const String buyNow = "Buy Now";
   static const String addToCart = "Add to Cart";
 
-  // Profile
+  // Settings
   static const String orders = "orders";
   static const String wishlist = "wishlist";
   static const String savedAddressesTitle = "Addresses";
@@ -83,6 +83,15 @@ class GTexts {
   static const String appSettings = "App Settings";
   static const String colorSchemeTitle = "App Color Scheme";
   static const String colorSchemeSubtitle = "Choose between light and dark mode";
+  static const String changeProfilePicture = "Change Profile Picture";
+  static const String name = "Name";
+  static const String gender = "Gender";
+  static const String deactivateAccount = "Deactivate Account";
+  static const String deleteAccount = "Delete Account";
+  static const String light = "Light";
+  static const String dark = "Dark";
+  static const String system = "System";
+
 
 
   GTexts._();
