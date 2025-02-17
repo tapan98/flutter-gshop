@@ -9,12 +9,14 @@ class SectionHeading extends StatelessWidget {
     this.textColor,
     this.onTap,
     this.buttonTitle, this.padding = const EdgeInsets.symmetric(horizontal: GSizes.defaultSpace),
+    this.suffixIcon = const FaIcon(FontAwesomeIcons.angleRight),
   });
 
   final String title;
   final Color? textColor;
   final VoidCallback? onTap;
   final String? buttonTitle;
+  final Widget suffixIcon;
   final EdgeInsetsGeometry padding;
 
   @override
@@ -38,7 +40,7 @@ class SectionHeading extends StatelessWidget {
             if (onTap != null)
               buttonTitle != null
                   ? TextButton(onPressed: onTap, child: Text(buttonTitle!))
-                  : FaIcon(FontAwesomeIcons.arrowRight),
+                  : suffixIcon,
           ],
         ),
       ),

@@ -27,3 +27,6 @@ An E-commerce app.
 
 ### Profile Screen
 <img src="screenshots/profile_screen_dark.jpg" width="40%" alt="Profile Screen dark"/> <img src="screenshots/profile_screen_light.jpg" width="40%" alt="Profile Screen light"/>
+
+### Orders list Screen
+<img src="screenshots/my_orders_screen_dark.jpg" width="40%" alt="Orders Screen dark"/> <img src="screenshots/my_orders_screen_light.jpg" width="40%" alt="Orders Screen light"/>

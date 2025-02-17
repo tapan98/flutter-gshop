@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:gshop/common/widgets/texts/section_heading.dart';
+import 'package:gshop/features/shop/screens/order/order_screen.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
@@ -31,7 +32,7 @@ class AccountSettingsSection extends StatelessWidget {
           ),
           title: GTexts.orders.capitalize!,
           subtitle: GTexts.ordersSubtitle,
-          onTap: () {},
+          onTap: () => Get.to(() => const OrderScreen()),
         ),
 
         // WishList

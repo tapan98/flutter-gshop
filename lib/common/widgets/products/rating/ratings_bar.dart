@@ -4,8 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/sizes.dart';
 
-class RatingsBar extends StatelessWidget {
-  const RatingsBar({super.key, required this.rating, this.totalRatings});
+class ProductRatingsBar extends StatelessWidget {
+  const ProductRatingsBar({super.key, required this.rating, this.totalRatings});
 
   final double rating;
   final int? totalRatings;

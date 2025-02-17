@@ -51,7 +51,7 @@ class GTexts {
   static const String verifyEmailTitle = "Verify Email";
   static const String verifyEmailSubtitle = "We've sent a verification link to your email.";
 
-  // Product
+  // Shop
   static const String priceDetails = "Price Details";
   static const String price = "price";
   static const String item = "item";
@@ -65,6 +65,10 @@ class GTexts {
   static const String onThisOrder = "on this order";
   static const String buyNow = "Buy Now";
   static const String addToCart = "Add to Cart";
+  static const String myOrders = "My Orders";
+  static const String searchOrders = "Search orders";
+  static const String filters = "filters";
+  static const String rateThisProduct = "Rate this product";
 
   // Settings
   static const String orders = "orders";

@@ -26,7 +26,7 @@ class ProductDetailsWidget extends StatelessWidget {
                 BrandTitleTextWithVerifiedIcon(title: "Samsung"),
       
                 // Rating Bar
-                RatingsBar(rating: 4.5, totalRatings: 100),
+                ProductRatingsBar(rating: 4.5, totalRatings: 100),
               ],
             ),
       

@@ -11,6 +11,7 @@ class GSearchBar extends StatelessWidget {
     this.icon = Icons.search,
     this.transparentBackground = false,
     this.showBorder = true,
+    this.inputField = false,
     this.onTap,
     this.padding = const EdgeInsets.symmetric(horizontal: GSizes.defaultSpace),
     this.height,
@@ -18,7 +19,7 @@ class GSearchBar extends StatelessWidget {
 
   final String text;
   final IconData icon;
-  final bool transparentBackground, showBorder;
+  final bool transparentBackground, showBorder, inputField;
   final VoidCallback? onTap;
   final EdgeInsetsGeometry padding;
   final double? height;
@@ -36,7 +37,7 @@ class GSearchBar extends StatelessWidget {
             child: Container(
               width: DeviceUtils.getScreenWidth(context),
               height: height,
-              padding: EdgeInsets.all(GSizes.md),
+              padding: inputField ? EdgeInsets.symmetric(horizontal: GSizes.md) : EdgeInsets.all(GSizes.md),
               decoration: BoxDecoration(
                 color: transparentBackground
                     ? Colors.transparent
@@ -46,14 +47,30 @@ class GSearchBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(GSizes.cardRadiusMd),
                 border: showBorder ? Border.all(color: GColors.grey) : null,
               ),
-              child: Row(
+              child: inputField ? TextField(
+                // TODO: Assign Search orders controller
+                // controller: ,
+                onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+                decoration: InputDecoration(
+                    icon: Icon(Icons.search),
+                    hintText: text,
+                    border: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    focusedErrorBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none
+                ),
+              ) : Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Icon(Icons.search),
+                  Icon(Icons.search, color: isDark ? GColors.grey : GColors.darkerGrey),
                   HelperFunctions.spaceBtwItemsWidth(),
-                  Text(
-                    text,
-                    style: Theme.of(context).textTheme.bodySmall,
-                    overflow: TextOverflow.ellipsis,
+                  Flexible(
+                    child: Text(
+                      text,
+                      style: Theme.of(context).textTheme.bodySmall,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
