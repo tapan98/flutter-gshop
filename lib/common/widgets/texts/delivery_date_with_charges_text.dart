@@ -28,7 +28,7 @@ class DeliveryDateWithChargesText extends StatelessWidget {
         ),
 
         // Separator
-        Text(" | "),
+        const Text(" | "),
 
         // -- Delivery Charges --
         // Free delivery

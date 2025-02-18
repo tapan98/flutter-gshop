@@ -17,10 +17,10 @@ class SettingsThemeChoice extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Color Scheme",
+            GTexts.colorScheme,
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          Divider(),
+          const Divider(),
           for (ThemeMode option in themeController.options)
             Obx(
               () => RadioListTile<ThemeMode>(
@@ -30,6 +30,7 @@ class SettingsThemeChoice extends StatelessWidget {
                 activeColor: GColors.primary,
                 onChanged: (ThemeMode? value) {
                   if (value != null) {
+                    // TODO: Add persistent storage
                     themeController.themeMode.value = value;
                     Navigator.pop(context);
                   }

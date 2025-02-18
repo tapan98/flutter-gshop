@@ -21,7 +21,7 @@ class PrimaryHeaderContainer extends StatelessWidget {
         Container(
           padding: padding,
           // color: GColors.primary,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: GradientStyles.primaryGradient,
           ),
           child: child,
@@ -34,7 +34,7 @@ class PrimaryHeaderContainer extends StatelessWidget {
               opacity: 0.4,
               child: CurvedBottomWidget(
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: GradientStyles.primaryGradient,
                   ),
                   height: 30,
@@ -43,7 +43,7 @@ class PrimaryHeaderContainer extends StatelessWidget {
             ),
             CurvedBottomWidget(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: GradientStyles.primaryGradient,
                 ),
                 height: 20,

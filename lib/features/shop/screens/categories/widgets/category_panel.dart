@@ -35,13 +35,13 @@ class CategoryPanel extends StatelessWidget {
                   return Container(
                     width: 56,
                     height: 100,
-                    padding: EdgeInsets.symmetric(horizontal: GSizes.sm),
+                    padding: const EdgeInsets.symmetric(horizontal: GSizes.sm),
                     decoration: BoxDecoration(
                       // Highlight selected Category
                       color: isSelected
                           ? selectedItemColor
                           : panelBackgroundColor,
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topRight: Radius.circular(GSizes.md),
                         bottomRight: Radius.circular(GSizes.md),
                       ),

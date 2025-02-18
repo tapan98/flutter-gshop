@@ -16,7 +16,7 @@ class AppSettingsSection extends StatelessWidget {
     return Column(
       children: [
         // ---- App Settings ----
-        SectionHeading(
+        const SectionHeading(
           title: GTexts.appSettings,
           padding: EdgeInsets.zero,
         ),
@@ -25,7 +25,7 @@ class AppSettingsSection extends StatelessWidget {
 
         // App Theme Color
         SettingsMenuTile(
-          icon: FaIcon(
+          icon: const FaIcon(
             FontAwesomeIcons.palette,
             color: GColors.primary,
           ),
@@ -34,7 +34,7 @@ class AppSettingsSection extends StatelessWidget {
           onTap: () {
             HelperFunctions.dialog(
               context,
-              SettingsThemeChoice(),
+              const SettingsThemeChoice(),
             );
           },
         )

@@ -10,16 +10,16 @@ class CartItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemBuilder: (context, index) {
-        return Column(
+        return const Column(
           children: [
-            const CartItem(showAddRemoveButton: true),
+            CartItem(showAddRemoveButton: true),
           ],
         );
       },
       itemCount: 1,
       separatorBuilder: (_, __) => HelperFunctions.spaceBtwSectionsHeight(),
       // Add extra space at the end of list
-      padding: EdgeInsets.only(bottom: GSizes.spaceBtwSections),
+      padding: const EdgeInsets.only(bottom: GSizes.spaceBtwSections),
       shrinkWrap: false,
     );
   }

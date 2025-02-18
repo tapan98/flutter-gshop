@@ -23,7 +23,7 @@ class OrderAppbarWidget extends StatelessWidget {
       floating: true,
       pinned: true,
       toolbarHeight: 70,
-      title: Text(GTexts.myOrders),
+      title: const Text(GTexts.myOrders),
       bottom: PreferredSize(
         preferredSize:
             const Size.fromHeight(GSizes.appBarHeight + GSizes.defaultSpace),
@@ -37,7 +37,7 @@ class OrderAppbarWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // Search
-              Flexible(
+              const Flexible(
                 child: GSearchBar(
                   text: GTexts.searchOrders,
                   inputField: true,
@@ -46,7 +46,7 @@ class OrderAppbarWidget extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(width: GSizes.spaceBtwItems/2),
+              const SizedBox(width: GSizes.spaceBtwItems / 2),
 
               // Filter
               TextButton(

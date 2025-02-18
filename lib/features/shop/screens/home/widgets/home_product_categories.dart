@@ -14,7 +14,7 @@ class HomeProductCategories extends StatelessWidget {
         itemCount: 20,
         scrollDirection: Axis.horizontal,
         gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (context, index) => VerticalImageText(
           imageUrl: GImages.product1,
           text: "Category ${index + 1}",

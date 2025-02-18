@@ -14,10 +14,10 @@ class PasswordResetScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     HelperFunctions.setDynamicStatusBarTheme(context);
     return Scaffold(
-      appBar: GAppBar(),
+      appBar: const GAppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(GSizes.defaultSpace),
+          padding: const EdgeInsets.all(GSizes.defaultSpace),
           child: Column(
             children: [
               // Email Delivered Image

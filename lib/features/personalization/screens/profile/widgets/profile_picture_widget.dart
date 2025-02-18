@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gshop/common/widgets/images/circular_profile_image.dart';
+import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 
 class ProfilePictureWidget extends StatelessWidget {
@@ -12,14 +12,14 @@ class ProfilePictureWidget extends StatelessWidget {
       child: Column(
         children: [
           // Image
-          CircularProfileImage(
-            width: 80,
-            height: 80,
+          const CircleAvatar(
+            backgroundImage: AssetImage(GImages.dummyPersonImage),
+           radius: 40,
           ),
           // Change Picture TextButton
           TextButton(
             onPressed: () {},
-            child: Text(GTexts.changeProfilePicture),
+            child: const Text(GTexts.changeProfilePicture),
           ),
         ],
       ),

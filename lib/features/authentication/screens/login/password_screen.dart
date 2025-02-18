@@ -16,15 +16,15 @@ class PasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     HelperFunctions.isDarkMode(context);
     return Scaffold(
-      appBar: GAppBar(),
+      appBar: const GAppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(GSizes.defaultSpace),
+          padding: const EdgeInsets.all(GSizes.defaultSpace),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Logo
-              LoginHeader(),
+              const LoginHeader(),
 
               // User's Email text
               Text("some@email.com",
@@ -38,7 +38,7 @@ class PasswordScreen extends StatelessWidget {
                     children: [
                       // Password Input
                       TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.lock),
                           labelText: GTexts.password,
                         ),
@@ -51,7 +51,7 @@ class PasswordScreen extends StatelessWidget {
                           TextButton(
                             onPressed: () =>
                                 Get.to(() => const ForgotPasswordScreen()),
-                            child: Text(
+                            child: const Text(
                               GTexts.forgotPassword,
                               textAlign: TextAlign.end,
                             ),
@@ -67,7 +67,7 @@ class PasswordScreen extends StatelessWidget {
                         child: ElevatedButton(
                           // TODO: Login on pressed
                           onPressed: () => Get.offAll(() => const NavigationMenu()),
-                          child: Text(GTexts.signIn),
+                          child: const Text(GTexts.signIn),
                         ),
                       ),
                     ],

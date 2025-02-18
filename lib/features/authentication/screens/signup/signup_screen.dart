@@ -15,10 +15,10 @@ class SignupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     HelperFunctions.setDynamicStatusBarTheme(context);
     return Scaffold(
-      appBar: GAppBar(),
+      appBar: const GAppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(GSizes.defaultSpace),
+          padding: const EdgeInsets.all(GSizes.defaultSpace),
           child: Column(
             children: [
               // Heading
@@ -27,16 +27,16 @@ class SignupScreen extends StatelessWidget {
               const SizedBox(height: GSizes.spaceBtwSections),
 
               // Create Account Form
-              CreateAccountForm(),
+              const CreateAccountForm(),
 
               const SizedBox(height: GSizes.spaceBtwSections),
 
               // Footer
-              FormDivider(text: GTexts.orSignInWith),
+              const FormDivider(text: GTexts.orSignInWith),
 
               const SizedBox(height: GSizes.spaceBtwSections),
 
-              SocialButtons(),
+              const SocialButtons(),
 
             ],
           ),

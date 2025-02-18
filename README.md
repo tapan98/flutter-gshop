@@ -30,3 +30,6 @@ An E-commerce app.
 
 ### Orders list Screen
 <img src="screenshots/my_orders_screen_dark.jpg" width="40%" alt="Orders Screen dark"/> <img src="screenshots/my_orders_screen_light.jpg" width="40%" alt="Orders Screen light"/>
+
+### Reviews Screen
+<img src="screenshots/reviews_screen_dark.jpg" width="40%" alt="Reviews Screen dark"/> <img src="screenshots/reviews_screen_light.jpg" width="40%" alt="Reviews Screen light"/>

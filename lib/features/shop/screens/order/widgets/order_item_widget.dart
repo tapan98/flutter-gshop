@@ -56,21 +56,22 @@ class OrderItemWidget extends StatelessWidget {
                       },
                       itemSize: GSizes.iconLg,
                       unratedColor: GColors.grey,
-                      itemBuilder: (context, _) => FaIcon(
+                      itemBuilder: (context, _) => const FaIcon(
                         FontAwesomeIcons.solidStar,
                         color: Colors.amber,
                       ),
                     ),
                     const SizedBox(height: GSizes.spaceBtwItems / 2),
-                    Text(
-                      GTexts.rateThisProduct,
-                      style: Theme.of(context).textTheme.titleMedium,
+                    TextButton(
+                      // TODO: Apply user rating to the product
+                      onPressed: () {},
+                      child: Text(GTexts.rateThisProduct, style: Theme.of(context).textTheme.titleMedium)
                     ),
                   ],
                 ),
             ],
           ),
-          trailing: FaIcon(
+          trailing: const FaIcon(
             FontAwesomeIcons.angleRight,
             size: GSizes.iconMd,
           ),

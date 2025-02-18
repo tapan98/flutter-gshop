@@ -33,10 +33,10 @@ class CategorySection extends StatelessWidget {
           //TODO: Fetch each category items from the controller
           GridView.builder(
             itemCount: 20,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3, mainAxisExtent: 105),
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.all(GSizes.sm),
               child: CircularImageText(

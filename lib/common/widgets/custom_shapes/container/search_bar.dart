@@ -19,7 +19,9 @@ class GSearchBar extends StatelessWidget {
 
   final String text;
   final IconData icon;
-  final bool transparentBackground, showBorder, inputField;
+  final bool transparentBackground, showBorder;
+  /// Input in the current search bar instead of navigating to search page
+  final bool inputField;
   final VoidCallback? onTap;
   final EdgeInsetsGeometry padding;
   final double? height;
@@ -28,7 +30,7 @@ class GSearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
     return InkWell(
-      onTap: onTap,
+      onTap: inputField ? null : onTap,
       child: Column(
         children: [
           // HelperFunctions.spaceBtwItemsHeight(),
@@ -37,7 +39,7 @@ class GSearchBar extends StatelessWidget {
             child: Container(
               width: DeviceUtils.getScreenWidth(context),
               height: height,
-              padding: inputField ? EdgeInsets.symmetric(horizontal: GSizes.md) : EdgeInsets.all(GSizes.md),
+              padding: inputField ? const EdgeInsets.symmetric(horizontal: GSizes.md) : const EdgeInsets.all(GSizes.md),
               decoration: BoxDecoration(
                 color: transparentBackground
                     ? Colors.transparent
@@ -52,7 +54,7 @@ class GSearchBar extends StatelessWidget {
                 // controller: ,
                 onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                 decoration: InputDecoration(
-                    icon: Icon(Icons.search),
+                    icon: const Icon(Icons.search),
                     hintText: text,
                     border: InputBorder.none,
                     errorBorder: InputBorder.none,

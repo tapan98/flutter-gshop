@@ -21,7 +21,7 @@ class RatingChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
     return RoundedCornerContainer(
-      padding: EdgeInsets.all(GSizes.xs),
+      padding: const EdgeInsets.all(GSizes.xs),
       radius: GSizes.xs,
       backgroundColor: isDark ? GColors.grey : GColors.white,
       child: Row(

@@ -20,7 +20,7 @@ class CategoriesScreen extends StatelessWidget {
 
       appBar: GAppBar(
         showBackArrow: false,
-        title: Text("All Categories"),
+        title: const Text("All Categories"),
         actions: [
           // Search Button
           TextButton(
@@ -42,7 +42,7 @@ class CategoriesScreen extends StatelessWidget {
       body: Row(
         children: [
           // NavigationRail
-          CategoryPanel(),
+          const CategoryPanel(),
 
           // Body
           Expanded(

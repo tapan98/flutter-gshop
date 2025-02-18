@@ -17,17 +17,17 @@ class ProductVariationWidget extends StatelessWidget {
           runSpacing: GSizes.spaceBtwItems,
           children: [
             ChoiceChip(
-              label: Text("12GB + 256GB"),
+              label: const Text("12GB + 256GB"),
               selected: true,
               onSelected: (value) {},
             ),
             ChoiceChip(
-              label: Text("12GB + 512GB"),
+              label: const Text("12GB + 512GB"),
               selected: false,
               onSelected: (value) {},
             ),
             ChoiceChip(
-              label: Text("12GB + 1TB"),
+              label: const Text("12GB + 1TB"),
               selected: false,
               onSelected: (value) {},
             ),

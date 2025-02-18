@@ -18,7 +18,7 @@ class SocialButtons extends StatelessWidget {
           child: IconButton(
             // TODO: Google Sign-In on pressed
             onPressed: () {},
-            icon: Image(
+            icon: const Image(
               width: GSizes.iconLg,
               height: GSizes.iconLg,
               image: AssetImage(GImages.googleIcon),

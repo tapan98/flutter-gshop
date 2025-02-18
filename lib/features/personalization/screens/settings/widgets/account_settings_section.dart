@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:gshop/common/widgets/texts/section_heading.dart';
+import 'package:gshop/features/personalization/screens/address/address_screen.dart';
 import 'package:gshop/features/shop/screens/order/order_screen.dart';
+import 'package:gshop/features/shop/screens/wishlist/wishlist_screen.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
@@ -17,7 +19,7 @@ class AccountSettingsSection extends StatelessWidget {
     return Column(
       children: [
         // ---- Account Settings ----
-        SectionHeading(
+        const SectionHeading(
           title: GTexts.accountSettings,
           padding: EdgeInsets.zero,
         ),
@@ -26,7 +28,7 @@ class AccountSettingsSection extends StatelessWidget {
 
         // Orders
         SettingsMenuTile(
-          icon: FaIcon(
+          icon: const FaIcon(
             FontAwesomeIcons.boxesPacking,
             color: GColors.primary,
           ),
@@ -37,30 +39,29 @@ class AccountSettingsSection extends StatelessWidget {
 
         // WishList
         SettingsMenuTile(
-          icon: FaIcon(
+          icon: const FaIcon(
             FontAwesomeIcons.solidHeart,
             color: GColors.primary,
           ),
           title: GTexts.wishlist.capitalize!,
           subtitle: GTexts.wishListSubtitle,
-          onTap: () {},
+          onTap: () => Get.to(() => const WishlistScreen()),
         ),
 
         // Saved Addresses
         SettingsMenuTile(
-          icon: FaIcon(
+          icon: const FaIcon(
             FontAwesomeIcons.solidAddressBook,
             color: GColors.primary,
           ),
           title: GTexts.savedAddressesTitle,
           subtitle: GTexts.savedAddressesSubtitle,
-          // TODO: Route to Saved Addresses Screen
-          onTap: () {},
+          onTap: () => Get.to(() => const AddressScreen()),
         ),
 
         // Payment Methods
         SettingsMenuTile(
-          icon: FaIcon(
+          icon: const FaIcon(
             FontAwesomeIcons.wallet,
             color: GColors.primary,
           ),
@@ -72,7 +73,7 @@ class AccountSettingsSection extends StatelessWidget {
 
         // Notification Settings
         SettingsMenuTile(
-          icon: FaIcon(
+          icon: const FaIcon(
             FontAwesomeIcons.solidBell,
             color: GColors.primary,
           ),
@@ -84,7 +85,7 @@ class AccountSettingsSection extends StatelessWidget {
 
         // Privacy Settings
         SettingsMenuTile(
-          icon: FaIcon(
+          icon: const FaIcon(
             FontAwesomeIcons.shieldHalved,
             color: GColors.primary,
           ),

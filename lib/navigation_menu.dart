@@ -30,20 +30,20 @@ class NavigationMenu extends StatelessWidget {
           destinations: [
             NavigationDestination(
               // icon: Icon(Icons.home),
-              icon: FaIcon(FontAwesomeIcons.house),
+              icon: const FaIcon(FontAwesomeIcons.house),
               label: GTexts.home.capitalize!,
             ),
             NavigationDestination(
-              icon: FaIcon(FontAwesomeIcons.cubesStacked),
+              icon: const FaIcon(FontAwesomeIcons.cubesStacked),
               label: GTexts.categories.capitalize!,
             ),
             NavigationDestination(
-              icon: FaIcon(FontAwesomeIcons.cartShopping),
+              icon: const FaIcon(FontAwesomeIcons.cartShopping),
               // TODO: Fetch Cart items
               label: "${GTexts.cart.capitalize!} (3)",
             ),
             NavigationDestination(
-              icon: FaIcon(FontAwesomeIcons.bars),
+              icon: const FaIcon(FontAwesomeIcons.bars),
               label: GTexts.settings.capitalize!,
             ),
           ],

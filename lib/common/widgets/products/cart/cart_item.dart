@@ -30,7 +30,7 @@ class CartItem extends StatelessWidget {
           imageUrl: GImages.product1,
           width: 60,
           height: 60,
-          padding: EdgeInsets.all(GSizes.sm),
+          padding: const EdgeInsets.all(GSizes.sm),
           backgroundColor: isDark ? GColors.darkerGrey : GColors.light,
         ),
 
@@ -46,7 +46,7 @@ class CartItem extends StatelessWidget {
               const BrandTitleTextWithVerifiedIcon(title: "Samsung"),
 
               // Product Name
-              ProductTitleText(title: "Samsung Galaxy S24 Ultra"),
+              const ProductTitleText(title: "Samsung Galaxy S24 Ultra"),
 
               // Variant 1
               RichText(
@@ -98,7 +98,7 @@ class CartItem extends StatelessWidget {
               HelperFunctions.spaceBtwItemsHeight(),
 
               if (showAddRemoveButton)
-                CartProductQuantityWithAddRemoveButtons(),
+                const CartProductQuantityWithAddRemoveButtons(),
             ],
           ),
         ),

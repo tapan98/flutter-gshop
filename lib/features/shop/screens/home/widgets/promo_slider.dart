@@ -21,7 +21,7 @@ class PromoSlider extends StatelessWidget {
         CarouselSlider(
           options: CarouselOptions(
             autoPlay: true,
-            autoPlayInterval: Duration(seconds: 10),
+            autoPlayInterval: const Duration(seconds: 10),
             onPageChanged: (index, _) =>
                 controller.updateCarouselCurrentIndex(index),
             viewportFraction: 1,
@@ -30,7 +30,7 @@ class PromoSlider extends StatelessWidget {
           items: banners
               .map((url) => RoundedCornerImage(
                     imageUrl: url,
-                    padding: EdgeInsets.all(GSizes.sm),
+                    padding: const EdgeInsets.all(GSizes.sm),
                   ))
               .toList(),
         ),
@@ -46,7 +46,7 @@ class PromoSlider extends StatelessWidget {
                 Container(
                   width: 20,
                   height: 4,
-                  margin: EdgeInsets.only(right: 10),
+                  margin: const EdgeInsets.only(right: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
                     color: controller.carouselCurrentIndex.value == i

@@ -33,6 +33,7 @@ class RoundedCornerContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(radius),
+        border: showBorder ? Border.all(color: borderColor) : null,
       ),
       child: child,
     );

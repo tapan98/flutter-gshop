@@ -20,7 +20,7 @@ class ProductDetailsWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             // Brand Name & Ratings
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 BrandTitleTextWithVerifiedIcon(title: "Samsung"),
@@ -33,7 +33,7 @@ class ProductDetailsWidget extends StatelessWidget {
             HelperFunctions.spaceBtwItemsHeight(),
       
             // Product Title
-            ProductTitleText(title: "Samsung Galaxy S24 Ultra"),
+            const ProductTitleText(title: "Samsung Galaxy S24 Ultra"),
       
             HelperFunctions.spaceBtwItemsHeight(),
       
@@ -43,7 +43,7 @@ class ProductDetailsWidget extends StatelessWidget {
             HelperFunctions.spaceBtwItemsHeight(),
       
             // Variation
-            ProductVariationWidget(),
+            const ProductVariationWidget(),
           ],
         ),
       ),

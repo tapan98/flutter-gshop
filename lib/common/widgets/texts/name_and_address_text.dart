@@ -36,13 +36,13 @@ class NameAndAddressText extends StatelessWidget {
 
         // ---- Address lines ----
         // Building #, Building Name
-        Text("House No. 43"),
+        const Text("House No. 43"),
         // Street, Locality
-        Text("Lodhi Rd, Lodhi Gardens, Lodhi Estate"),
+        const Text("Lodhi Rd, Lodhi Gardens, Lodhi Estate"),
         // City, State & Pin code
-        Text("New Delhi, Delhi 110003"),
+        const Text("New Delhi, Delhi 110003"),
         // Contact Number
-        Text("+91 99999 99999")
+        const Text("+91 99999 99999")
       ],
     );
   }

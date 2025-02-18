@@ -45,7 +45,7 @@ class ProductDetailsImagesSlider extends StatelessWidget {
                       Container(
                         width: 20,
                         height: 4,
-                        margin: EdgeInsets.only(right: 10),
+                        margin: const EdgeInsets.only(right: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           color: controller.imageIndex.value == i

@@ -13,7 +13,7 @@ class OrderScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           // Order search and Filter
-          OrderAppbarWidget(),
+          const OrderAppbarWidget(),
 
           OrderItemWidget(
             imageUrl: GImages.product1,
@@ -33,6 +33,50 @@ class OrderScreen extends StatelessWidget {
             shouldRate: false,
             onTap: () {},
           ),
+
+          OrderItemWidget(
+            imageUrl: GImages.product1,
+            deliveryText: "Delivered on Feb 15, 2025",
+            product: "Samsung Galaxy S24 Ultra",
+            isNetworkImage: false,
+            onTap: () {},
+          ),
+          OrderItemWidget(
+            imageUrl: GImages.product1,
+            deliveryText: "Delivered on Feb 15, 2025",
+            product: "Samsung Galaxy S24 Ultra",
+            isNetworkImage: false,
+            onTap: () {},
+          ),
+          OrderItemWidget(
+            imageUrl: GImages.product1,
+            deliveryText: "Delivered on Feb 15, 2025",
+            product: "Samsung Galaxy S24 Ultra",
+            isNetworkImage: false,
+            onTap: () {},
+          ),
+          OrderItemWidget(
+            imageUrl: GImages.product1,
+            deliveryText: "Delivered on Feb 15, 2025",
+            product: "Samsung Galaxy S24 Ultra",
+            isNetworkImage: false,
+            onTap: () {},
+          ),
+          OrderItemWidget(
+            imageUrl: GImages.product1,
+            deliveryText: "Delivered on Feb 15, 2025",
+            product: "Samsung Galaxy S24 Ultra",
+            isNetworkImage: false,
+            onTap: () {},
+          ),
+          OrderItemWidget(
+            imageUrl: GImages.product1,
+            deliveryText: "Delivered on Feb 15, 2025",
+            product: "Samsung Galaxy S24 Ultra",
+            isNetworkImage: false,
+            onTap: () {},
+          ),
+
         ],
       ),
     );

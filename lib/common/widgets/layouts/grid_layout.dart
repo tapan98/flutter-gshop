@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gshop/util/constants/sizes.dart';
 
 
-class GridLayout extends StatelessWidget {
+class ProductGridLayout extends StatelessWidget {
   /// GridView for Products
-  const GridLayout({
+  const ProductGridLayout({
     super.key,
     required this.itemCount,
     this.mainAxisExtent = 288,
@@ -22,7 +22,7 @@ class GridLayout extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       itemCount: itemCount,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         /// controls the height of the item

@@ -13,21 +13,21 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GAppBar(),
+      appBar: const GAppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(GSizes.defaultSpace),
           child: Column(
             children: [
               // Profile Pictures
-              ProfilePictureWidget(),
+              const ProfilePictureWidget(),
 
               const SizedBox(height: GSizes.spaceBtwSections / 2),
-              Divider(),
+              const Divider(),
               const SizedBox(height: GSizes.spaceBtwSections / 2),
 
               // ---- Profile Information ---- //
-              SectionHeading(title: "Profile Information"),
+              const SectionHeading(title: "Profile Information"),
 
               HelperFunctions.spaceBtwItemsHeight(),
 
@@ -46,11 +46,11 @@ class ProfileScreen extends StatelessWidget {
               ),
 
               const SizedBox(height: GSizes.spaceBtwSections / 2),
-              Divider(),
+              const Divider(),
               const SizedBox(height: GSizes.spaceBtwSections / 2),
 
               // ---- Personal Information ---- //
-              SectionHeading(title: "Personal Information"),
+              const SectionHeading(title: "Personal Information"),
 
               HelperFunctions.spaceBtwItemsHeight(),
 
@@ -76,14 +76,14 @@ class ProfileScreen extends StatelessWidget {
               ),
 
               const SizedBox(height: GSizes.spaceBtwSections / 2),
-              Divider(),
+              const Divider(),
               const SizedBox(height: GSizes.spaceBtwSections / 2),
 
               // ---- Buttons ---- //
               // Deactivate Account Button
               TextButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   GTexts.deactivateAccount,
                   style: TextStyle(color: Colors.red),
                 ),
@@ -92,7 +92,7 @@ class ProfileScreen extends StatelessWidget {
               // Delete Account Button
               TextButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   GTexts.deleteAccount,
                   style: TextStyle(color: Colors.red),
                 ),

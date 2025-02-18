@@ -16,7 +16,7 @@ class PriceDetailsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Price details
-        SectionHeading(
+        const SectionHeading(
           title: GTexts.priceDetails,
           padding: EdgeInsets.zero,
         ),
@@ -28,7 +28,7 @@ class PriceDetailsWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text("${GTexts.price.capitalize} (1 ${GTexts.item})"),
-            ProductPriceText(price: "100,000"),
+            const ProductPriceText(price: "100,000"),
           ],
         ),
         const SizedBox(height: GSizes.spaceBtwItems / 2),
@@ -55,7 +55,7 @@ class PriceDetailsWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(GTexts.deliveryCharges),
+            const Text(GTexts.deliveryCharges),
             Text(
               GTexts.freeDelivery,
               style: Theme.of(context)
@@ -76,7 +76,7 @@ class PriceDetailsWidget extends StatelessWidget {
               GTexts.totalAmount,
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            ProductPriceText(price: "71,000", isLarge: true),
+            const ProductPriceText(price: "71,000", isLarge: true),
           ],
         ),
 

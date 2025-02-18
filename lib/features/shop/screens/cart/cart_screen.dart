@@ -12,7 +12,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GAppBar(
+      appBar: const GAppBar(
         showBackArrow: false,
         title: Text("My Cart"),
       ),
@@ -24,7 +24,7 @@ class CartScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: GSizes.defaultSpace),
         child: ElevatedButton(
           onPressed: () => Get.to(() => const OrderSummaryScreen()),
-          child: Text("Checkout ₹71,000"),
+          child: const Text("Checkout ₹71,000"),
         ),
       ),
     );

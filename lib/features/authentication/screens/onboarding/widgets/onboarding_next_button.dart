@@ -22,7 +22,7 @@ class OnboardingNextButton extends StatelessWidget {
           backgroundColor: isDark ? GColors.primary : Colors.black,
           side: BorderSide.none,
         ),
-        child: Icon(Icons.keyboard_arrow_right, color: GColors.white),
+        child: const Icon(Icons.keyboard_arrow_right, color: GColors.white),
       ),
     );
   }

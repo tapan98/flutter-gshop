@@ -29,9 +29,9 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: DeviceUtils.getAppBarHeight()),
-                  AddressBar(foregroundColor: GColors.black),
+                  const AddressBar(foregroundColor: GColors.black),
                   HelperFunctions.spaceBtwItemsHeight(),
-                  GSearchBar(text: "Search for Products"),
+                  const GSearchBar(text: "Search for Products"),
                 ],
               ),
             ),
@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
           SliverToBoxAdapter(child: HelperFunctions.spaceBtwSectionsHeight()),
 
           // Promo Slider
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: PromoSlider(
               banners: [
                 GImages.banner1,
@@ -53,12 +53,12 @@ class HomeScreen extends StatelessWidget {
           SliverToBoxAdapter(child: HelperFunctions.spaceBtwSectionsHeight()),
 
           // Product Categories
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: HomeProductCategories(),
           ),
 
-          SliverToBoxAdapter(
-              child: const SizedBox(height: GSizes.spaceBtwSections / 2)),
+          const SliverToBoxAdapter(
+              child: SizedBox(height: GSizes.spaceBtwSections / 2)),
 
           // Popular Products Heading
           SliverToBoxAdapter(
@@ -74,8 +74,8 @@ class HomeScreen extends StatelessWidget {
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: GSizes.defaultSpace),
-              child: GridLayout(
-                itemBuilder: (context, index) => ProductCardVertical(
+              child: ProductGridLayout(
+                itemBuilder: (context, index) => const ProductCardVertical(
                   productTitle: "Samsung Galaxy S24 Ultra",
                   imageUrl: GImages.product1,
                   productRating: "4.3",

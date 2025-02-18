@@ -29,7 +29,7 @@ class CategoryController extends GetxController {
      .asMap().entries .map(
         (entry) => CategoryModel(
           navigationRailDestination: NavigationRailDestination(
-              icon: FaIcon(FontAwesomeIcons.cubesStacked),
+              icon: const FaIcon(FontAwesomeIcons.cubesStacked),
               label: Text(entry.value, textAlign: TextAlign.center)),
           destination: CategorySection(sectionTitle: "${entry.key} Trending now",),
         ),
@@ -51,7 +51,7 @@ class CategoryController extends GetxController {
   void onCategorySelected(int index) {
     selectedIndex.value = index;
     if (sectionScrollController.hasClients) {
-      sectionScrollController.animateTo(0, duration: Duration(milliseconds: 100), curve: Curves.easeIn);
+      sectionScrollController.animateTo(0, duration: const Duration(milliseconds: 100), curve: Curves.easeIn);
     }
   }
 

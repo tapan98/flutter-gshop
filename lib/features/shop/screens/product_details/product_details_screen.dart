@@ -5,11 +5,14 @@ import 'package:gshop/common/widgets/texts/section_heading.dart';
 import 'package:gshop/features/shop/screens/checkout/order_summary_screen.dart';
 import 'package:gshop/features/shop/screens/product_details/widgets/product_deliver_widget.dart';
 import 'package:gshop/features/shop/screens/product_details/widgets/product_details_images_slider.dart';
+import 'package:gshop/features/shop/screens/product_reviews/product_reviews_screen.dart';
+import 'package:gshop/features/shop/screens/product_reviews/widgets/overall_product_rating_widget.dart';
 import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
 
+import '../product_reviews/widgets/user_review_card_widget.dart';
 import 'widgets/product_details_widget.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -21,7 +24,7 @@ class ProductDetailsScreen extends StatelessWidget {
       // appBar: GAppBar(),
       body: CustomScrollView(
         slivers: [
-          GSliverAppBar(),
+          const GSliverAppBar(),
           // Images Slider
           SliverToBoxAdapter(
             child: ProductDetailsImagesSlider(
@@ -31,17 +34,17 @@ class ProductDetailsScreen extends StatelessWidget {
           SliverToBoxAdapter(child: HelperFunctions.spaceBtwSectionsHeight()),
 
           // Product Details
-          SliverToBoxAdapter(child: ProductDetailsWidget()),
+          const SliverToBoxAdapter(child: ProductDetailsWidget()),
 
           SliverToBoxAdapter(child: HelperFunctions.spaceBtwItemsHeight()),
 
-          SliverToBoxAdapter(child: ProductDeliverWidget()),
+          const SliverToBoxAdapter(child: ProductDeliverWidget()),
 
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: SizedBox(height: GSizes.spaceBtwSections / 2),
           ),
 
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: GSizes.defaultSpace,
@@ -50,36 +53,63 @@ class ProductDetailsScreen extends StatelessWidget {
             ),
           ),
 
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: SizedBox(height: GSizes.spaceBtwSections / 2),
           ),
 
-          // Reviews
+          // Ratings & Reviews
           SliverToBoxAdapter(
             child: SectionHeading(
-              title: "Reviews (255)",
-              onTap: () {},
+              title: "${GTexts.ratingsAndReviews} (255)",
+              onTap: () => Get.to(() => const ProductReviewsScreen()),
             ),
           ),
 
           SliverToBoxAdapter(child: HelperFunctions.spaceBtwSectionsHeight()),
 
+          // Product Rating Overview
           SliverToBoxAdapter(
-            child: Row(
-              children: [],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: GSizes.defaultSpace),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Ratings & Reviews brief text
+                  Text(
+                    GTexts.ratingsAndReviewsBrief,
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+
+                  HelperFunctions.spaceBtwItemsHeight(),
+
+                  const OverallProductRatingWidget(),
+                ],
+              ),
             ),
           ),
+
+          SliverToBoxAdapter(child: HelperFunctions.spaceBtwSectionsHeight()),
+
+          // User Review Card
+          const SliverToBoxAdapter(child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: GSizes.defaultSpace),
+            child: UserReviewCardWidget(),
+          )),
+
+          // Extra Space at the end
+          SliverToBoxAdapter(child: HelperFunctions.spaceBtwSectionsHeight()),
         ],
       ),
       bottomNavigationBar: Row(
         children: [
           Expanded(
-            child: TextButton(onPressed: () {}, child: Text(GTexts.addToCart)),
+            child: TextButton(
+                onPressed: () {}, child: const Text(GTexts.addToCart)),
           ),
           Expanded(
               child: ElevatedButton(
             onPressed: () => Get.to(() => const OrderSummaryScreen()),
-            child: Text(GTexts.buyNow),
+            child: const Text(GTexts.buyNow),
           ))
         ],
       ),

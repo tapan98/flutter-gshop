@@ -11,10 +11,10 @@ class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GAppBar(),
+      appBar: const GAppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(GSizes.defaultSpace),
+          padding: const EdgeInsets.all(GSizes.defaultSpace),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +48,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 child: ElevatedButton(
                   // TODO: Send Verification Email
                   onPressed: () => Get.to(() => const PasswordResetScreen()),
-                  child: Text(GTexts.submit),
+                  child: const Text(GTexts.submit),
                 ),
               ),
             ],

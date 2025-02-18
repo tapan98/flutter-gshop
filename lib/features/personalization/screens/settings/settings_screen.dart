@@ -18,20 +18,20 @@ class SettingsScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(GSizes.defaultSpace),
+            padding: const EdgeInsets.all(GSizes.defaultSpace),
             child: Column(
               children: [
-                SettingsHeader(),
+                const SettingsHeader(),
 
                 HelperFunctions.spaceBtwSectionsHeight(),
 
-                AccountSettingsSection(),
+                const AccountSettingsSection(),
 
                 const SizedBox(height: GSizes.spaceBtwSections / 2),
 
                 const SizedBox(height: GSizes.spaceBtwSections / 2),
 
-                AppSettingsSection(),
+                const AppSettingsSection(),
 
                 HelperFunctions.spaceBtwSectionsHeight(),
 

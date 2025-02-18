@@ -34,7 +34,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   // Email Input
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.email),
                       labelText: GTexts.email,
                     ),
@@ -84,7 +84,7 @@ class LoginScreen extends StatelessWidget {
               width: double.infinity,
               child: OutlinedButton(
                 onPressed: () => Get.to(() => const SignupScreen()),
-                child: Text(GTexts.createAccount),
+                child: const Text(GTexts.createAccount),
               ),
             ),
 

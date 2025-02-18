@@ -25,15 +25,15 @@ class OnboardingScreen extends StatelessWidget {
             onPageChanged: controller.updatePageIndex,
             children: [
               // Images, Titles & Subtitles
-              OnboardingPage(
+              const OnboardingPage(
                   title: GTexts.onboardingTitle1,
                   subtitle: GTexts.onboardingSubtitle1,
                   image: GImages.onboardingImage1),
-              OnboardingPage(
+              const OnboardingPage(
                   title: GTexts.onboardingTitle2,
                   subtitle: GTexts.onboardingSubtitle2,
                   image: GImages.onboardingImage2),
-              OnboardingPage(
+              const OnboardingPage(
                   title: GTexts.onboardingTitle3,
                   subtitle: GTexts.onboardingSubtitle3,
                   image: GImages.onboardingImage3),
@@ -41,10 +41,10 @@ class OnboardingScreen extends StatelessWidget {
           ),
 
           // Next Button
-          OnboardingNextButton(),
+          const OnboardingNextButton(),
 
           // Skip button
-          OnboardingSkipButton(),
+          const OnboardingSkipButton(),
         ],
       ),
     );

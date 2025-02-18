@@ -15,7 +15,7 @@ class OrderSummaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GAppBar(
+      appBar: const GAppBar(
         title: Text(GTexts.orderSummary),
       ),
       body: SingleChildScrollView(
@@ -32,16 +32,16 @@ class OrderSummaryScreen extends StatelessWidget {
                 padding: EdgeInsets.zero,
               ),
 
-              NameAndAddressText(),
+              const NameAndAddressText(),
 
               const SizedBox(height: GSizes.spaceBtwSections/2),
 
-              Divider(),
+              const Divider(),
               const SizedBox(height: GSizes.spaceBtwSections/2),
 
               // Product(s) with offers applied
               // TODO: use CartItems instead to display multiple items
-              CartItem(
+              const CartItem(
                 offersText: "2 Offers Applied · 2 Offers Available",
               ),
 
@@ -54,10 +54,10 @@ class OrderSummaryScreen extends StatelessWidget {
               ),
 
               const SizedBox(height: GSizes.spaceBtwSections/2),
-              Divider(),
+              const Divider(),
               const SizedBox(height: GSizes.spaceBtwSections/2),
 
-              PriceDetailsWidget(),
+              const PriceDetailsWidget(),
             ],
           ),
         ),

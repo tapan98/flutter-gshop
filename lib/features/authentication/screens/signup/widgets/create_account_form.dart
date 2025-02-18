@@ -20,7 +20,7 @@ class CreateAccountForm extends StatelessWidget {
               // First Name
               Expanded(
                 child: TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person),
                     labelText: GTexts.firstName,
                   ),
@@ -31,7 +31,7 @@ class CreateAccountForm extends StatelessWidget {
               // Last Name
               Expanded(
                 child: TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person),
 
                     labelText: GTexts.lastName,
@@ -45,7 +45,7 @@ class CreateAccountForm extends StatelessWidget {
 
           // Username
           TextFormField(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               prefixIcon: Icon(Icons.perm_identity),
               labelText: GTexts.username,
             ),
@@ -56,7 +56,7 @@ class CreateAccountForm extends StatelessWidget {
           // Email
           TextFormField(
             keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               prefixIcon: Icon(Icons.email),
               labelText: GTexts.email,
             ),
@@ -67,7 +67,7 @@ class CreateAccountForm extends StatelessWidget {
           // Phone Number
           TextFormField(
             keyboardType: TextInputType.phone,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               prefixIcon: Icon(Icons.phone),
               labelText: GTexts.phoneNumber,
             ),
@@ -80,7 +80,7 @@ class CreateAccountForm extends StatelessWidget {
             keyboardType: TextInputType.visiblePassword,
             // TODO: Toggle obscure text
             obscureText: true,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               prefixIcon: Icon(Icons.password),
               labelText: GTexts.password,
               suffixIcon: Icon(Icons.visibility),
@@ -95,7 +95,7 @@ class CreateAccountForm extends StatelessWidget {
             keyboardType: TextInputType.visiblePassword,
             // TODO: Toggle obscure text
             obscureText: true,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               prefixIcon: Icon(Icons.password),
               labelText: GTexts.reEnterPassword,
             ),
@@ -104,7 +104,7 @@ class CreateAccountForm extends StatelessWidget {
           const SizedBox(height: GSizes.spaceBtwSections),
 
           // Agreement Checkbox
-          AgreementsCheckbox(),
+          const AgreementsCheckbox(),
 
           const SizedBox(height: GSizes.spaceBtwSections),
 
@@ -114,7 +114,7 @@ class CreateAccountForm extends StatelessWidget {
             child: ElevatedButton(
               // TODO: Create Account
               onPressed: () => Get.to(() => const VerifyEmailScreen()),
-              child: Text(GTexts.createAccount),
+              child: const Text(GTexts.createAccount),
             ),
           ),
 

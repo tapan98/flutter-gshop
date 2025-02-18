@@ -26,7 +26,7 @@ class ProductCardVertical extends StatelessWidget {
     final isDark = HelperFunctions.isDarkMode(context);
     return InkWell(
       // TODO: Route to correct product details
-      onTap: () => Get.to(() => ProductDetailsScreen()),
+      onTap: () => Get.to(() => const ProductDetailsScreen()),
       child: SizedBox(
         width: 140,
         child: Column(
@@ -70,9 +70,9 @@ class ProductCardVertical extends StatelessWidget {
                 Wrap(
                   children: [
                     // TODO: Fetch price
-                    ProductPriceText(price: "100,000", lineThrough: true),
+                    const ProductPriceText(price: "100,000", lineThrough: true),
                     HelperFunctions.spaceBtwItemsWidth(),
-                    ProductPriceText(price: "71,999", isLarge: true),
+                    const ProductPriceText(price: "71,999", isLarge: true),
                   ],
                 ),
 

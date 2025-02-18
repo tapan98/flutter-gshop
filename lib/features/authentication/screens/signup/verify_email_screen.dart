@@ -19,13 +19,13 @@ class VerifyEmailScreen extends StatelessWidget {
           IconButton(
             // TODO: Logout
             onPressed: () => Get.offAll(() => const LoginScreen()),
-            icon: Icon(Icons.clear),
+            icon: const Icon(Icons.clear),
           ),
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(GSizes.defaultSpace),
+          padding: const EdgeInsets.all(GSizes.defaultSpace),
           child: Column(
             children: [
               // Email Sent Image
