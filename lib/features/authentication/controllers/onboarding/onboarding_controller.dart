@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gshop/data/repositories/authentication_repository.dart';
 import 'package:gshop/features/authentication/screens/login/login_screen.dart';
 import 'package:gshop/util/logger/logger.dart';
 
@@ -23,13 +24,10 @@ class OnboardingController extends GetxController {
     if (pageIndex.value < 2) {
       pageIndex.value++;
       pageController.nextPage(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut);
+          duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
     } else {
-      Get.off(() => const LoginScreen());
-
+      getOffOnboarding();
     }
-
   }
 
   // Update current page index on skip
@@ -38,8 +36,15 @@ class OnboardingController extends GetxController {
       pageIndex.value = 2;
       pageController.jumpToPage(2);
     } else {
-      Get.off(() => const LoginScreen());
+      getOffOnboarding();
     }
+  }
+
+  /// Marks the app as it isn't launched for the first time
+  void getOffOnboarding() {
+    AuthenticationRepository.instance.deviceStorage
+        .write(AuthenticationRepository.isFirstTime, false);
+    Get.offAll(() => const LoginScreen());
   }
 
   @override

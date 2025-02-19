@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gshop/features/authentication/screens/onboarding/onboarding_screen.dart';
+import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/theme/theme.dart';
-
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -15,7 +15,11 @@ class App extends StatelessWidget {
         themeMode: controller.themeMode.value,
         theme: GTheme.lightTheme,
         darkTheme: GTheme.darkTheme,
-        home: const OnboardingScreen(),
+        // Loading screen while app is initializing
+        home: const Scaffold(
+          backgroundColor: GColors.primary,
+          body: Center(child: CircularProgressIndicator(color: GColors.white)),
+        ),
       ),
     );
   }
