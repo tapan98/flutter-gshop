@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:gshop/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:gshop/features/authentication/screens/signup/verify_email_screen.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
+import 'package:gshop/util/validators/input_validator.dart';
 
 import 'agreements_checkbox.dart';
 
@@ -11,7 +14,9 @@ class CreateAccountForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignupController());
     return Form(
+      key: controller.formKey,
       child: Column(
         children: [
           // First & Last Name
@@ -20,6 +25,9 @@ class CreateAccountForm extends StatelessWidget {
               // First Name
               Expanded(
                 child: TextFormField(
+                  controller: controller.firstNameTextController,
+                  validator: (value) =>
+                      Validator.validateEmptyText(GTexts.firstName, value),
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person),
                     labelText: GTexts.firstName,
@@ -31,9 +39,11 @@ class CreateAccountForm extends StatelessWidget {
               // Last Name
               Expanded(
                 child: TextFormField(
+                  controller: controller.lastNameTextController,
+                  validator: (value) =>
+                      Validator.validateEmptyText(GTexts.firstName, value),
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person),
-
                     labelText: GTexts.lastName,
                   ),
                 ),
@@ -45,6 +55,9 @@ class CreateAccountForm extends StatelessWidget {
 
           // Username
           TextFormField(
+            controller: controller.usernameTextController,
+            validator: (value) =>
+                Validator.validateEmptyText(GTexts.username, value),
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.perm_identity),
               labelText: GTexts.username,
@@ -55,6 +68,8 @@ class CreateAccountForm extends StatelessWidget {
 
           // Email
           TextFormField(
+            controller: controller.emailTextController,
+            validator: (value) => Validator.validateEmail(value),
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.email),
@@ -66,6 +81,8 @@ class CreateAccountForm extends StatelessWidget {
 
           // Phone Number
           TextFormField(
+            controller: controller.phoneNumberTextController,
+            validator: (value) => Validator.validatePhoneNumber(value),
             keyboardType: TextInputType.phone,
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.phone),
@@ -73,31 +90,51 @@ class CreateAccountForm extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: GSizes.spaceBtwInputFields),
 
           // Password
-          TextFormField(
-            keyboardType: TextInputType.visiblePassword,
-            // TODO: Toggle obscure text
-            obscureText: true,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.password),
-              labelText: GTexts.password,
-              suffixIcon: Icon(Icons.visibility),
-            ),
-          ),
+          Obx(
+            () => Column(
+              children: [
+                const SizedBox(height: GSizes.spaceBtwInputFields),
+                TextFormField(
+                  controller: controller.passwordTextController,
+                  validator: (value) => Validator.validatePassword(value),
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: controller.obscurePassword.value,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.password),
+                    labelText: GTexts.password,
+                    suffixIcon: IconButton(
+                      onPressed: controller.togglePasswordVisibility,
+                      icon: controller.obscurePassword.value
+                          ? const FaIcon(FontAwesomeIcons.eye)
+                          : const FaIcon(FontAwesomeIcons.eyeSlash),
+                    ),
+                  ),
+                ),
 
-          const SizedBox(height: GSizes.spaceBtwInputFields),
+                const SizedBox(height: GSizes.spaceBtwInputFields),
 
-          // Re-enter Password
-          // TODO: Hide Input Field on password visibility
-          TextFormField(
-            keyboardType: TextInputType.visiblePassword,
-            // TODO: Toggle obscure text
-            obscureText: true,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.password),
-              labelText: GTexts.reEnterPassword,
+                // Re-enter Password
+                if (controller.obscurePassword.value)
+                  TextFormField(
+                    controller: controller.reEnterPasswordTextController,
+                    validator: (value) {
+                      // Validate only when password is being Re-entered
+                      if (controller.obscurePassword.value) {
+                        return Validator.validateReEnterPassword(
+                            controller.passwordTextController.text, value);
+                      }
+                      return null;
+                    },
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.password),
+                      labelText: GTexts.reEnterPassword,
+                    ),
+                  ),
+              ],
             ),
           ),
 
@@ -112,13 +149,10 @@ class CreateAccountForm extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              // TODO: Create Account
-              onPressed: () => Get.to(() => const VerifyEmailScreen()),
+              onPressed: controller.createAccount,
               child: const Text(GTexts.createAccount),
             ),
           ),
-
-
         ],
       ),
     );

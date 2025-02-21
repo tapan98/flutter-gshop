@@ -11,6 +11,10 @@ class GTexts {
   static const String categories = "categories";
   static const String cart = "cart";
   static const String settings = "settings";
+  static const String isRequired = "is required";
+  static const String noInternetConnection = "No Internet Connection";
+  static const String somethingWentWrongPleaseTryAgain = "Something went wrong! Please try again.";
+  static const String errorSnackBarTitle = "Oops!";
 
   // Onboarding Texts
   static const String onboardingTitle1 = "Search your favorite products";
@@ -43,6 +47,19 @@ class GTexts {
   static const String termsOfUse = "Terms of Use";
   static const String submit = "Submit";
   static const String resendEmail = "Resend Email";
+  static const String invalidEmail = "Invalid email address";
+  static const String passwordMustBeAtLeast = "Password must be at least";
+  static const String charactersLong = "characters long";
+  static const String passwordMustContainAtLeastOneUppercase = "Password must contain at least one uppercase letter";
+  static const String passwordMustContainAtLeastOneNumber = "Password must contain at least one number";
+  static const String passwordMustContainAtLeastOneSpecial = "Password must contain at least one special character.";
+  static const String pleaseReEnterPassword = "Please re-enter password";
+  static const String passwordsDoNotMatch = "Passwords do not match";
+  static const String invalidPhoneNumberFormat = "Invalid phone number format";
+  static const String digitsRequired = "digits required";
+  static const String signingYouUp = "Signing you up";
+  static const String pleaseAcceptAgreementsTitle = "Please accept our Privacy Policy and Terms of Use";
+  static const String pleaseAcceptAgreementsSubtitle = "In order to create account, you need accept our Privacy Policy & Terms of use";
 
   // Authentication Headings
   static const String welcomeTitle = "Hello!";
@@ -56,6 +73,10 @@ class GTexts {
   static const String verifyEmailTitle = "Verify Email";
   static const String verifyEmailSubtitle =
       "We've sent a verification link to your email.";
+  static const String accountCreated = "Account Created!";
+  static const String accountCreatedSubtitle = "Your account has been created. Please verify email to continue.";
+  static const String emailVerifiedTitle = "E-mail verified!";
+  static const String emailVerifiedSubtitle = "Your E-mail has been verified successfully";
 
   // Shop
   static const String priceDetails = "Price Details";

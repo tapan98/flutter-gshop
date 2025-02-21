@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gshop/common/widgets/appbar/appbar.dart';
+import 'package:gshop/data/repositories/authentication_repository.dart';
+import 'package:gshop/features/authentication/controllers/signup/verify_email_controller.dart';
 import 'package:gshop/features/authentication/screens/login/login_screen.dart';
 import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
 
+
 class VerifyEmailScreen extends StatelessWidget {
-  const VerifyEmailScreen({super.key});
+  /// To be instantiated after the account has been created
+  /// but email is not verified.
+  ///
+  /// Warning: It assumes [AuthenticationRepository] has already been
+  /// instantiated, otherwise the close button from the appbar will throw an error
+  ///
+  /// Once instantiated, VerifyEmailController sends
+  /// verification email to the current user
+  /// and starts auto verification timer
+  const VerifyEmailScreen({super.key, required this.email});
+
+  final String email;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(VerifyEmailController());
     return Scaffold(
       appBar: GAppBar(
         showBackArrow: false,
         actions: [
           IconButton(
-            // TODO: Logout
-            onPressed: () => Get.offAll(() => const LoginScreen()),
+            onPressed: AuthenticationRepository.instance.logout,
             icon: const Icon(Icons.clear),
           ),
         ],
@@ -27,6 +41,8 @@ class VerifyEmailScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(GSizes.defaultSpace),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Email Sent Image
               Image.asset(
@@ -42,7 +58,7 @@ class VerifyEmailScreen extends StatelessWidget {
               HelperFunctions.spaceBtwItemsHeight(),
 
               // User's Email
-              Text("Some@email.com",
+              Text(email,
                   style: Theme.of(context).textTheme.labelLarge),
 
               HelperFunctions.spaceBtwItemsHeight(),
@@ -57,8 +73,7 @@ class VerifyEmailScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  // TODO: Check email verification status
-                  onPressed: () => Get.offAll(() => const LoginScreen()),
+                  onPressed: controller.checkEmailVerificationStatus,
                   child: Text(GTexts.continueText.capitalize!),
                 ),
               ),
@@ -67,8 +82,7 @@ class VerifyEmailScreen extends StatelessWidget {
 
               // Resend Email Button
               TextButton(
-                // TODO: Resend Email
-                onPressed: () {},
+                onPressed: controller.sendVerificationEmail,
                 child: Text(GTexts.resendEmail.capitalize!),
               ),
             ],

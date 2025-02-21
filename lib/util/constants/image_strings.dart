@@ -24,5 +24,9 @@ class GImages {
   // Icons
   static const String googleIcon = "assets/icons/google-icon.png";
 
+  // Animations
+  static const String processingDocerAnimation = "assets/images/animations/ball-ring-animation.json";
+  static const String successAnimation = "assets/images/animations/success-animation.json";
+
   GImages._();
 }

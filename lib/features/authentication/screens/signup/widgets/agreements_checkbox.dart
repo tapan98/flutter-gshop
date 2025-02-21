@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:gshop/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 
@@ -8,13 +10,17 @@ class AgreementsCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = SignupController.instance;
     return Row(
       children: [
         // Checkbox
-        Checkbox(
-          value: true,
-          // TODO: Add onChanged
-          onChanged: (value) {},
+        Obx(
+          () => Checkbox(
+            value: controller.agreementsCheck.value,
+            // TODO: Add onChanged
+            onChanged: (value) =>
+                (value != null) ? controller.agreementsCheck.value = value : null,
+          ),
         ),
 
         // Privacy Policy & Terms of Use text
