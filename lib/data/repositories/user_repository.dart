@@ -34,6 +34,22 @@ class UserRepository extends GetxController {
     }
   }
 
+  Future<bool> isEmailRegistered(String email) async {
+    try {
+      // check if email exists in Firestore Database
+      final querySnapshot = await _firestore
+          .collection(_firestoreUsersCollection)
+          .where(UserModel.emailKey, isEqualTo: email)
+          .get();
+      return querySnapshot.docs.isNotEmpty;
+    } on FirebaseException catch (e) {
+      throw FirebaseExceptionMessage(e.code).message;
+    } catch (e) {
+      Log.error(e);
+      throw "Something went wrong trying to save user data!";
+    }
+  }
+
   // Constants
   static const String _firestoreUsersCollection = "Users";
 }

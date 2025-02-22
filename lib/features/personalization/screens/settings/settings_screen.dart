@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gshop/features/personalization/controllers/settings/settings_controller.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
@@ -13,6 +14,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SettingsController());
     HelperFunctions.setDynamicStatusBarTheme(context);
     return Scaffold(
       body: SafeArea(
@@ -39,8 +41,7 @@ class SettingsScreen extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton(
-                    // TODO: logout the user
-                    onPressed: () {},
+                    onPressed: controller.logout,
                     child: Text(GTexts.logout.capitalize!),
                   ),
                 ),

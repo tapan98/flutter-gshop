@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:gshop/common/styles/padding_styles.dart';
 import 'package:gshop/common/widgets/authentication/form_divider.dart';
 import 'package:gshop/common/widgets/authentication/social_buttons.dart';
-import 'package:gshop/features/authentication/screens/login/password_screen.dart';
+import 'package:gshop/features/authentication/controllers/login/login_controller.dart';
+import 'package:gshop/features/authentication/screens/login/widgets/login_form.dart';
 import 'package:gshop/features/authentication/screens/login/widgets/login_header.dart';
 import 'package:gshop/features/authentication/screens/signup/signup_screen.dart';
 import 'package:gshop/util/constants/sizes.dart';
@@ -15,6 +16,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(LoginController());
     HelperFunctions.setDynamicStatusBarTheme(context);
     return Scaffold(
         body: SingleChildScrollView(
@@ -29,53 +31,7 @@ class LoginScreen extends StatelessWidget {
             HelperFunctions.spaceBtwSectionsHeight(),
 
             // Email Input & Continue Button
-            Form(
-              child: Column(
-                children: [
-                  // Email Input
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.email),
-                      labelText: GTexts.email,
-                    ),
-                  ),
-
-                  const SizedBox(height: GSizes.spaceBtwItems),
-
-                  // Remember Email Checkbox
-                  GestureDetector(
-                    // TODO: toggle checkbox
-                    onTap: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Checkbox(
-                          value: true,
-                          // TODO: toggle checkbox
-                          onChanged: (value) {},
-                        ),
-                        const Text(
-                          GTexts.rememberEmail,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: GSizes.spaceBtwItems),
-
-                  // Continue Button
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      // TODO: Check Email input
-                      onPressed: () => Get.to(() => const PasswordScreen()),
-                      child: Text(GTexts.continueText.capitalize!),
-                    ),
-                  )
-                ],
-              ),
-            ),
+            const LoginForm(),
 
             const SizedBox(height: GSizes.spaceBtwItems),
 

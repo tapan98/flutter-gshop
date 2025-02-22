@@ -15,6 +15,7 @@ class GTexts {
   static const String noInternetConnection = "No Internet Connection";
   static const String somethingWentWrongPleaseTryAgain = "Something went wrong! Please try again.";
   static const String errorSnackBarTitle = "Oops!";
+  static const String somethingWentWrong = "Something went wrong!";
 
   // Onboarding Texts
   static const String onboardingTitle1 = "Search your favorite products";
@@ -77,6 +78,10 @@ class GTexts {
   static const String accountCreatedSubtitle = "Your account has been created. Please verify email to continue.";
   static const String emailVerifiedTitle = "E-mail verified!";
   static const String emailVerifiedSubtitle = "Your E-mail has been verified successfully";
+  static const String checkingEmail = "Checking email...";
+  static const String loggingYouIn = "Logging you in...";
+  static const String emailIsNotRegistered = "Email isn't registered";
+  static const String sendingPasswordResetEmail = "Sending password reset E-mail...";
 
   // Shop
   static const String priceDetails = "Price Details";

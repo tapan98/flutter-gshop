@@ -3,12 +3,11 @@ import 'package:get/get.dart';
 import 'package:gshop/common/widgets/appbar/appbar.dart';
 import 'package:gshop/data/repositories/authentication_repository.dart';
 import 'package:gshop/features/authentication/controllers/signup/verify_email_controller.dart';
-import 'package:gshop/features/authentication/screens/login/login_screen.dart';
 import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
-
+import 'package:gshop/util/logger/logger.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
   /// To be instantiated after the account has been created
@@ -22,10 +21,13 @@ class VerifyEmailScreen extends StatelessWidget {
   /// and starts auto verification timer
   const VerifyEmailScreen({super.key, required this.email});
 
-  final String email;
+  final String? email;
 
   @override
   Widget build(BuildContext context) {
+    if (email == null) {
+      Log.warning("email is null!");
+    }
     final controller = Get.put(VerifyEmailController());
     return Scaffold(
       appBar: GAppBar(
@@ -58,8 +60,7 @@ class VerifyEmailScreen extends StatelessWidget {
               HelperFunctions.spaceBtwItemsHeight(),
 
               // User's Email
-              Text(email,
-                  style: Theme.of(context).textTheme.labelLarge),
+              Text(email ?? '', style: Theme.of(context).textTheme.labelLarge),
 
               HelperFunctions.spaceBtwItemsHeight(),
 
