@@ -28,6 +28,10 @@ class AuthenticationRepository extends GetxController {
   final _auth = FirebaseAuth.instance;
 
   // Methods
+
+  /// Get current authenticated user
+  User? get getCurrentUser => _auth.currentUser;
+
   /// Decides which screen to navigate in to
   ///
   Future<void> screenRedirect() async {

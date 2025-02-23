@@ -7,7 +7,7 @@ class UserModel {
   final String firstName;
   final String lastName;
   final String phoneNumber;
-  final String? profilePicture;
+  final String profilePicture;
 
   UserModel({
     required this.userId,
@@ -16,7 +16,7 @@ class UserModel {
     required this.firstName,
     required this.lastName,
     required this.phoneNumber,
-    this.profilePicture,
+    required this.profilePicture,
   });
 
   static UserModel empty() => UserModel(
@@ -26,6 +26,7 @@ class UserModel {
         firstName: "",
         lastName: "",
         phoneNumber: "",
+        profilePicture: "",
       );
 
   Map<String, dynamic> toMap() {
@@ -40,7 +41,7 @@ class UserModel {
   }
 
   /// Creates UserModel from a Firebase document snapshot
-  factory UserModel.fromSnapshot(
+  factory UserModel.fromFirestoreDocumentSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
     return UserModel(
@@ -50,7 +51,7 @@ class UserModel {
       username: data[usernameKey] ?? "",
       email: data[emailKey] ?? "",
       phoneNumber: data[phoneKey] ?? "",
-      profilePicture: data[profilePictureKey],
+      profilePicture: data[profilePictureKey] ?? "",
     );
   }
 

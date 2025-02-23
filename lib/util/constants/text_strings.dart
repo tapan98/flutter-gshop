@@ -16,6 +16,7 @@ class GTexts {
   static const String somethingWentWrongPleaseTryAgain = "Something went wrong! Please try again.";
   static const String errorSnackBarTitle = "Oops!";
   static const String somethingWentWrong = "Something went wrong!";
+  static const String hello = "Hello";
 
   // Onboarding Texts
   static const String onboardingTitle1 = "Search your favorite products";

@@ -1,7 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:gshop/data/repositories/authentication_repository.dart';
 import 'package:gshop/features/authentication/models/user_model.dart';
+import 'package:gshop/util/constants/text_strings.dart';
+import 'package:gshop/util/exceptions/firebase_auth_exceptions.dart';
 import 'package:gshop/util/exceptions/firebase_exceptions.dart';
+import 'package:gshop/util/exceptions/platform_exceptions.dart';
 import 'package:gshop/util/logger/logger.dart';
 
 /// Instantiated in general_bindings.dart
@@ -16,6 +22,38 @@ class UserRepository extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Methods
+
+  Future<UserModel> fetchUserDetails() async {
+    Log.debug("Fetching current user details...");
+    try {
+      final User? user = AuthenticationRepository.instance.getCurrentUser;
+
+      if (user == null) {
+        Log.error("User is null");
+        throw GTexts.somethingWentWrongPleaseTryAgain;
+      }
+
+      final DocumentSnapshot<Map<String, dynamic>> snapshot = await _firestore
+          .collection(_firestoreUsersCollection)
+          .doc(user.uid)
+          .get();
+
+      if (!snapshot.exists) {
+        Log.error("User document does not exist");
+        throw GTexts.somethingWentWrongPleaseTryAgain;
+      }
+      return UserModel.fromFirestoreDocumentSnapshot(snapshot);
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthExceptionMessage(e.code).message;
+    } on FirebaseException catch (e) {
+      throw FirebaseExceptionMessage(e.code).message;
+    } on PlatformException catch (e) {
+      throw PlatformExceptionMessage(e.code).message;
+    } catch (e) {
+      Log.debug(e);
+      throw GTexts.somethingWentWrongPleaseTryAgain;
+    }
+  }
 
   /// Save user data to Firestore
   ///
@@ -52,7 +90,6 @@ class UserRepository extends GetxController {
 
   // Generate username
   static String generateUsername(String fullName) {
-
     List<String> nameParts = fullName.split(' ');
 
     String firstName = nameParts.first;
@@ -68,6 +105,7 @@ class UserRepository extends GetxController {
     List<String> nameParts = fullName.split(' ');
     return nameParts.first;
   }
+
   // Last name
   static String getLastName(String fullName) {
     List<String> nameParts = fullName.split(' ');
