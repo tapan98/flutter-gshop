@@ -7,7 +7,6 @@ class UserModel {
   final String firstName;
   final String lastName;
   final String phoneNumber;
-  final String profilePicture;
 
   UserModel({
     required this.userId,
@@ -16,7 +15,6 @@ class UserModel {
     required this.firstName,
     required this.lastName,
     required this.phoneNumber,
-    required this.profilePicture,
   });
 
   static UserModel empty() => UserModel(
@@ -26,7 +24,6 @@ class UserModel {
         firstName: "",
         lastName: "",
         phoneNumber: "",
-        profilePicture: "",
       );
 
   Map<String, dynamic> toMap() {
@@ -36,7 +33,6 @@ class UserModel {
       usernameKey: username,
       emailKey: email,
       phoneKey: phoneNumber,
-      profilePictureKey: profilePicture,
     };
   }
 
@@ -51,15 +47,17 @@ class UserModel {
       username: data[usernameKey] ?? "",
       email: data[emailKey] ?? "",
       phoneNumber: data[phoneKey] ?? "",
-      profilePicture: data[profilePictureKey] ?? "",
     );
   }
 
-  // Constants
+  @override
+  String toString() {
+    return 'UserModel(userId: $userId, username: $username, email: $email, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber)';
+  } // Constants
+
   static const String firstNameKey = "FirstName";
   static const String lastNameKey = "LastName";
   static const String emailKey = "Email";
   static const String phoneKey = "PhoneNumber";
-  static const String profilePictureKey = "ProfilePicture";
   static const String usernameKey = "Username";
 }

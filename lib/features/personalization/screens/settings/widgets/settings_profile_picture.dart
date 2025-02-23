@@ -16,10 +16,14 @@ class SettingsProfilePicture extends StatelessWidget {
       () => userController.profileLoading.value
           ? ShimmerWidget(
               width: imageRadius, height: imageRadius, radius: imageRadius)
-          : userController.user.value.profilePicture.isEmpty
-              ? const Image(image: AssetImage(GImages.dummyPersonImage))
+          : userController.getProfilePictureUrl().isEmpty
+              ? CircularImage(
+                  imageUrl: GImages.dummyPersonImage,
+                  radius: imageRadius,
+                  isNetworkImage: false,
+                )
               : CircularImage(
-                  imageUrl: userController.user.value.profilePicture,
+                  imageUrl: userController.getProfilePictureUrl(),
                   isNetworkImage: true,
                 ),
     );

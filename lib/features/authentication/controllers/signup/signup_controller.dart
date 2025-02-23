@@ -12,7 +12,6 @@ import 'package:gshop/util/helpers/network_manager.dart';
 import 'package:gshop/util/helpers/snackbars.dart';
 import 'package:gshop/util/logger/logger.dart';
 
-
 class SignupController extends GetxController {
   /// Instantiated in CreateAccountForm
   ///
@@ -79,13 +78,13 @@ class SignupController extends GetxController {
       // Save User to Firestore
       if (userCredential.user != null) {
         final newUser = UserModel(
-            userId: userCredential.user!.uid,
-            username: usernameTextController.text.trim(),
-            email: emailTextController.text.trim(),
-            firstName: firstNameTextController.text.trim(),
-            lastName: lastNameTextController.text.trim(),
-            phoneNumber: phoneNumberTextController.text.trim(),
-            profilePicture: '');
+          userId: userCredential.user!.uid,
+          username: usernameTextController.text.trim(),
+          email: emailTextController.text.trim(),
+          firstName: firstNameTextController.text.trim(),
+          lastName: lastNameTextController.text.trim(),
+          phoneNumber: phoneNumberTextController.text.trim(),
+        );
         await UserRepository.instance.saveUserRecord(newUser);
       } else {
         Log.error("userCredential.user was null!");
@@ -103,7 +102,8 @@ class SignupController extends GetxController {
     } catch (e) {
       FullScreenLoadingAnimation.stopLoading(Get.context!);
       // Show human readable error message
-      GSnackBar.errorSnackBar(title: GTexts.errorSnackBarTitle, message: e.toString());
+      GSnackBar.errorSnackBar(
+          title: GTexts.errorSnackBarTitle, message: e.toString());
     }
   }
 

@@ -17,6 +17,10 @@ class GTexts {
   static const String errorSnackBarTitle = "Oops!";
   static const String somethingWentWrong = "Something went wrong!";
   static const String hello = "Hello";
+  static const String delete = "delete";
+  static const String cancel = "cancel";
+  static const String verify = "verify";
+  static const String processing = "processing";
 
   // Onboarding Texts
   static const String onboardingTitle1 = "Search your favorite products";
@@ -81,6 +85,7 @@ class GTexts {
   static const String emailVerifiedSubtitle = "Your E-mail has been verified successfully";
   static const String checkingEmail = "Checking email...";
   static const String loggingYouIn = "Logging you in...";
+  static const String loggingYouOut = "Logging you out...";
   static const String emailIsNotRegistered = "Email isn't registered";
   static const String sendingPasswordResetEmail = "Sending password reset E-mail...";
   static const String signingInWithGoogle = "Signing in with Google...";
@@ -131,9 +136,10 @@ class GTexts {
   static const String changeProfilePicture = "Change Profile Picture";
   static const String name = "Name";
   static const String gender = "Gender";
-  static const String deactivateAccount = "Deactivate Account";
   static const String deleteAccount = "Delete Account";
   static const String colorScheme = "Color Scheme";
+  static const String deleteAccountWarningText = "Are you sure you want to delete your account? This action cannot be undone.";
+  static const String deletingAccount = "Deleting account...";
 
   GTexts._();
 }

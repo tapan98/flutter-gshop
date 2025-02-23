@@ -51,7 +51,6 @@ class LoginController extends GetxController {
       // Check if email is registered
       if (!await UserRepository.instance
           .isEmailRegistered(emailController.text.trim())) {
-        Log.debug("Checking email: ${emailController.text.trim()}");
         FullScreenLoadingAnimation.stopLoading(Get.context!);
         GSnackBar.errorSnackBar(
             title: GTexts.errorSnackBarTitle,
@@ -144,9 +143,10 @@ class LoginController extends GetxController {
 
       Log.debug("Saving user record...");
 
-      // check if email is already registered
-      if (user.email != null && await UserRepository.instance.isEmailRegistered(user.email!)) {
-        Log.debug("email ${user.email} is already registered. Skipping...");
+      // check if user is already registered
+      final userId = userCredential.user?.uid;
+      if (userId != null && await UserRepository.instance.isUserIdRegistered(userId)) {
+        Log.debug("User is already registered. Skipping...");
         AuthenticationRepository.instance.screenRedirect();
         return;
       }
@@ -158,12 +158,14 @@ class LoginController extends GetxController {
         firstName: UserRepository.getFirstName(user.displayName ?? ''),
         lastName: UserRepository.getLastName(user.displayName ?? ''),
         phoneNumber: user.phoneNumber ?? '',
-        profilePicture: user.photoURL ?? '',
       );
 
       await UserRepository.instance.saveUserRecord(newUser);
 
       FullScreenLoadingAnimation.stopLoading(Get.context!);
+
+      // redirect
+      AuthenticationRepository.instance.screenRedirect();
 
     } catch (e) {
       FullScreenLoadingAnimation.stopLoading(Get.context!);

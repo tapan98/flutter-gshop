@@ -4,6 +4,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:gshop/data/repositories/user_repository.dart';
 import 'package:gshop/features/authentication/screens/login/login_screen.dart';
 import 'package:gshop/features/authentication/screens/onboarding/onboarding_screen.dart';
 import 'package:gshop/features/authentication/screens/signup/verify_email_screen.dart';
@@ -46,6 +47,7 @@ class AuthenticationRepository extends GetxController {
         Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser!.email));
       }
     } else {
+      Log.debug("User isn't logged in");
       // Check if app is launched for the first time
       deviceStorage.writeIfNull(isFirstTime, true);
       deviceStorage.read(isFirstTime)
@@ -65,6 +67,23 @@ class AuthenticationRepository extends GetxController {
       throw FirebaseExceptionMessage(e.code).message;
     } on PlatformException catch (e) {
       throw PlatformExceptionMessage(e.code).message;
+    } catch (e) {
+      Log.debug(e);
+      throw GTexts.somethingWentWrongPleaseTryAgain;
+    }
+  }
+
+  Future<void> reAuthenticateWithEmailAndPassword(
+      {required String email, required String password}) async {
+    try {
+      _auth.currentUser?.reauthenticateWithCredential(
+        EmailAuthProvider.credential(
+          email: email,
+          password: password,
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthExceptionMessage(e.code).message;
     } catch (e) {
       Log.debug(e);
       throw GTexts.somethingWentWrongPleaseTryAgain;
@@ -158,7 +177,8 @@ class AuthenticationRepository extends GetxController {
     try {
       GoogleSignInAccount? account = await GoogleSignIn().signIn();
       GoogleSignInAuthentication? googleAuth = await account?.authentication;
-      OAuthCredential credential = GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+      OAuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
       return await _auth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw FirebaseAuthExceptionMessage(e.code).message;
@@ -177,6 +197,24 @@ class AuthenticationRepository extends GetxController {
     try {
       await GoogleSignIn().signOut();
       await _auth.signOut();
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthExceptionMessage(e.code).message;
+    } on FirebaseException catch (e) {
+      throw FirebaseExceptionMessage(e.code).message;
+    } on PlatformException catch (e) {
+      throw PlatformExceptionMessage(e.code).message;
+    } catch (e) {
+      Log.debug(e);
+      throw GTexts.somethingWentWrongPleaseTryAgain;
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    Log.debug("Deleting account...");
+    try {
+      final String userId = _auth.currentUser!.uid;
+      await _auth.currentUser?.delete();
+      await UserRepository.instance.deleteUserDetails(userId);
     } on FirebaseAuthException catch (e) {
       throw FirebaseAuthExceptionMessage(e.code).message;
     } on FirebaseException catch (e) {

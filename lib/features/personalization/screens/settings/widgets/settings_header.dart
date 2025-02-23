@@ -26,7 +26,8 @@ class SettingsHeader extends StatelessWidget {
           // Image
           const SettingsProfilePicture(),
           HelperFunctions.spaceBtwItemsWidth(),
-          Text(controller.getHeaderText(), style: Theme.of(context).textTheme.titleMedium),
+          Obx(() => Text(controller.getHeaderText(),
+              style: Theme.of(context).textTheme.titleMedium)),
           const Expanded(child: SizedBox()),
           IconButton(
             onPressed: () => Get.to(() => const ProfileScreen()),

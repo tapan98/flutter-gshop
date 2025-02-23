@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gshop/common/widgets/shimmers/shimmer_widget.dart';
 import 'package:gshop/util/constants/colors.dart';
-import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
 
@@ -47,8 +46,8 @@ class CircularImage extends StatelessWidget {
                 errorWidget: (_, __, ___) =>
                     const FaIcon(FontAwesomeIcons.circleExclamation),
               )
-            : const Image(
-                image: AssetImage(GImages.dummyPersonImage),
+            : Image(
+                image: AssetImage(imageUrl),
               ),
       ),
     );

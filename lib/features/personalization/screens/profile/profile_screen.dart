@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gshop/common/widgets/appbar/appbar.dart';
 import 'package:gshop/common/widgets/texts/section_heading.dart';
+import 'package:gshop/features/authentication/models/user_model.dart';
+import 'package:gshop/features/personalization/controllers/user/user_controller.dart';
 import 'package:gshop/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:gshop/features/personalization/screens/profile/widgets/profile_picture_widget.dart';
 import 'package:gshop/util/constants/sizes.dart';
@@ -12,6 +14,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userController = UserController.instance;
+    final UserModel user = userController.user.value;
     return Scaffold(
       appBar: const GAppBar(),
       body: SingleChildScrollView(
@@ -34,14 +38,16 @@ class ProfileScreen extends StatelessWidget {
               // First Name
               ProfileMenu(
                 title: GTexts.firstName,
-                value: "Tapan",
+                value: user.firstName,
+                // TODO: Navigate to editor screen
                 onTap: () {},
               ),
 
               // Last Name
               ProfileMenu(
                 title: GTexts.lastName,
-                value: "B",
+                value: user.lastName,
+                // TODO: Navigate to editor screen
                 onTap: () {},
               ),
 
@@ -57,21 +63,14 @@ class ProfileScreen extends StatelessWidget {
               // Mobile Number
               ProfileMenu(
                 title: GTexts.phoneNumber,
-                value: "+91 99999 99999",
+                value: user.phoneNumber,
                 onTap: () {},
               ),
 
               // Email ID
               ProfileMenu(
                 title: GTexts.email,
-                value: "tapanboro98@gmail.com",
-                onTap: () {},
-              ),
-
-              // Gender
-              ProfileMenu(
-                title: GTexts.gender,
-                value: "Male",
+                value: user.email,
                 onTap: () {},
               ),
 
@@ -79,19 +78,10 @@ class ProfileScreen extends StatelessWidget {
               const Divider(),
               const SizedBox(height: GSizes.spaceBtwSections / 2),
 
-              // ---- Buttons ---- //
-              // Deactivate Account Button
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  GTexts.deactivateAccount,
-                  style: TextStyle(color: Colors.red),
-                ),
-              ),
 
               // Delete Account Button
               TextButton(
-                onPressed: () {},
+                onPressed: userController.deleteUserAccount,
                 child: const Text(
                   GTexts.deleteAccount,
                   style: TextStyle(color: Colors.red),
