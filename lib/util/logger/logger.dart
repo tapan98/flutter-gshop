@@ -1,9 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 
 class Log {
   static final Logger _logger = Logger(
     printer: PrettyPrinter(),
-    level: Level.debug,
+    level: kDebugMode? Level.all : Level.off,
   );
 
   static void debug(message) {
