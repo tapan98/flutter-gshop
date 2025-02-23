@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gshop/app.dart';
+import 'package:gshop/home/controllers/theme_controller.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
@@ -16,40 +16,35 @@ class SettingsThemeChoice extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          // Title
           Text(
             GTexts.colorScheme,
             style: Theme.of(context).textTheme.titleMedium,
           ),
+
           const Divider(),
-          for (ThemeMode option in themeController.options)
-            Obx(
+
+          // List of Theme Modes
+          ...ThemeMode.values.map(
+            (e) => Obx(
               () => RadioListTile<ThemeMode>(
-                title: Text(getString(option)),
-                value: option,
+                title: Text(e.name.capitalize!),
+                value: e,
                 groupValue: themeController.themeMode.value,
                 activeColor: GColors.primary,
                 onChanged: (ThemeMode? value) {
                   if (value != null) {
-                    // TODO: Add persistent storage
-                    themeController.themeMode.value = value;
+                    themeController
+                      ..themeMode.value = value
+                      ..saveThemeMode();
                     Navigator.pop(context);
                   }
                 },
               ),
             ),
+          ),
         ],
       ),
     );
-  }
-
-  static String getString(ThemeMode mode) {
-    switch (mode) {
-      case ThemeMode.system:
-        return GTexts.system;
-      case ThemeMode.light:
-        return GTexts.light;
-      case ThemeMode.dark:
-        return GTexts.dark;
-    }
   }
 }

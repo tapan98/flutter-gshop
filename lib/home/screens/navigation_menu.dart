@@ -8,7 +8,7 @@ import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
 
-import 'features/personalization/screens/settings/settings_screen.dart';
+import '../../features/personalization/screens/settings/settings_screen.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});

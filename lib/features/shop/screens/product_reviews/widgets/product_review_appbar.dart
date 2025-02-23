@@ -42,6 +42,5 @@ class ProductReviewAppbar extends StatelessWidget implements PreferredSizeWidget
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => Size.fromHeight(DeviceUtils.getAppBarHeight());
 }

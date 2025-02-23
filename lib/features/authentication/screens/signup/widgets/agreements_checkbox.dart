@@ -17,7 +17,6 @@ class AgreementsCheckbox extends StatelessWidget {
         Obx(
           () => Checkbox(
             value: controller.agreementsCheck.value,
-            // TODO: Add onChanged
             onChanged: (value) =>
                 (value != null) ? controller.agreementsCheck.value = value : null,
           ),
@@ -59,7 +58,7 @@ class AgreementsCheckbox extends StatelessWidget {
                   text: GTexts.termsOfUse,
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      // TODO: Open Privacy Policy
+                      // TODO: Open Terms of Use
                     },
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Theme.of(context).primaryColor,

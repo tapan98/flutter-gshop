@@ -15,7 +15,6 @@ class OnboardingNextButton extends StatelessWidget {
       bottom: DeviceUtils.getBottomNavigationBarHeight(),
       right: GSizes.defaultSpace,
       child: ElevatedButton(
-        // TODO: update index to next page
         onPressed: OnboardingController.instance.next,
         style: ElevatedButton.styleFrom(
           shape: const CircleBorder(),

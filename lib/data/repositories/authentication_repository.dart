@@ -6,7 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:gshop/features/authentication/screens/login/login_screen.dart';
 import 'package:gshop/features/authentication/screens/onboarding/onboarding_screen.dart';
 import 'package:gshop/features/authentication/screens/signup/verify_email_screen.dart';
-import 'package:gshop/navigation_menu.dart';
+import 'package:gshop/home/screens/navigation_menu.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/exceptions/firebase_auth_exceptions.dart';
 import 'package:gshop/util/exceptions/firebase_exceptions.dart';

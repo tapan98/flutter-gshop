@@ -40,7 +40,7 @@ class OrderItemWidget extends StatelessWidget {
               const SizedBox(height: GSizes.spaceBtwItems / 2),
               Text(product),
               const SizedBox(height: GSizes.spaceBtwItems / 2),
-              // TODO: Determine if item is to be rated
+              // TODO: Determine from the server if item is to be rated
               if (shouldRate)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

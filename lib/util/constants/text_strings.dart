@@ -131,9 +131,6 @@ class GTexts {
   static const String gender = "Gender";
   static const String deactivateAccount = "Deactivate Account";
   static const String deleteAccount = "Delete Account";
-  static const String light = "Light";
-  static const String dark = "Dark";
-  static const String system = "System";
   static const String colorScheme = "Color Scheme";
 
   GTexts._();
