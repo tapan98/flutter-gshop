@@ -148,7 +148,7 @@ class CreateAccountForm extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: controller.createAccount,
+              onPressed: controller.createAccountWithEmailAndPassword,
               child: const Text(GTexts.createAccount),
             ),
           ),

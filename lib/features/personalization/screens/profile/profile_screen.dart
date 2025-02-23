@@ -81,7 +81,7 @@ class ProfileScreen extends StatelessWidget {
 
               // Delete Account Button
               TextButton(
-                onPressed: userController.deleteUserAccount,
+                onPressed: userController.deleteAccountPopup,
                 child: const Text(
                   GTexts.deleteAccount,
                   style: TextStyle(color: Colors.red),

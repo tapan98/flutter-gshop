@@ -36,6 +36,7 @@ class AuthenticationRepository extends GetxController {
   /// Decides which screen to navigate in to
   ///
   Future<void> screenRedirect() async {
+    Log.debug("Deciding screen redirection...");
     // Check if user is logged in with FirebaseAuth
     _auth.currentUser?.reload();
     if (_auth.currentUser != null) {
@@ -76,14 +77,16 @@ class AuthenticationRepository extends GetxController {
   Future<void> reAuthenticateWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      _auth.currentUser?.reauthenticateWithCredential(
-        EmailAuthProvider.credential(
-          email: email,
-          password: password,
-        ),
+      final AuthCredential credential = EmailAuthProvider.credential(
+        email: email,
+        password: password,
       );
+
+      await _auth.currentUser!.reauthenticateWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw FirebaseAuthExceptionMessage(e.code).message;
+    } on PlatformException catch (e) {
+      throw PlatformExceptionMessage(e.code).message;
     } catch (e) {
       Log.debug(e);
       throw GTexts.somethingWentWrongPleaseTryAgain;

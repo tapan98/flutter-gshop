@@ -5,6 +5,7 @@ import 'package:gshop/common/widgets/animation/fullscreen_loading.dart';
 import 'package:gshop/data/repositories/authentication_repository.dart';
 import 'package:gshop/data/repositories/user_repository.dart';
 import 'package:gshop/features/authentication/models/user_model.dart';
+import 'package:gshop/features/authentication/screens/login/login_screen.dart';
 import 'package:gshop/features/personalization/screens/profile/re_authenticate_login_screen.dart';
 import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/sizes.dart';
@@ -70,9 +71,9 @@ class UserController extends GetxController {
 
       // Delete User
       AuthenticationRepository.instance.deleteAccount();
-
-      FullScreenLoadingAnimation.stopLoading(Get.context!);
-      AuthenticationRepository.instance.screenRedirect();
+      // TODO: Delete uploaded profile picture (if any)
+      AuthenticationRepository.instance.logout();
+      Get.offAll(() => const LoginScreen());
     } catch (e) {
       FullScreenLoadingAnimation.stopLoading(Get.context!);
       GSnackBar.errorSnackBar(
@@ -80,7 +81,7 @@ class UserController extends GetxController {
     }
   }
 
-  void deleteAccount() {
+  void deleteAccountPopup() {
     // Show warning dialog
     Get.defaultDialog(
       contentPadding: const EdgeInsets.all(GSizes.md),
@@ -91,7 +92,7 @@ class UserController extends GetxController {
           backgroundColor: Colors.red,
           side: const BorderSide(color: Colors.red),
         ),
-        onPressed: deleteUserAccount,
+        onPressed: _deleteUserAccount,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: GSizes.lg),
           child: Text(GTexts.delete.capitalize!),
@@ -104,7 +105,7 @@ class UserController extends GetxController {
     );
   }
 
-  Future<void> deleteUserAccount() async {
+  Future<void> _deleteUserAccount() async {
     try {
       FullScreenLoadingAnimation.startLoading(
         Get.context!,
@@ -125,14 +126,14 @@ class UserController extends GetxController {
       if (provider == 'google.com') {
         await auth.signInWithGoogle();
         await auth.deleteAccount();
-        FullScreenLoadingAnimation.stopLoading(Get.context!);
-        auth.screenRedirect();
+        // TODO: Delete uploading profile picture (if any)
+        await auth.logout();
+        Get.offAll(() => const LoginScreen());
       } else if (provider == 'password') {
         FullScreenLoadingAnimation.stopLoading(Get.context!);
-        Get.to(() => const ReAuthenticateLoginScreen());
+        Get.off(() => const ReAuthenticateLoginScreen());
       }
 
-      FullScreenLoadingAnimation.stopLoading(Get.context!);
     } catch (e) {
       FullScreenLoadingAnimation.stopLoading(Get.context!);
       GSnackBar.errorSnackBar(

@@ -76,7 +76,7 @@ class LoginController extends GetxController {
     }
   }
 
-  Future<void> login() async {
+  Future<void> loginWithEmailAndPassword() async {
     try {
       // Loading screen
       FullScreenLoadingAnimation.startLoading(
@@ -161,6 +161,8 @@ class LoginController extends GetxController {
       );
 
       await UserRepository.instance.saveUserRecord(newUser);
+
+      UserRepository.instance.fetchUserDetails();
 
       FullScreenLoadingAnimation.stopLoading(Get.context!);
 

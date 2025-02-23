@@ -37,7 +37,7 @@ class SignupController extends GetxController {
   /// 1. Validates the form
   /// 2. Saves the user to the Firestore
   /// 3. Navigates to the VerifyEmailScreen
-  Future<void> createAccount() async {
+  Future<void> createAccountWithEmailAndPassword() async {
     try {
       // Start full screen loading
       FullScreenLoadingAnimation.startLoading(
@@ -86,6 +86,7 @@ class SignupController extends GetxController {
           phoneNumber: phoneNumberTextController.text.trim(),
         );
         await UserRepository.instance.saveUserRecord(newUser);
+        UserRepository.instance.fetchUserDetails();
       } else {
         Log.error("userCredential.user was null!");
         throw "Something went wrong!";

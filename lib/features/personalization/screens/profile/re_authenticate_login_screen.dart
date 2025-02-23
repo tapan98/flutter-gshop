@@ -65,7 +65,7 @@ class ReAuthenticateLoginScreen extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () =>
                         controller.reAuthenticateEmailAndPasswordAndDelete(),
-                    child: const Text(GTexts.verify),
+                    child: Text(GTexts.verify.capitalize!),
                   ),
                 )
               ],
