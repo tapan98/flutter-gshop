@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gshop/common/widgets/animation/fullscreen_loading.dart';
 import 'package:gshop/data/repositories/authentication_repository.dart';
 import 'package:gshop/data/repositories/user_repository.dart';
+import 'package:gshop/features/authentication/models/user_model.dart';
 import 'package:gshop/features/authentication/screens/login/password_screen.dart';
 import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/text_strings.dart';
@@ -11,8 +13,8 @@ import 'package:gshop/util/helpers/snackbars.dart';
 import 'package:gshop/util/local_storage/local_storage.dart';
 import 'package:gshop/util/logger/logger.dart';
 
+/// Instantiated in LoginScreen
 class LoginController extends GetxController {
-  /// Instantiated in LoginScreen
   static LoginController get instance => Get.find();
 
   // Variables
@@ -107,6 +109,62 @@ class LoginController extends GetxController {
 
       // Redirect
       AuthenticationRepository.instance.screenRedirect();
+    } catch (e) {
+      FullScreenLoadingAnimation.stopLoading(Get.context!);
+      GSnackBar.errorSnackBar(
+          title: GTexts.errorSnackBarTitle, message: e.toString());
+    }
+  }
+
+  /// Federated Sign-in with Google
+  Future<void> loginWithGoogle() async {
+    try {
+      FullScreenLoadingAnimation.startLoading(
+        Get.context!,
+        GImages.processingDocerAnimation,
+        GTexts.signingInWithGoogle,
+      );
+
+      if (!await NetworkManager.instance.isConnected()) {
+        FullScreenLoadingAnimation.stopLoading(Get.context!);
+        return;
+      }
+
+      // Trigger sign in
+      UserCredential userCredential =
+      await AuthenticationRepository.instance.signInWithGoogle();
+
+
+      // Save user to Firestore Database
+      final user = userCredential.user;
+      if (user == null) {
+        Log.error("userCredential.user was null!");
+        throw GTexts.somethingWentWrong;
+      }
+
+      Log.debug("Saving user record...");
+
+      // check if email is already registered
+      if (user.email != null && await UserRepository.instance.isEmailRegistered(user.email!)) {
+        Log.debug("email ${user.email} is already registered. Skipping...");
+        AuthenticationRepository.instance.screenRedirect();
+        return;
+      }
+
+      final newUser = UserModel(
+        userId: user.uid,
+        username: UserRepository.generateUsername(user.displayName ?? ''),
+        email: user.email ?? '',
+        firstName: UserRepository.getFirstName(user.displayName ?? ''),
+        lastName: UserRepository.getLastName(user.displayName ?? ''),
+        phoneNumber: user.phoneNumber ?? '',
+        profilePicture: user.photoURL ?? '',
+      );
+
+      await UserRepository.instance.saveUserRecord(newUser);
+
+      FullScreenLoadingAnimation.stopLoading(Get.context!);
+
     } catch (e) {
       FullScreenLoadingAnimation.stopLoading(Get.context!);
       GSnackBar.errorSnackBar(

@@ -82,6 +82,7 @@ class GTexts {
   static const String loggingYouIn = "Logging you in...";
   static const String emailIsNotRegistered = "Email isn't registered";
   static const String sendingPasswordResetEmail = "Sending password reset E-mail...";
+  static const String signingInWithGoogle = "Signing in with Google...";
 
   // Shop
   static const String priceDetails = "Price Details";

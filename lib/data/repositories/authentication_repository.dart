@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:gshop/features/authentication/screens/login/login_screen.dart';
 import 'package:gshop/features/authentication/screens/onboarding/onboarding_screen.dart';
 import 'package:gshop/features/authentication/screens/signup/verify_email_screen.dart';
@@ -30,7 +31,6 @@ class AuthenticationRepository extends GetxController {
   /// Decides which screen to navigate in to
   ///
   Future<void> screenRedirect() async {
-
     // Check if user is logged in with FirebaseAuth
     _auth.currentUser?.reload();
     if (_auth.currentUser != null) {
@@ -53,7 +53,8 @@ class AuthenticationRepository extends GetxController {
   Future<UserCredential> signInWithEmailAndPassword(
       String email, String password) async {
     try {
-      return await _auth.signInWithEmailAndPassword(email: email, password: password);
+      return await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
     } on FirebaseAuthException catch (e) {
       throw FirebaseAuthExceptionMessage(e.code).message;
     } on FirebaseException catch (e) {
@@ -129,7 +130,7 @@ class AuthenticationRepository extends GetxController {
       throw GTexts.somethingWentWrongPleaseTryAgain;
     }
   }
-  
+
   bool? isEmailVerified() {
     try {
       _auth.currentUser?.reload();
@@ -146,10 +147,31 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
+  // * Federated Login *
+  // Google sign in
+  Future<UserCredential> signInWithGoogle() async {
+    Log.debug("Signing in with Google...");
+    try {
+      GoogleSignInAccount? account = await GoogleSignIn().signIn();
+      GoogleSignInAuthentication? googleAuth = await account?.authentication;
+      OAuthCredential credential = GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+      return await _auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthExceptionMessage(e.code).message;
+    } on FirebaseException catch (e) {
+      throw FirebaseExceptionMessage(e.code).message;
+    } on PlatformException catch (e) {
+      throw PlatformExceptionMessage(e.code).message;
+    } catch (e) {
+      Log.debug(e);
+      throw GTexts.somethingWentWrongPleaseTryAgain;
+    }
+  }
+
   Future<void> logout() async {
     Log.debug("Logging user out...");
     try {
-      // TODO: call GoogleSignIn().signOut() once google authentication is implemented
+      await GoogleSignIn().signOut();
       await _auth.signOut();
     } on FirebaseAuthException catch (e) {
       throw FirebaseAuthExceptionMessage(e.code).message;

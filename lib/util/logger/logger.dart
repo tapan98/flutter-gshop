@@ -21,4 +21,6 @@ class Log {
   static void info(message) {
     _logger.i(message);
   }
+
+  Log._();
 }

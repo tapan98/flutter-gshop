@@ -50,6 +50,30 @@ class UserRepository extends GetxController {
     }
   }
 
+  // Generate username
+  static String generateUsername(String fullName) {
+
+    List<String> nameParts = fullName.split(' ');
+
+    String firstName = nameParts.first;
+
+    String userName = "${firstName}_${DateTime.now().millisecondsSinceEpoch}";
+
+    return userName;
+  }
+
+  // ** Get first & last name **
+  // First name
+  static String getFirstName(String fullName) {
+    List<String> nameParts = fullName.split(' ');
+    return nameParts.first;
+  }
+  // Last name
+  static String getLastName(String fullName) {
+    List<String> nameParts = fullName.split(' ');
+    return nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '';
+  }
+
   // Constants
   static const String _firestoreUsersCollection = "Users";
 }
