@@ -21,6 +21,9 @@ class GTexts {
   static const String cancel = "cancel";
   static const String verify = "verify";
   static const String processing = "processing";
+  static const String save = "save";
+  static const String success = "success";
+  static const String sorry = "Sorry";
 
   // Onboarding Texts
   static const String onboardingTitle1 = "Search your favorite products";
@@ -66,6 +69,7 @@ class GTexts {
   static const String signingYouUp = "Signing you up";
   static const String pleaseAcceptAgreementsTitle = "Please accept our Privacy Policy and Terms of Use";
   static const String pleaseAcceptAgreementsSubtitle = "In order to create account, you need accept our Privacy Policy & Terms of use";
+  static const String fullName = "Full Name";
 
   // Authentication Headings
   static const String welcomeTitle = "Hello!";
@@ -140,6 +144,10 @@ class GTexts {
   static const String colorScheme = "Color Scheme";
   static const String deleteAccountWarningText = "Are you sure you want to delete your account? This action cannot be undone.";
   static const String deletingAccount = "Deleting account...";
+  static const String editDisplayName = "Edit Display Name";
+  static const String nameUpdatedSuccessfully = "Name updated successfully";
+  static const String usernameUpdatedSuccessfully = "Username updated successfully";
+  static const String usernameIsAlreadyTaken = "Username is already taken";
 
   GTexts._();
 }

@@ -17,6 +17,8 @@ class UserModel {
     required this.phoneNumber,
   });
 
+  String get fullName => "$firstName $lastName";
+
   static UserModel empty() => UserModel(
         userId: "",
         username: "",

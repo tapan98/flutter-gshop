@@ -17,7 +17,8 @@ import 'package:image_picker/image_picker.dart';
 
 /// Instantiated in general_bindings.dart
 ///
-/// Communicates with [FirebaseFirestore] and [FirebaseStorage]
+/// Communicates with [AuthenticationRepository],
+/// [FirebaseFirestore] and [FirebaseStorage]
 /// to store and retrieve user data
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
@@ -28,8 +29,34 @@ class UserRepository extends GetxController {
 
   // Methods
 
+  /// Updates the user details in Firestore Database
+  ///
+  /// Re-throws known exceptions with a human readable message,
+  /// else logs the unexpected exception and throws a generic error message
+  Future<void> updateUserDetails(Map<String, dynamic> data) async {
+    Log.debug("Updating user details...");
+    try {
+      final User? user = AuthenticationRepository.instance.getCurrentUser;
+      if (user == null) {
+        throw "Current user isn't authenticated!";
+      }
+
+      await _firestore
+          .collection(FirestoreCollections.firestoreUsersCollection)
+          .doc(user.uid)
+          .update(data);
+    } on FirebaseException catch (e) {
+      throw FirebaseExceptionMessage(e.code).message;
+    } on PlatformException catch (e) {
+      throw PlatformExceptionMessage(e.code).message;
+    } catch (e) {
+      Log.error(e);
+      throw GTexts.somethingWentWrong;
+    }
+  }
+
   Future<UserModel> fetchUserDetails() async {
-    Log.debug("Fetching current user details...");
+    Log.debug("Fetching current user details from Firestore...");
     try {
       final User? user = AuthenticationRepository.instance.getCurrentUser;
 
@@ -37,6 +64,8 @@ class UserRepository extends GetxController {
         Log.error("User is null");
         throw GTexts.somethingWentWrongPleaseTryAgain;
       }
+
+      user.reload();
 
       final DocumentSnapshot<Map<String, dynamic>> snapshot = await _firestore
           .collection(FirestoreCollections.firestoreUsersCollection)
@@ -107,6 +136,29 @@ class UserRepository extends GetxController {
     }
   }
 
+  Future<bool> isUsernameUnique(String username) async {
+    Log.debug("Checking if username $username is unique...");
+    try {
+      // check if username exists in Firestore Database
+      final querySnapshot = await _firestore
+          .collection(FirestoreCollections.firestoreUsersCollection)
+          .where(UserModel.usernameKey, isEqualTo: username)
+          .get();
+      return querySnapshot.docs.isEmpty;
+    } on FirebaseException catch (e) {
+      throw FirebaseExceptionMessage(e.code).message;
+    } catch (e) {
+      Log.error(e);
+      throw GTexts.somethingWentWrong;
+    }
+  }
+
+  /// Deletes the object with the given url
+  /// from [FirebaseStorage].
+  ///
+  /// Rethrows known exceptions with a human readable message,
+  /// else, logs the unexpected exception
+  /// and throws a generic "Something went wrong" message
   Future<void> deleteObjectFromStorage(String url) async {
     Log.debug("Deleting $url...");
     try {
@@ -118,6 +170,24 @@ class UserRepository extends GetxController {
     } catch (e) {
       Log.error(e);
       throw GTexts.somethingWentWrong;
+    }
+  }
+
+  /// Tries the delete the object with the given url
+  ///
+  /// If the url doesn't exist it will simply log an error.
+  ///
+  /// Useful on a scenario when the url object couldn't be deleted
+  /// for some reason (e.g. url doesn't exist in Storage)
+  /// and the execution flow should not be stopped simple because
+  /// the [FirebaseStorage] threw an exception
+  Future<void> deleteObjectFromStorageWithoutThrowingException(
+      String url) async {
+    Log.debug("Deleting $url...");
+    try {
+      FirebaseStorage.instance.refFromURL(url).delete();
+    } catch (e) {
+      Log.error(e);
     }
   }
 
@@ -150,7 +220,8 @@ class UserRepository extends GetxController {
       // Delete user document from Firestore
       await _firestore
           .collection(FirestoreCollections.firestoreUsersCollection)
-          .doc(userId).delete();
+          .doc(userId)
+          .delete();
     } on FirebaseException catch (e) {
       throw FirebaseExceptionMessage(e.code).message;
     } on PlatformException catch (e) {
@@ -161,15 +232,15 @@ class UserRepository extends GetxController {
     }
   }
 
+  // ** Static methods **
+
   // Generate username
   static String generateUsername(String fullName) {
     List<String> nameParts = fullName.split(' ');
 
     String firstName = nameParts.first;
 
-    String userName = "${firstName}_${DateTime
-        .now()
-        .millisecondsSinceEpoch}";
+    String userName = "${firstName}_${DateTime.now().millisecondsSinceEpoch}";
 
     Log.debug("Generated username: $userName");
     return userName;

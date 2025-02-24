@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gshop/common/widgets/appbar/appbar.dart';
 import 'package:gshop/common/widgets/texts/section_heading.dart';
-import 'package:gshop/features/authentication/models/user_model.dart';
 import 'package:gshop/features/personalization/controllers/user/user_controller.dart';
 import 'package:gshop/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:gshop/features/personalization/screens/profile/widgets/profile_picture_widget.dart';
@@ -9,13 +9,15 @@ import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
 
+import 'edit_name_screen.dart';
+import 'edit_username_screen.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final userController = UserController.instance;
-    final UserModel user = userController.user.value;
     return Scaffold(
       appBar: const GAppBar(),
       body: SingleChildScrollView(
@@ -35,20 +37,22 @@ class ProfileScreen extends StatelessWidget {
 
               HelperFunctions.spaceBtwItemsHeight(),
 
-              // First Name
-              ProfileMenu(
-                title: GTexts.firstName,
-                value: user.firstName,
-                // TODO: Navigate to editor screen
-                onTap: () {},
+              // Display Name
+              Obx(
+                () => ProfileMenu(
+                  title: GTexts.fullName,
+                  value: userController.user.value.fullName,
+                  onTap: () => Get.to(() => const EditNameScreen()),
+                ),
               ),
 
-              // Last Name
-              ProfileMenu(
-                title: GTexts.lastName,
-                value: user.lastName,
-                // TODO: Navigate to editor screen
-                onTap: () {},
+              // Username
+              Obx(
+                () => ProfileMenu(
+                  title: GTexts.username,
+                  value: userController.user.value.username,
+                  onTap: () => Get.to(() => const EditUsernameScreen()),
+                ),
               ),
 
               const SizedBox(height: GSizes.spaceBtwSections / 2),
@@ -63,21 +67,20 @@ class ProfileScreen extends StatelessWidget {
               // Mobile Number
               ProfileMenu(
                 title: GTexts.phoneNumber,
-                value: user.phoneNumber,
+                value: userController.user.value.phoneNumber,
                 onTap: () {},
               ),
 
               // Email ID
               ProfileMenu(
                 title: GTexts.email,
-                value: user.email,
+                value: userController.user.value.email,
                 onTap: () {},
               ),
 
               const SizedBox(height: GSizes.spaceBtwSections / 2),
               const Divider(),
               const SizedBox(height: GSizes.spaceBtwSections / 2),
-
 
               // Delete Account Button
               TextButton(

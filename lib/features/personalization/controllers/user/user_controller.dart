@@ -64,13 +64,15 @@ class UserController extends GetxController {
       }
 
       // Re-Authenticate User
-      await AuthenticationRepository.instance.reAuthenticateWithEmailAndPassword(
+      await AuthenticationRepository.instance
+          .reAuthenticateWithEmailAndPassword(
         email: verifyEmailController.text.trim(),
         password: verifyPasswordController.text.trim(),
       );
 
       // get current profile picture url to delete
-      final photoUrl =  AuthenticationRepository.instance.getCurrentUser?.photoURL;
+      final photoUrl =
+          AuthenticationRepository.instance.getCurrentUser?.photoURL;
 
       // Delete User
       AuthenticationRepository.instance.deleteAccount();
@@ -153,14 +155,16 @@ class UserController extends GetxController {
       if (provider == 'google.com') {
         await auth.signInWithGoogle();
         // get current profile picture url to delete later
-        final photoUrl =  AuthenticationRepository.instance.getCurrentUser?.photoURL;
+        final photoUrl =
+            AuthenticationRepository.instance.getCurrentUser?.photoURL;
         await auth.deleteAccount();
         // Delete Profile Picture
         if (photoUrl == null) {
           Log.debug("No photo url found for the current user");
         } else {
           // delete profile picture from Firebase Storage
-          await UserRepository.instance.deleteObjectFromStorage(photoUrl);
+          await UserRepository.instance
+              .deleteObjectFromStorageWithoutThrowingException(photoUrl);
         }
         await auth.logout();
         Get.offAll(() => const LoginScreen());
@@ -168,7 +172,6 @@ class UserController extends GetxController {
         FullScreenLoadingAnimation.stopLoading(Get.context!);
         Get.off(() => const ReAuthenticateLoginScreen());
       }
-
     } catch (e) {
       FullScreenLoadingAnimation.stopLoading(Get.context!);
       GSnackBar.errorSnackBar(
@@ -186,11 +189,7 @@ class UserController extends GetxController {
     Log.debug("Fetching user details from UserRepository...");
     profileLoading.value = true;
     try {
-      if (AuthenticationRepository.instance.getCurrentUser != null) {
-        user.value = await UserRepository.instance.fetchUserDetails();
-      } else {
-        Log.warning("No currently authenticated user!");
-      }
+      user.value = await UserRepository.instance.fetchUserDetails();
     } catch (e) {
       Log.error(e);
       user(UserModel.empty());
