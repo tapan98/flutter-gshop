@@ -69,9 +69,19 @@ class UserController extends GetxController {
         password: verifyPasswordController.text.trim(),
       );
 
+      // get current profile picture url to delete
+      final photoUrl =  AuthenticationRepository.instance.getCurrentUser?.photoURL;
+
       // Delete User
       AuthenticationRepository.instance.deleteAccount();
-      // TODO: Delete uploaded profile picture (if any)
+
+      // Delete Profile Picture
+      if (photoUrl == null) {
+        Log.debug("No photo url found for the current user");
+      } else {
+        // delete profile picture from Firebase Storage
+        await UserRepository.instance.deleteObjectFromStorage(photoUrl);
+      }
       AuthenticationRepository.instance.logout();
       Get.offAll(() => const LoginScreen());
     } catch (e) {
@@ -81,6 +91,8 @@ class UserController extends GetxController {
     }
   }
 
+  /// Shows a warning popup to the user,
+  /// prompting user to either cancel or continue deleting their account
   void deleteAccountPopup() {
     // Show warning dialog
     Get.defaultDialog(
@@ -105,6 +117,21 @@ class UserController extends GetxController {
     );
   }
 
+  /// Checks the current authenticated user provider.
+  ///
+  /// ** On sign in with google provider **
+  /// If it is a google sign in provider,
+  /// then it calls [AuthenticationRepository]'s
+  /// [signInWithGoogle] method, when no exception is caused
+  /// (meaning successful re-authentication),
+  /// this method proceeds to delete user account
+  /// along with their profile picture
+  ///
+  /// ** On Sign in with Email and Password provider **
+  /// It redirects the screen to [ReAuthenticateLoginScreen],
+  /// there, the user is prompted to re-authenticate
+  /// using their email & password, upon successful re-authentication,
+  /// the account is deleted along with their uploaded profile picture
   Future<void> _deleteUserAccount() async {
     try {
       FullScreenLoadingAnimation.startLoading(
@@ -125,8 +152,16 @@ class UserController extends GetxController {
 
       if (provider == 'google.com') {
         await auth.signInWithGoogle();
+        // get current profile picture url to delete later
+        final photoUrl =  AuthenticationRepository.instance.getCurrentUser?.photoURL;
         await auth.deleteAccount();
-        // TODO: Delete uploading profile picture (if any)
+        // Delete Profile Picture
+        if (photoUrl == null) {
+          Log.debug("No photo url found for the current user");
+        } else {
+          // delete profile picture from Firebase Storage
+          await UserRepository.instance.deleteObjectFromStorage(photoUrl);
+        }
         await auth.logout();
         Get.offAll(() => const LoginScreen());
       } else if (provider == 'password') {
@@ -148,10 +183,13 @@ class UserController extends GetxController {
   }
 
   Future<void> fetchUserRecord() async {
+    Log.debug("Fetching user details from UserRepository...");
     profileLoading.value = true;
     try {
       if (AuthenticationRepository.instance.getCurrentUser != null) {
         user.value = await UserRepository.instance.fetchUserDetails();
+      } else {
+        Log.warning("No currently authenticated user!");
       }
     } catch (e) {
       Log.error(e);

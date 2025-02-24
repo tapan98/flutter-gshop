@@ -6,6 +6,7 @@ import 'package:gshop/data/repositories/authentication_repository.dart';
 import 'package:gshop/data/repositories/user_repository.dart';
 import 'package:gshop/features/authentication/models/user_model.dart';
 import 'package:gshop/features/authentication/screens/login/password_screen.dart';
+import 'package:gshop/features/personalization/controllers/user/user_controller.dart';
 import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/network_manager.dart';
@@ -147,6 +148,8 @@ class LoginController extends GetxController {
       final userId = userCredential.user?.uid;
       if (userId != null && await UserRepository.instance.isUserIdRegistered(userId)) {
         Log.debug("User is already registered. Skipping...");
+        // refresh user details
+        UserController.instance.fetchUserRecord();
         AuthenticationRepository.instance.screenRedirect();
         return;
       }
