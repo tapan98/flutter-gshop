@@ -1,65 +1,45 @@
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:gshop/data/repositories/category_repository.dart';
 import 'package:gshop/features/shop/models/category_model.dart';
-import 'package:gshop/features/shop/screens/categories/widgets/category_section.dart';
-import 'package:gshop/util/logger/logger.dart';
+import 'package:gshop/features/shop/screens/home/widgets/home_product_categories.dart';
+import 'package:gshop/util/constants/text_strings.dart';
+import 'package:gshop/util/helpers/snackbars.dart';
 
-/// Instantiated in CategoriesScreen
+/// Instantiated in [HomeProductCategories]
+///
+/// Communicates with [CategoryRepository]
+/// to fetch available categories
 class CategoryController extends GetxController {
   static CategoryController get instance => Get.find();
 
-  // Variables
-  final RxInt selectedIndex = 0.obs;
-  final sectionScrollController = ScrollController();
-
-  // TODO: To be dynamically fetched
-  final RxList<CategoryModel> categories = [
-    "Appliances",
-    "Mobiles",
-    "Electronics",
-    "Toys",
-    "Personal Care",
-    "Furniture",
-    "Clothes",
-    "Travel",
-    "Bikes & Scooters",
-    "Services"
-  ]
-     .asMap().entries .map(
-        (entry) => CategoryModel(
-          navigationRailDestination: NavigationRailDestination(
-              icon: const FaIcon(FontAwesomeIcons.cubesStacked),
-              label: Text(entry.value, textAlign: TextAlign.center)),
-          destination: CategorySection(sectionTitle: "${entry.key} Trending now",),
-        ),
-      )
-      .toList()
-      .obs;
-
-  // Methods
-  List<NavigationRailDestination> getCategories() {
-    // TODO: fetch categories
-    return categories.map((item) => item.navigationRailDestination).toList();
-  }
-
-  List<Widget> getDestinations() {
-    // TODO: fetch category destinations
-    return categories.map((item) => item.destination).toList();
-  }
-
-  void onCategorySelected(int index) {
-    selectedIndex.value = index;
-    if (sectionScrollController.hasClients) {
-      sectionScrollController.animateTo(0, duration: const Duration(milliseconds: 100), curve: Curves.easeIn);
-    }
-  }
+  // Data
+  // Init category repository
+  final _categoryRepository = Get.put(CategoryRepository());
+  final RxList<CategoryModel> categories = <CategoryModel>[].obs;
+  final RxBool isLoading = false.obs;
 
   @override
-  void onClose() {
-    Log.debug("Disposing sectionScrollController ...");
-    sectionScrollController.dispose();
-    super.onClose();
+  void onInit() {
+    super.onInit();
+    fetchCategories();
+  }
 
+  // Methods
+  Future<void> fetchCategories() async {
+    try {
+      isLoading.value = true;
+
+      categories.value = await _categoryRepository.getCategories();
+
+      isLoading.value = false;
+
+    } catch (e) {
+      isLoading.value = false;
+
+      GSnackBar.errorSnackBar(
+        title: GTexts.errorSnackBarTitle,
+        message: e.toString(),
+      );
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gshop/common/styles/padding_styles.dart';
 import 'package:gshop/util/constants/sizes.dart';
 
 class RatingsFilterWidget extends StatelessWidget {
@@ -14,14 +15,8 @@ class RatingsFilterWidget extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: reviewFilters.length,
         itemBuilder: (BuildContext context, int index) => Padding(
-          padding: EdgeInsets.only(
-            left: (index == 0) // if first item, add left padding
-                ? GSizes.defaultSpace
-                : GSizes.spaceBtwItems/2,
-            right: (index == reviewFilters.length - 1) // if last item, add right padding
-                ? GSizes.defaultSpace
-                : 0,
-          ),
+          padding: PaddingStyles.horizontalListPadding(
+              length: reviewFilters.length, index: index),
           child: ChoiceChip(
             label: Text(reviewFilters[index]),
             selected: index == 0,

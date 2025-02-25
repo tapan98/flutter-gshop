@@ -1,5 +1,6 @@
 class FirestoreCollections {
   static const String firestoreUsersCollection = "Users";
+  static const String firebaseCategoriesCollection = "Categories";
 }
 
 class FirebaseStoragePaths {

@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
 
           // Product Categories
           const SliverToBoxAdapter(
-            child: HomeProductCategories(),
+            child: Center(child: HomeProductCategories()),
           ),
 
           const SliverToBoxAdapter(

@@ -82,7 +82,8 @@ class UserController extends GetxController {
         Log.debug("No photo url found for the current user");
       } else {
         // delete profile picture from Firebase Storage
-        await UserRepository.instance.deleteObjectFromStorage(photoUrl);
+        await UserRepository.instance
+            .deleteObjectFromStorageWithoutThrowingException(photoUrl);
       }
       AuthenticationRepository.instance.logout();
       Get.offAll(() => const LoginScreen());

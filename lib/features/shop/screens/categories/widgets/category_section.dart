@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gshop/common/widgets/custom_shapes/container/circular_image_text.dart';
 import 'package:gshop/common/widgets/texts/section_heading.dart';
-import 'package:gshop/features/shop/controllers/category_controller.dart';
+import 'package:gshop/features/shop/controllers/category_panel_controller.dart';
 import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
@@ -17,7 +17,7 @@ class CategorySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      controller: CategoryController.instance.sectionScrollController,
+      controller: CategoryPanelController.instance.sectionScrollController,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

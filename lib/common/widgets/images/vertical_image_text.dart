@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:gshop/common/widgets/shimmers/shimmer_widget.dart';
 import 'package:gshop/util/constants/sizes.dart';
 
 class VerticalImageText extends StatelessWidget {
@@ -8,16 +10,18 @@ class VerticalImageText extends StatelessWidget {
     required this.text,
     this.backgroundColor,
     this.textColor,
-    this.isNetworkImage = false,
+    required this.isNetworkImage,
     this.imageWidth = 56,
     this.imageHeight = 56,
+    this.fit = BoxFit.fill,
     this.onTap,
     this.padding = EdgeInsets.zero,
   });
 
   final String imageUrl;
   final String text;
-  final double? imageWidth, imageHeight;
+  final double imageWidth, imageHeight;
+  final BoxFit fit;
   final EdgeInsetsGeometry padding;
   final Color? backgroundColor, textColor;
   final VoidCallback? onTap;
@@ -32,14 +36,27 @@ class VerticalImageText extends StatelessWidget {
       child: Padding(
         padding: padding,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             // Icon Image
-            Image(
-              image: AssetImage(imageUrl),
-              width: imageWidth,
-              height: imageHeight,
-              fit: BoxFit.fill,
-            ),
+            isNetworkImage
+                ? CachedNetworkImage(
+                    imageUrl: imageUrl,
+                    width: imageWidth,
+                    height: imageHeight,
+                    fit: fit,
+                    progressIndicatorBuilder: (_, __, ___) => ShimmerWidget(
+                      width: imageWidth,
+                      height: imageHeight,
+                      radius: 0,
+                    ),
+                  )
+                : Image(
+                    image: AssetImage(imageUrl),
+                    width: imageWidth,
+                    height: imageHeight,
+                    fit: fit,
+                  ),
 
             const SizedBox(height: GSizes.spaceBtwItems / 2),
 

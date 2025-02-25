@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gshop/common/widgets/custom_shapes/container/circular_image_text.dart';
-import 'package:gshop/features/shop/controllers/category_controller.dart';
+import 'package:gshop/features/shop/controllers/category_panel_controller.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/image_strings.dart';
 import 'package:gshop/util/constants/sizes.dart';
@@ -13,7 +13,7 @@ class CategoryPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
-    final controller = CategoryController.instance;
+    final controller = CategoryPanelController.instance;
 
     final panelBackgroundColor = isDark ? GColors.darkerGrey : GColors.grey;
     final selectedItemColor = isDark ? GColors.black : GColors.white;
