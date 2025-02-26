@@ -14,7 +14,9 @@ class ProductCardVertical extends StatelessWidget {
     super.key,
     required this.imageUrl,
     required this.productTitle,
-    this.offerText, required this.productRating, this.totalRatings,
+    this.offerText,
+    required this.productRating,
+    this.totalRatings,
   });
 
   final String imageUrl, productTitle, productRating;
@@ -38,12 +40,17 @@ class ProductCardVertical extends StatelessWidget {
               child: Stack(
                 children: [
                   // Image
-                  RoundedCornerImage(imageUrl: imageUrl),
+                  RoundedCornerImage(
+                    imageUrl: imageUrl,
+                    // TODO: Load network image
+                    isNetworkImage: false,
+                  ),
                   // Rating on Bottom left
                   Positioned(
                     bottom: 12,
                     left: 12,
-                    child: RatingChip(rating: productRating,totalRatings: totalRatings),
+                    child: RatingChip(
+                        rating: productRating, totalRatings: totalRatings),
                   ),
                 ],
               ),
@@ -57,7 +64,6 @@ class ProductCardVertical extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 // Product Details
                 Text(
                   productTitle,
@@ -86,7 +92,6 @@ class ProductCardVertical extends StatelessWidget {
                   ),
               ],
             ),
-
           ],
         ),
       ),

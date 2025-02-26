@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gshop/common/widgets/shimmers/shimmer_widget.dart';
 import 'package:gshop/util/constants/sizes.dart';
 
 class RoundedCornerImage extends StatelessWidget {
@@ -11,9 +13,10 @@ class RoundedCornerImage extends StatelessWidget {
     this.height,
     this.border,
     this.borderRadius = GSizes.md,
-    this.isNetworkImage = false,
+    required this.isNetworkImage,
     this.fit = BoxFit.contain,
-    this.onTap, this.backgroundColor,
+    this.onTap,
+    this.backgroundColor,
   });
 
   final String imageUrl;
@@ -41,11 +44,20 @@ class RoundedCornerImage extends StatelessWidget {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(borderRadius),
-          child: Image(
-            // TODO: Load Network Image
-            image: AssetImage(imageUrl),
-            fit: BoxFit.contain,
-          ),
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  fit: fit,
+                  progressIndicatorBuilder: (_, __, ___) =>
+                      const ShimmerWidget(),
+                  errorWidget: (_, __, ___) => const Placeholder(
+                    child: Text("Couldn't load image"),
+                  ),
+                )
+              : Image(
+                  image: AssetImage(imageUrl),
+                  fit: fit,
+                ),
         ),
       ),
     );

@@ -50,6 +50,9 @@ class VerticalImageText extends StatelessWidget {
                       height: imageHeight,
                       radius: 0,
                     ),
+                    errorWidget: (_,__,___) => const Placeholder(
+                      child: Text("Couldn't load image"),
+                    ),
                   )
                 : Image(
                     image: AssetImage(imageUrl),

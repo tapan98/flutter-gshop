@@ -32,6 +32,8 @@ class CartItem extends StatelessWidget {
           height: 60,
           padding: const EdgeInsets.all(GSizes.sm),
           backgroundColor: isDark ? GColors.darkerGrey : GColors.light,
+          // TODO: Load network image
+          isNetworkImage: false,
         ),
 
         HelperFunctions.spaceBtwItemsWidth(),
@@ -84,7 +86,7 @@ class CartItem extends StatelessWidget {
               if (offersText != null)
                 Column(
                   children: [
-                    const SizedBox(height: GSizes.spaceBtwItems/2),
+                    const SizedBox(height: GSizes.spaceBtwItems / 2),
                     Text(
                       offersText!,
                       style: Theme.of(context)

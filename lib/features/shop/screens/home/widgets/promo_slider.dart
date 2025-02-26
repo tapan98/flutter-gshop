@@ -8,9 +8,7 @@ import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
 
 class PromoSlider extends StatelessWidget {
-  const PromoSlider({super.key, required this.banners});
-
-  final List<String> banners;
+  const PromoSlider({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,21 +16,27 @@ class PromoSlider extends StatelessWidget {
     return Column(
       children: [
         // Slider Images
-        CarouselSlider(
-          options: CarouselOptions(
-            autoPlay: true,
-            autoPlayInterval: const Duration(seconds: 10),
-            onPageChanged: (index, _) =>
-                controller.updateCarouselCurrentIndex(index),
-            viewportFraction: 1,
-            aspectRatio: 1.9,
-          ),
-          items: banners
-              .map((url) => RoundedCornerImage(
-                    imageUrl: url,
+        Obx(
+          () => CarouselSlider(
+            options: CarouselOptions(
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 10),
+              onPageChanged: (index, _) =>
+                  controller.updateCarouselCurrentIndex(index),
+              viewportFraction: 1,
+              aspectRatio: 1.9,
+
+            ),
+            items: controller.promos
+                .map(
+                  (promos) => RoundedCornerImage(
+                    imageUrl: promos.image,
+                    isNetworkImage: true,
                     padding: const EdgeInsets.all(GSizes.sm),
-                  ))
-              .toList(),
+                  ),
+                )
+                .toList(),
+          ),
         ),
 
         HelperFunctions.spaceBtwItemsHeight(),
@@ -42,7 +46,7 @@ class PromoSlider extends StatelessWidget {
           () => Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              for (int i = 0; i < banners.length; i++)
+              for (int i = 0; i < controller.promos.length; i++)
                 Container(
                   width: 20,
                   height: 4,
@@ -50,8 +54,8 @@ class PromoSlider extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
                     color: controller.carouselCurrentIndex.value == i
-                  ? GColors.primary
-                    : Colors.grey,
+                        ? GColors.primary
+                        : Colors.grey,
                   ),
                 )
             ],

@@ -41,13 +41,7 @@ class HomeScreen extends StatelessWidget {
 
           // Promo Slider
           const SliverToBoxAdapter(
-            child: PromoSlider(
-              banners: [
-                GImages.banner1,
-                GImages.banner2,
-                GImages.banner3,
-              ],
-            ),
+            child: PromoSlider(),
           ),
 
           SliverToBoxAdapter(child: HelperFunctions.spaceBtwSectionsHeight()),

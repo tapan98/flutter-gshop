@@ -6,13 +6,13 @@ import 'package:shimmer/shimmer.dart';
 class ShimmerWidget extends StatelessWidget {
   const ShimmerWidget({
     super.key,
-    required this.width,
-    required this.height,
-    required this.radius,
+    this.width,
+    this.height,
+    this.radius,
     this.color,
   });
 
-  final double width, height, radius;
+  final double? width, height, radius;
   final Color? color;
 
   @override
@@ -26,7 +26,7 @@ class ShimmerWidget extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           color: color ?? (isDark ? GColors.darkerGrey : GColors.white),
-          borderRadius: BorderRadius.circular(radius),
+          borderRadius: radius != null ? BorderRadius.circular(radius!) : null,
         ),
       ),
     );
