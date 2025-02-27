@@ -6,6 +6,7 @@ class SectionHeading extends StatelessWidget {
   const SectionHeading({
     super.key,
     required this.title,
+    this.maxLines = 1,
     this.textColor,
     this.onTap,
     this.buttonTitle, this.padding = const EdgeInsets.symmetric(horizontal: GSizes.defaultSpace),
@@ -13,6 +14,7 @@ class SectionHeading extends StatelessWidget {
   });
 
   final String title;
+  final int maxLines;
   final Color? textColor;
   final VoidCallback? onTap;
   final String? buttonTitle;
@@ -35,7 +37,7 @@ class SectionHeading extends StatelessWidget {
                     .textTheme
                     .headlineSmall!
                     .apply(color: textColor),
-                maxLines: 1,
+                maxLines: maxLines,
                 overflow: TextOverflow.ellipsis,
               ),
             ),

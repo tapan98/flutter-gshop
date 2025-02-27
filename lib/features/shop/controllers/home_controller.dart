@@ -23,20 +23,19 @@ class HomeController extends GetxController {
   }
 
   Future<void> fetchPromos() async {
+    Log.debug("Fetching promo banners...");
     try {
       isLoading.value = true;
 
       promos.value = await _promoRepository.getPromos();
 
-      isLoading.value = false;
-
     } catch (e) {
-      isLoading.value = false;
-
       GSnackBar.errorSnackBar(
         title: GTexts.errorSnackBarTitle,
         message: e.toString(),
       );
+    } finally {
+      isLoading.value = false;
     }
   }
 

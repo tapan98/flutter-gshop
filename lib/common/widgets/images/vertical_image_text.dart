@@ -8,25 +8,26 @@ class VerticalImageText extends StatelessWidget {
     super.key,
     required this.imageUrl,
     required this.text,
+    this.maxLines = 1,
     this.backgroundColor,
     this.textColor,
     required this.isNetworkImage,
     this.imageWidth = 56,
     this.imageHeight = 56,
-    this.fit = BoxFit.fill,
+    this.fit = BoxFit.contain,
     this.onTap,
     this.padding = EdgeInsets.zero,
   });
 
   final String imageUrl;
   final String text;
+  final int maxLines;
   final double imageWidth, imageHeight;
   final BoxFit fit;
   final EdgeInsetsGeometry padding;
   final Color? backgroundColor, textColor;
   final VoidCallback? onTap;
 
-  /// TODO: Implement network image support
   final bool isNetworkImage;
 
   @override
@@ -67,6 +68,7 @@ class VerticalImageText extends StatelessWidget {
             Text(
               text,
               style: Theme.of(context).textTheme.labelLarge,
+              maxLines: maxLines,
               overflow: TextOverflow.ellipsis,
             ),
           ],
