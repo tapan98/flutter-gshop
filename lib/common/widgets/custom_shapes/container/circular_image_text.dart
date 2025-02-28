@@ -1,6 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:gshop/common/widgets/shimmers/shimmer_widget.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/sizes.dart';
+import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
 
 class CircularImageText extends StatelessWidget {
@@ -16,6 +19,7 @@ class CircularImageText extends StatelessWidget {
     this.onTap,
     this.imageBackgroundColor,
     this.maxLines = 1,
+    required this.isNetworkImage,
   });
 
   final double width, height, imagePadding;
@@ -26,6 +30,7 @@ class CircularImageText extends StatelessWidget {
   final VoidCallback? onTap;
   final Color? imageBackgroundColor;
   final int maxLines;
+  final bool isNetworkImage;
 
   @override
   Widget build(BuildContext context) {
@@ -40,15 +45,26 @@ class CircularImageText extends StatelessWidget {
             height: height,
             padding: EdgeInsets.all(imagePadding),
             decoration: BoxDecoration(
-              color: imageBackgroundColor ?? (isDark ? GColors.darkerGrey : GColors.grey),
+              color: imageBackgroundColor ??
+                  (isDark ? GColors.darkerGrey : GColors.grey),
               borderRadius: BorderRadius.circular(100),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100),
-              child: Image(
-                image: AssetImage(image),
-                color: overlayColor,
-              ),
+              child: isNetworkImage
+                  ? CachedNetworkImage(
+                      imageUrl: image,
+                      width: width,
+                      height: height,
+                      placeholder: (_, __) => const ShimmerWidget(),
+                      errorWidget: (_, __, ___) => const Placeholder(
+                        child: Text(GTexts.noImage),
+                      ),
+                    )
+                  : Image(
+                      image: AssetImage(image),
+                      color: overlayColor,
+                    ),
             ),
           ),
 

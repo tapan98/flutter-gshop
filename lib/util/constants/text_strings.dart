@@ -116,6 +116,8 @@ class GTexts {
   static const String ratingsAndReviewsBrief =
       "Ratings and reviews are verified and users are expected to write feedbacks related to the product.";
   static const String mostRelevant = "Most Relevant";
+  static const String noImage = "No Image";
+  static const String noSubCategoriesFound = "No sub-categories found";
 
   // Settings
   static const String orders = "orders";

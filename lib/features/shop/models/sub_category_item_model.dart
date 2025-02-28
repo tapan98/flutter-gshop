@@ -1,44 +1,43 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:gshop/features/shop/models/sub_category_model.dart';
 
-class CategoryModel {
+class SubCategoryItemModel {
   String id;
   String name;
   String image;
-  List<SubCategoryModel> subcategories;
 
-  CategoryModel({
+  SubCategoryItemModel({
     required this.id,
     required this.name,
     required this.image,
-    required this.subcategories,
   });
 
-  static CategoryModel empty() => CategoryModel(
+  static SubCategoryItemModel empty() => SubCategoryItemModel(
         id: '',
         name: '',
         image: '',
-        subcategories: [],
       );
 
-  // convert from firestore document snapshot
-  factory CategoryModel.fromDocumentSnapshot(
+  factory SubCategoryItemModel.fromDocumentSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() == null) {
-      return CategoryModel.empty();
+      return SubCategoryItemModel.empty();
     }
-
     final data = document.data()!;
 
-    return CategoryModel(
+    return SubCategoryItemModel(
       id: document.id,
       name: data[nameKey] ?? '',
       image: data[imageKey] ?? '',
-      subcategories: [], // to be fetched later
     );
   }
 
-  // constants
+
+  @override
+  String toString() {
+    return 'SubCategoryItemModel(id: $id, name: $name, image: $image)';
+  }
+
+  // Constants
   static const String nameKey = "Name";
   static const String imageKey = "Image";
 }

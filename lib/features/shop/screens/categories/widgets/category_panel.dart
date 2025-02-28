@@ -30,7 +30,7 @@ class _CategoryPanelState extends State<CategoryPanel> {
               BoxConstraints(minHeight: constraint.maxHeight, maxWidth: 90),
           child: Obx(
             () => ListView.builder(
-              itemCount: controller.isLoading.value
+              itemCount: controller.isPanelLoading.value
                   ? shimmerCount
                   : controller.categoryPanelList.length,
               shrinkWrap: true,
@@ -43,11 +43,11 @@ class _CategoryPanelState extends State<CategoryPanel> {
                     "itemBuilder: index: $index, color: $backgroundColor");
                 return CategoryPanelItem(
                   key: ValueKey(index),
-                  imageUrl: controller.isLoading.value ? "" : controller.categoryPanelList[index].image,
-                  title: controller.isLoading.value ? "" : controller.categoryPanelList[index].title,
+                  imageUrl: controller.isPanelLoading.value ? "" : controller.categoryPanelList[index].image,
+                  title: controller.isPanelLoading.value ? "" : controller.categoryPanelList[index].title,
                   isNetworkImage: true,
                   backgroundColor: backgroundColor,
-                  showShimmer: controller.isLoading.value,
+                  showShimmer: controller.isPanelLoading.value,
                   onTap: () => setState(() {
                     controller.onCategorySelected(index);
                   }),

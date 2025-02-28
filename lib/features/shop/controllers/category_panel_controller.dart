@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gshop/common/widgets/images/circular_image.dart';
 import 'package:gshop/data/repositories/category_repository.dart';
+import 'package:gshop/features/shop/controllers/category_controller.dart';
+import 'package:gshop/features/shop/models/category_model.dart';
 import 'package:gshop/features/shop/models/category_panel_model.dart';
-import 'package:gshop/features/shop/screens/categories/widgets/category_section.dart';
+import 'package:gshop/features/shop/models/sub_category_model.dart';
+import 'package:gshop/features/shop/screens/categories/widgets/category_Page.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/snackbars.dart';
 import 'package:gshop/util/logger/logger.dart';
@@ -14,18 +17,24 @@ class CategoryPanelController extends GetxController {
 
   // Variables
   final RxInt selectedIndex = 0.obs;
-  final sectionScrollController = ScrollController();
+  final categoryPageScrollController = ScrollController();
   final _categoryRepository = CategoryRepository.instance;
+  final _categoryController = CategoryController.instance;
 
   final RxList<CategoryPanelModel> categoryPanelList =
       <CategoryPanelModel>[].obs;
-  final RxBool isLoading = false.obs;
+  final RxBool isPanelLoading = false.obs;
 
   // Methods
   Future<void> fetchCategoryPanels() async {
     try {
-      isLoading.value = true;
-      final categories = await _categoryRepository.getCategories();
+      isPanelLoading.value = true;
+
+      final List<CategoryModel> categories =
+          _categoryController.categories.isNotEmpty
+              ? _categoryController.categories
+              : await _categoryRepository.getCategories();
+
       categoryPanelList.value = categories
           .map(
             (category) => CategoryPanelModel(
@@ -38,29 +47,32 @@ class CategoryPanelController extends GetxController {
                 ),
                 label: Text(category.name),
               ),
-              destination: CategorySection(
-                sectionTitle: '${category.name} Trending now',
-                scrollController: sectionScrollController,
-              ),
+              categoryId: category.id,
             ),
           )
           .toList();
+      if (categoryPanelList.isNotEmpty) {
+        // Load init entry
+        _categoryController.fetchSubCategories(selectedIndex.value);
+      }
     } catch (e) {
       GSnackBar.errorSnackBar(
         title: GTexts.errorSnackBarTitle,
         message: e.toString(),
       );
     } finally {
-      isLoading.value = false;
+      isPanelLoading.value = false;
     }
   }
 
-  void onCategorySelected(int index) {
+  Future<void> onCategorySelected(int index) async {
     selectedIndex.value = index;
-    if (sectionScrollController.hasClients) {
-      sectionScrollController.animateTo(0,
-          duration: const Duration(milliseconds: 100), curve: Curves.easeIn);
-    }
+    _categoryController.fetchSubCategories(index).then((didFetch) {
+      if (didFetch && categoryPageScrollController.hasClients) {
+        categoryPageScrollController.animateTo(0,
+            duration: const Duration(milliseconds: 100), curve: Curves.easeIn);
+      }
+    });
   }
 
   @override
@@ -72,7 +84,7 @@ class CategoryPanelController extends GetxController {
   @override
   void onClose() {
     Log.debug("Disposing sectionScrollController ...");
-    sectionScrollController.dispose();
+    categoryPageScrollController.dispose();
     super.onClose();
   }
 }

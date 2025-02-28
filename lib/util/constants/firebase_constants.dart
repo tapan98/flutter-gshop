@@ -3,6 +3,7 @@ class FirestoreCollections {
   static const String firebaseCategoriesCollection = "Categories";
   static const String firebasePromosCollection = "PromoBanners";
   static const String firebaseSubCategoriesCollectionString = "SubCategories";
+  static const String firebaseSubCategoryItemsCollectionString = "SubCategoryItems";
 }
 
 class FirebaseStoragePaths {
