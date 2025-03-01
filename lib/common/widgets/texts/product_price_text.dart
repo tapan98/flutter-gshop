@@ -18,9 +18,9 @@ class ProductPriceText extends StatelessWidget {
       currencySign + price,
       overflow: TextOverflow.ellipsis,
       style: isLarge
-          ? Theme.of(context).textTheme.titleLarge!.apply(
+          ? Theme.of(context).textTheme.headlineSmall!.apply(
               decoration: lineThrough ? TextDecoration.lineThrough : null)
-          : Theme.of(context).textTheme.labelLarge!.apply(
+          : Theme.of(context).textTheme.labelMedium!.apply(
               decoration: lineThrough ? TextDecoration.lineThrough : null),
     );
   }

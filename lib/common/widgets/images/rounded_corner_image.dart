@@ -3,11 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gshop/common/widgets/shimmers/shimmer_widget.dart';
 import 'package:gshop/util/constants/sizes.dart';
+import 'package:gshop/util/logger/logger.dart';
 
 class RoundedCornerImage extends StatelessWidget {
   const RoundedCornerImage({
     super.key,
     required this.imageUrl,
+    this.showShimmer = false,
     this.padding,
     this.width,
     this.height,
@@ -20,6 +22,7 @@ class RoundedCornerImage extends StatelessWidget {
   });
 
   final String imageUrl;
+  final bool showShimmer;
   final double? width, height;
   final Color? backgroundColor;
   final BoxBorder? border;
@@ -44,20 +47,24 @@ class RoundedCornerImage extends StatelessWidget {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(borderRadius),
-          child: isNetworkImage
+          child: showShimmer ? const ShimmerWidget() : (isNetworkImage
               ? CachedNetworkImage(
                   imageUrl: imageUrl,
                   fit: fit,
                   progressIndicatorBuilder: (_, __, ___) =>
                       const ShimmerWidget(),
-                  errorWidget: (_, __, ___) => const Placeholder(
-                    child: Text("Couldn't load image"),
-                  ),
+                  errorWidget: (_, __, ___)
+                  {
+                    Log.error("Failed to load image: $imageUrl");
+                    return const Placeholder(
+                      child: Text("Couldn't load image"),
+                    );
+                  },
                 )
               : Image(
                   image: AssetImage(imageUrl),
                   fit: fit,
-                ),
+                )),
         ),
       ),
     );

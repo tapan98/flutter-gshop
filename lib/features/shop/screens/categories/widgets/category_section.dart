@@ -30,6 +30,7 @@ class CategorySection extends StatelessWidget {
             ? const ShimmerWidget(
                 height: 20,
                 width: double.infinity,
+                radius: 10,
               )
             : SectionHeading(
                 title: title.isEmpty ? "-" : title,
@@ -50,15 +51,15 @@ class CategorySection extends StatelessWidget {
           itemBuilder: (context, index) => Padding(
             padding: const EdgeInsets.all(GSizes.sm),
             child: showShimmer
-                ? const ShimmerWidget()
+                ? const ShimmerWidget(radius: 10)
                 : CircularImageText(
-                  image: showShimmer ? "" : items[index].image,
-                  text: showShimmer ? "" : items[index].name,
-                  isNetworkImage: true,
-                  onTap: () {
-                    // TODO: Navigate to filtered products page
-                  },
-                ),
+                    image: showShimmer ? "" : items[index].image,
+                    text: showShimmer ? "" : items[index].name,
+                    isNetworkImage: true,
+                    onTap: () {
+                      // TODO: Navigate to filtered products page
+                    },
+                  ),
           ),
         ),
       ],
