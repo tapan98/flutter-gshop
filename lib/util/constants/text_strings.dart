@@ -118,6 +118,7 @@ class GTexts {
   static const String mostRelevant = "Most Relevant";
   static const String noImage = "No Image";
   static const String noSubCategoriesFound = "No sub-categories found";
+  static const String noCategoriesAvailable = "No categories available";
 
   // Settings
   static const String orders = "orders";

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gshop/features/shop/models/sub_category_item_model.dart';
 
+/// Represents second-level category
 class SubCategoryModel {
   String id;
   String title;

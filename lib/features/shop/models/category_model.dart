@@ -1,24 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gshop/features/shop/models/sub_category_model.dart';
 
+/// Represents the top-level category
 class CategoryModel {
-  String id;
-  String name;
-  String image;
-  List<SubCategoryModel> subcategories;
+  final String id;
+  final String name;
+  final String image;
+
+  /// list of [SubCategoryModel]
+  ///
+  /// The [null] state represents that the list hasn't been fetched at least once,
+  /// the empty list represents that subcategories couldn't be fetched and
+  /// is not to be fetched again to minimize server requests
+  List<SubCategoryModel>? subCategories;
 
   CategoryModel({
     required this.id,
     required this.name,
     required this.image,
-    required this.subcategories,
+    this.subCategories,
   });
 
   static CategoryModel empty() => CategoryModel(
         id: '',
         name: '',
         image: '',
-        subcategories: [],
+        subCategories: [],
       );
 
   // convert from firestore document snapshot
@@ -34,7 +41,7 @@ class CategoryModel {
       id: document.id,
       name: data[nameKey] ?? '',
       image: data[imageKey] ?? '',
-      subcategories: [], // to be fetched later
+      //subCategories to be fetched later
     );
   }
 

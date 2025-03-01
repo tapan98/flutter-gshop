@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:gshop/features/shop/controllers/category_controller.dart';
 import 'package:gshop/features/shop/screens/categories/widgets/category_appbar.dart';
 import 'package:gshop/features/shop/screens/categories/widgets/category_panel.dart';
-import 'package:gshop/features/shop/screens/categories/widgets/category_Page.dart';
+import 'package:gshop/features/shop/screens/categories/widgets/category_page.dart';
 
+import '../../../../util/constants/text_strings.dart';
 import '../../controllers/category_panel_controller.dart';
 
 class CategoriesScreen extends StatelessWidget {
@@ -18,6 +19,7 @@ class CategoriesScreen extends StatelessWidget {
     return Scaffold(
       appBar: const CategoryAppbar(),
       body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // NavigationRail
           const CategoryPanel(),
@@ -26,6 +28,13 @@ class CategoriesScreen extends StatelessWidget {
           Expanded(
             child: Obx(
               () {
+                final bool isSubCategoriesNotNull = categoryController
+                    .categories[categoryPanelController.selectedIndex.value]
+                    .subCategories != null;
+                final bool isSubCategoriesEmpty = categoryController
+                    .categories[categoryPanelController.selectedIndex.value]
+                    .subCategories
+                    ?.isEmpty ?? true;
                 if (categoryPanelController.isPanelLoading.value) {
                   return Center(
                     child: CategoryPage(
@@ -37,16 +46,23 @@ class CategoriesScreen extends StatelessWidget {
                   );
                 } else if (categoryPanelController.categoryPanelList.isEmpty) {
                   return const Center(
-                    child: Text("No categories available"),
+                    child: Text(GTexts.noSubCategoriesFound),
                   ); // Or any other widget
+                } else if (isSubCategoriesNotNull && isSubCategoriesEmpty &&
+                    !categoryController.subCategoriesLoading.value) {
+                  // No sub categories
+                  return const Center(
+                    child: Text(GTexts.noSubCategoriesFound),
+                  );
                 } else {
                   return CategoryPage(
                     subcategories: categoryController
                         .categories[categoryPanelController.selectedIndex.value]
-                        .subcategories,
+                        .subCategories,
                     scrollController:
                         categoryPanelController.categoryPageScrollController,
-                    showShimmer: categoryController.areSubCategoriesLoading.value,
+                    showShimmer:
+                        categoryController.subCategoriesLoading.value,
                   );
                 }
               },

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gshop/features/shop/models/sub_category_model.dart';
 
+/// Represents [SubCategoryModel]'s [items]
 class SubCategoryItemModel {
   String id;
   String name;

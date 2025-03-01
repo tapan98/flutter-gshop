@@ -14,12 +14,21 @@ import 'package:gshop/util/logger/logger.dart';
 class CategoryController extends GetxController {
   static CategoryController get instance => Get.find();
 
-  // Data
+  // ================= Data =================
   // Init category repository
   final _categoryRepository = Get.put(CategoryRepository());
+
+  /// List of [CategoryModel]
+  ///
+  /// Note: [categories.subCategories] list is empty unless
+  /// [fetchSubCategories] is called
   final RxList<CategoryModel> categories = <CategoryModel>[].obs;
-  final RxBool areCategoriesLoading = false.obs;
-  final RxBool areSubCategoriesLoading = false.obs;
+
+  /// Indicates if categories are being fetched
+  final RxBool categoriesLoading = false.obs;
+
+  /// Indicates if sub-categories are being fetched
+  final RxBool subCategoriesLoading = false.obs;
 
   @override
   void onInit() {
@@ -27,19 +36,24 @@ class CategoryController extends GetxController {
     fetchCategories();
   }
 
-  // Methods
+  // ================= Methods =================
+
+  /// Fetches a list of [CategoryModel] and updates [categories]
+  ///
+  /// Note: [categories.subCategories] list is empty unless
+  /// [fetchSubCategories] is called
   Future<void> fetchCategories() async {
     Log.debug("Fetching categories...");
     try {
-      areCategoriesLoading.value = true;
+      categoriesLoading.value = true;
 
       categories.value = await _categoryRepository.getCategories();
 
       Log.debug("Got ${categories.length} categories");
 
-      areCategoriesLoading.value = false;
+      categoriesLoading.value = false;
     } catch (e) {
-      areCategoriesLoading.value = false;
+      categoriesLoading.value = false;
 
       GSnackBar.errorSnackBar(
         title: GTexts.errorSnackBarTitle,
@@ -54,10 +68,10 @@ class CategoryController extends GetxController {
   /// Returns [true] if there were no errors, else [false]
   ///
   /// Note: Even if it returns [true], the list of [SubCategoryModel]
-  /// in [categories.subcategories] might be empty!
+  /// in [categories.subCategories] might be empty!
   Future<bool> fetchSubCategories(int index) async {
     try {
-      areSubCategoriesLoading.value = true;
+      subCategoriesLoading.value = true;
 
       if (index < 0 || index >= categories.length) {
         Log.error(
@@ -68,6 +82,12 @@ class CategoryController extends GetxController {
         );
       }
 
+      if (categories[index].subCategories != null) { // null represents non-fetched subcategories
+        Log.debug(
+            "subcategories in categories[$index] was already fetched once. skipping...");
+        return true;
+      }
+
       final categoryId = categories[index].id;
       final subCategories =
           await _categoryRepository.getSubCategories(categoryId);
@@ -76,7 +96,7 @@ class CategoryController extends GetxController {
         Log.warning("No subcategories found for categoryId: $categoryId");
       }
 
-      categories[index].subcategories = subCategories;
+      categories[index].subCategories = subCategories;
       return true;
     } catch (e) {
       GSnackBar.errorSnackBar(
@@ -85,7 +105,7 @@ class CategoryController extends GetxController {
       );
       return false;
     } finally {
-      areSubCategoriesLoading.value = false;
+      subCategoriesLoading.value = false;
     }
   }
 }

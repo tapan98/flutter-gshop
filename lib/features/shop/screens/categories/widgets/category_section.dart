@@ -36,7 +36,7 @@ class CategorySection extends StatelessWidget {
                 maxLines: 2,
               ),
 
-        HelperFunctions.spaceBtwSectionsHeight(),
+        HelperFunctions.spaceBtwItemsHeight(),
 
         // Items
         GridView.builder(

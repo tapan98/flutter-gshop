@@ -4,7 +4,6 @@ import 'package:gshop/features/shop/controllers/category_panel_controller.dart';
 import 'package:gshop/features/shop/screens/categories/widgets/category_panel_item.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
-import 'package:gshop/util/logger/logger.dart';
 
 class CategoryPanel extends StatefulWidget {
   const CategoryPanel({super.key});
@@ -13,6 +12,9 @@ class CategoryPanel extends StatefulWidget {
   State<CategoryPanel> createState() => _CategoryPanelState();
 }
 
+/// Unfortunately Obx doesn't rebuild the
+/// [CategoryPanelItem], so setState is used
+/// to rebuild the whole state of [CategoryPanel]
 class _CategoryPanelState extends State<CategoryPanel> {
   final controller = CategoryPanelController.instance;
 
@@ -39,8 +41,6 @@ class _CategoryPanelState extends State<CategoryPanel> {
                     (controller.selectedIndex.value == index)
                         ? selectedItemColor
                         : panelBackgroundColor;
-                Log.debug(
-                    "itemBuilder: index: $index, color: $backgroundColor");
                 return CategoryPanelItem(
                   key: ValueKey(index),
                   imageUrl: controller.isPanelLoading.value ? "" : controller.categoryPanelList[index].image,

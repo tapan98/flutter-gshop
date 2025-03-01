@@ -5,8 +5,6 @@ import 'package:gshop/data/repositories/category_repository.dart';
 import 'package:gshop/features/shop/controllers/category_controller.dart';
 import 'package:gshop/features/shop/models/category_model.dart';
 import 'package:gshop/features/shop/models/category_panel_model.dart';
-import 'package:gshop/features/shop/models/sub_category_model.dart';
-import 'package:gshop/features/shop/screens/categories/widgets/category_Page.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/snackbars.dart';
 import 'package:gshop/util/logger/logger.dart';
