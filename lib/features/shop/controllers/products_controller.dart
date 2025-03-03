@@ -15,40 +15,67 @@ class ProductsController extends GetxController {
   // ====================== Data ======================
   final _productsRepository = ProductsRepository.instance;
 
-  // TODO: For testing purpose, remove later
-  Rx<ProductModel> product = ProductModel.empty().obs;
-  RxBool isProductLoading = false.obs;
+  RxList<String> popularProductIds = <String>[].obs;
+  RxBool popularProductsLoading = false.obs;
 
-  // TODO: For testing purpose, remove or modify later
-  Future<void> fetchProduct() async {
-    isProductLoading.value = true;
+  // In-memory cache
+  final Map<String, ProductModel> _productCache = {};
+
+  /// Fetches popular products from [ProductsRepository]
+  ///
+  /// Called automatically when the controller is initialized
+  Future<void> _fetchPopularProducts() async {
+    popularProductsLoading.value = true;
+
     try {
-      final ProductModel? fetchedProduct =
-          await _productsRepository.getProductById("AMrFRfuIcjYbFJGlx4Wm");
-      Log.debug("================= Final product =================");
-      Log.debug("fetched product: $fetchedProduct");
-      Log.debug("=================================================");
+      final List<String> products =
+          await _productsRepository.getPopularProductIds();
 
-      Log.debug("Assigning the fetched product...");
-      if (fetchedProduct == null) {
-        Log.error("fetchedProduct is null!");
-      } else {
-        product.value = fetchedProduct;
-        Log.debug("product.value is now: ${product.value}");
+      if (products.isEmpty) {
+        Log.warning("No popular products found!");
+        return;
       }
+
+      Log.debug("Fetched popular products: $products");
+
+      popularProductIds.value = products;
     } catch (e) {
       GSnackBar.errorSnackBar(
           title: GTexts.errorSnackBarTitle, message: e.toString());
     } finally {
-      isProductLoading.value = false;
+      popularProductsLoading.value = false;
+    }
+  }
+
+  Future<ProductModel?> fetchProductById(String productId) async {
+    Log.debug("Fetching product by ID: $productId");
+
+    if (_productCache.containsKey(productId)) {
+      Log.info("Product found in cache: $productId");
+      return _productCache[productId];
+    }
+
+    Log.info("Product not found in cache, fetching from network: $productId");
+    try {
+
+      final product = await _productsRepository.getProductById(productId);
+
+      // Add product to cache
+      if (product != null) {
+        _productCache[productId] = product;
+      }
+
+      return product;
+    } catch (e) {
+      GSnackBar.errorSnackBar(
+          title: GTexts.errorSnackBarTitle, message: e.toString());
+      return null;
     }
   }
 
   @override
   void onInit() {
     super.onInit();
-
-    // TODO: For testing purpose, remove later
-    fetchProduct();
+    _fetchPopularProducts();
   }
 }

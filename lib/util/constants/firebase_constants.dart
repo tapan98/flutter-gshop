@@ -4,6 +4,7 @@ class FirestoreCollections {
   static const String firebaseCategoriesCollection = "Categories";
   static const String firebasePromosCollection = "PromoBanners";
   static const String firebaseProductsCollection = "Products";
+  static const String firebasePopularProductsCollection = "PopularProducts";
 
   // ==============  Sub-collections ==============
   static const String firebaseSubCategoriesCollectionString = "SubCategories";

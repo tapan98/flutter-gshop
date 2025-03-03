@@ -24,6 +24,8 @@ class GTexts {
   static const String save = "save";
   static const String success = "success";
   static const String sorry = "Sorry";
+  static const String viewAll = "View All";
+  static const String couldNotLoadImage = "Couldn't load image";
 
   // Onboarding Texts
   static const String onboardingTitle1 = "Search your favorite products";
@@ -119,6 +121,8 @@ class GTexts {
   static const String noImage = "No Image";
   static const String noSubCategoriesFound = "No sub-categories found";
   static const String noCategoriesAvailable = "No categories available";
+  static const String couldNotLoadProduct = "Couldn't load product";
+  static const String popularProducts = "Popular Products";
 
   // Settings
   static const String orders = "orders";

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gshop/common/widgets/shimmers/shimmer_widget.dart';
 import 'package:gshop/util/constants/sizes.dart';
+import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/logger/logger.dart';
 
 class RoundedCornerImage extends StatelessWidget {
@@ -47,24 +48,39 @@ class RoundedCornerImage extends StatelessWidget {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(borderRadius),
-          child: showShimmer ? const ShimmerWidget() : (isNetworkImage
-              ? CachedNetworkImage(
-                  imageUrl: imageUrl,
-                  fit: fit,
-                  progressIndicatorBuilder: (_, __, ___) =>
-                      const ShimmerWidget(),
-                  errorWidget: (_, __, ___)
-                  {
-                    Log.error("Failed to load image: $imageUrl");
-                    return const Placeholder(
-                      child: Text("Couldn't load image"),
-                    );
-                  },
-                )
-              : Image(
-                  image: AssetImage(imageUrl),
-                  fit: fit,
-                )),
+          child: showShimmer
+              ? const ShimmerWidget()
+              : (isNetworkImage
+                  ? CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      fit: fit,
+                      progressIndicatorBuilder: (_, __, ___) =>
+                          const ShimmerWidget(),
+                      errorWidget: (_, __, ___) {
+                        Log.error("Failed to load network image: $imageUrl");
+                        return buildCouldNotLoadImage();
+                      },
+                    )
+                  : Image(
+                      image: AssetImage(imageUrl),
+                      fit: fit,
+                      errorBuilder: (_, error, stackTrace) {
+                        Log.error(error);
+                        Log.error(stackTrace);
+                        return buildCouldNotLoadImage();
+                      },
+                    )),
+        ),
+      ),
+    );
+  }
+
+  Widget buildCouldNotLoadImage() {
+    return const Placeholder(
+      child: Center(
+        child: Text(
+          GTexts.couldNotLoadImage,
+          textAlign: TextAlign.center,
         ),
       ),
     );

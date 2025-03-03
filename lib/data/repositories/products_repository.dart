@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:gshop/bindings/general_bindings.dart';
+import 'package:gshop/features/shop/models/popular_products_model.dart';
 import 'package:gshop/features/shop/models/product_model.dart';
 import 'package:gshop/features/shop/models/product_variant_model.dart';
 import 'package:gshop/util/constants/firebase_constants.dart';
@@ -47,7 +48,6 @@ class ProductsRepository extends GetxController {
   ///
   /// Returns [null] if no product is found
   Future<ProductModel?> getProductBySku(String sku) async {
-    Log.debug("Fetching product by SKU: $sku...");
     try {
       final QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
           .collection(FirestoreCollections.firebaseProductsCollection)
@@ -55,7 +55,6 @@ class ProductsRepository extends GetxController {
               arrayContains: {ProductVariantModel.variantSkuKey: sku}).get();
 
       if (snapshot.docs.isEmpty) {
-        Log.error("No product found with SKU: $sku");
         return null;
       }
 
@@ -64,6 +63,28 @@ class ProductsRepository extends GetxController {
 
       final product = ProductModel.fromDocumentSnapshot(documentSnapshot);
       return product;
+    } on FirebaseException catch (e) {
+      throw FirebaseExceptionMessage(e.code).message;
+    } catch (e) {
+      Log.error(e);
+      throw GTexts.somethingWentWrong;
+    }
+  }
+
+  Future<List<String>> getPopularProductIds() async {
+    try {
+      final QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
+          .collection(FirestoreCollections.firebasePopularProductsCollection)
+          .get();
+
+      if (snapshot.docs.isEmpty) {
+        return [];
+      }
+
+      final List<String> popularProductIds = snapshot.docs.map((doc) {
+        return doc.data()[PopularProductsModel.productIdKey] as String;
+      }).toList();
+      return popularProductIds;
     } on FirebaseException catch (e) {
       throw FirebaseExceptionMessage(e.code).message;
     } catch (e) {
