@@ -5,10 +5,21 @@ import 'package:gshop/common/widgets/texts/product_title_text.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
 
-import 'product_variation_widget.dart';
 
 class ProductDetailsWidget extends StatelessWidget {
-  const ProductDetailsWidget({super.key});
+  const ProductDetailsWidget({
+    super.key,
+    required this.brandTitle,
+    required this.productTitle,
+    required this.price,
+    this.averageRating,
+    this.totalRatings,
+  });
+
+  final String brandTitle, productTitle;
+  final double price;
+  final double? averageRating;
+  final int? totalRatings;
 
   @override
   Widget build(BuildContext context) {
@@ -20,30 +31,27 @@ class ProductDetailsWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             // Brand Name & Ratings
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                BrandTitleTextWithVerifiedIcon(title: "Samsung"),
-      
+                BrandTitleTextWithVerifiedIcon(title: brandTitle),
+
                 // Rating Bar
-                ProductRatingsBar(rating: 4.5, totalRatings: 100),
+                if (averageRating != null && totalRatings != null)
+                   ProductRatingsBar(rating: averageRating!, totalRatings: totalRatings),
               ],
             ),
-      
+
             HelperFunctions.spaceBtwItemsHeight(),
-      
+
             // Product Title
-            const ProductTitleText(title: "Samsung Galaxy S24 Ultra"),
-      
+             ProductTitleText(title: productTitle),
+
             HelperFunctions.spaceBtwItemsHeight(),
-      
+
             // Price
-            Text("₹71,000", style: Theme.of(context).textTheme.headlineMedium),
-      
-            HelperFunctions.spaceBtwItemsHeight(),
-      
-            // Variation
-            const ProductVariationWidget(),
+            // TODO: Format price text
+            Text("₹${price.toStringAsFixed(2)}", style: Theme.of(context).textTheme.headlineMedium),
           ],
         ),
       ),

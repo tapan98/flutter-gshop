@@ -9,10 +9,8 @@ import 'package:gshop/features/shop/controllers/products_controller.dart';
 import 'package:gshop/features/shop/models/product_model.dart';
 import 'package:gshop/features/shop/models/product_variant_model.dart';
 import 'package:gshop/features/shop/screens/product_details/product_details_screen.dart';
-import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
-import 'package:gshop/util/helpers/helper_functions.dart';
 
 class ProductCardVertical extends StatefulWidget {
   const ProductCardVertical({
@@ -29,26 +27,35 @@ class ProductCardVertical extends StatefulWidget {
 class _ProductCardVerticalState extends State<ProductCardVertical> {
   final productsController = ProductsController.instance;
 
+  Future<ProductModel?>? _product;
+
+  @override
+  void initState() {
+    super.initState();
+    _product = productsController.fetchProductById(widget.productId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: productsController.fetchProductById(widget.productId),
+      future: _product,
       builder: (_, snapshot) {
         if (snapshot.hasError) {
-          return buildErrorWidget(snapshot.error);
+          return _buildErrorWidget(snapshot.error);
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return const ShimmerWidget(radius: 10);
         } else if (snapshot.hasData && snapshot.data != null) {
-          return buildProductCard(snapshot.data!);
+          return _buildProductCard(snapshot.data!);
         } else {
-          return buildCouldNotLoadProductWidget();
+          return _buildCouldNotLoadProductWidget();
         }
       },
     );
   }
 
-  Widget buildProductCard(ProductModel product) {
-    final isDark = HelperFunctions.isDarkMode(context);
+  Widget _buildProductCard(ProductModel product) {
+    final imageBackgroundColor = Colors.white;
+
     // Check if there are any variants
     final hasVariants = product.variants.isNotEmpty;
     // Get the first variant or null if there are no variants
@@ -60,15 +67,19 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
 
     return InkWell(
       // TODO: Route to correct product details
-      onTap: () => Get.to(() => const ProductDetailsScreen()),
+      onTap: () => Get.to(
+        () => ProductDetailsScreen(productId: widget.productId),
+      ),
       child: SizedBox(
         width: 140,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Image & Rating on bottom left
             RoundedCornerContainer(
               height: 190,
-              backgroundColor: isDark ? GColors.darkerGrey : GColors.grey,
+              backgroundColor: imageBackgroundColor,
               child: Stack(
                 children: [
                   // Image
@@ -92,6 +103,7 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
 
             const SizedBox(height: GSizes.spaceBtwItems / 2),
 
+            // Title, Price & Offer texts
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,6 +115,7 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
+                const SizedBox(height: GSizes.spaceBtwItems / 2),
 
                 // Price
                 if (firstVariant != null)
@@ -110,12 +123,10 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
                     children: [
                       // calculate discounted price from discount percentage
                       ProductPriceText(
-                          price: getFormattedDiscountedPrice(
+                          price: _getFormattedDiscountedPrice(
                             variant: firstVariant,
                           ),
                           isLarge: true),
-
-                      const SizedBox(width: GSizes.spaceBtwItems / 2),
 
                       // actual price strikethrough
                       if (shouldShowOriginalPrice)
@@ -142,7 +153,7 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
     );
   }
 
-  String getFormattedDiscountedPrice({required ProductVariantModel variant}) {
+  String _getFormattedDiscountedPrice({required ProductVariantModel variant}) {
     if (!variant.isDiscountApplicable || variant.discountPercentage == 1) {
       return variant.price.toStringAsFixed(2);
     }
@@ -151,7 +162,7 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
         .toStringAsFixed(2);
   }
 
-  Widget buildErrorWidget(Object? error) {
+  Widget _buildErrorWidget(Object? error) {
     return Placeholder(
       child: Center(
         child: Text("Error: $error", textAlign: TextAlign.center),
@@ -159,7 +170,7 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
     );
   }
 
-  Widget buildCouldNotLoadProductWidget() {
+  Widget _buildCouldNotLoadProductWidget() {
     return const Placeholder(
       child: Center(
         child: Text(GTexts.couldNotLoadProduct, textAlign: TextAlign.center),
