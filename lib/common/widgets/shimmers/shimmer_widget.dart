@@ -19,7 +19,8 @@ class ShimmerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = HelperFunctions.isDarkMode(context);
     return Shimmer.fromColors(
-      baseColor: isDark ? Colors.grey[900]! : Colors.grey[300]!,
+      baseColor: Colors.transparent,
+      // baseColor: isDark ? Colors.grey[900]! : Colors.grey[300]!,
       highlightColor: isDark ? Colors.grey[100]! : Colors.grey[700]!,
       child: Container(
         width: width,

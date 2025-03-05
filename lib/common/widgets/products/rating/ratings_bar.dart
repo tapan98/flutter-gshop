@@ -26,7 +26,7 @@ class ProductRatingsBar extends StatelessWidget {
         if (showRatingNumber)
           Row(
             children: [
-              Text("$rating", style: Theme.of(context).textTheme.labelMedium),
+              Text(rating.toStringAsFixed(1), style: Theme.of(context).textTheme.labelMedium),
               const SizedBox(width: GSizes.spaceBtwItems / 2),
             ],
           ),

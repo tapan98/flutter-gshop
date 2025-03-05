@@ -7,7 +7,7 @@ class ProductGridLayout extends StatelessWidget {
   const ProductGridLayout({
     super.key,
     required this.itemCount,
-    this.mainAxisExtent = 288,
+    this.mainAxisExtent = 300,
     this.scrollDirection = Axis.vertical,
     required this.itemBuilder,
   });

@@ -50,6 +50,11 @@ class ProductsController extends GetxController {
   Future<ProductModel?> fetchProductById(String productId) async {
     Log.debug("Fetching product by ID: $productId");
 
+    if (productId.isEmpty) {
+      Log.warning("Product id is empty: $productId");
+      return null;
+    }
+
     if (_productCache.containsKey(productId)) {
       Log.info("Product found in cache: $productId");
       return _productCache[productId];

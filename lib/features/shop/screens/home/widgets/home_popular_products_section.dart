@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gshop/common/widgets/layouts/grid_layout.dart';
+import 'package:get/get.dart';
+import 'package:gshop/common/widgets/layouts/products_grid_layout.dart';
 import 'package:gshop/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:gshop/common/widgets/texts/section_heading.dart';
 import 'package:gshop/features/shop/controllers/products_controller.dart';
+import 'package:gshop/features/shop/screens/popular_products/popular_products_screen.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 
@@ -21,8 +23,7 @@ class HomePopularProductsSection extends StatelessWidget {
         SectionHeading(
           title: GTexts.popularProducts,
           buttonTitle: GTexts.viewAll,
-          // TODO: Route to popular products screen
-          onTap: () {},
+          onTap: () => Get.to(() => const PopularProductsScreen()),
         ),
 
         // Vertical Product Cards
