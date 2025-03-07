@@ -49,7 +49,6 @@ class CategoryController extends GetxController {
 
       categories.value = await _categoryRepository.getCategories();
 
-      Log.debug("Got ${categories.length} categories");
 
       categoriesLoading.value = false;
     } catch (e) {

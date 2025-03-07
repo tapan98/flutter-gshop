@@ -23,6 +23,12 @@ class ProductVariantModel {
     required this.discountPercentage,
   });
 
+  Set<String> get allPropertyValues {
+    Set<String> values = {};
+    properties.forEach((key, value) => values.add(value));
+    return values;
+  }
+
   static ProductVariantModel empty() {
     return ProductVariantModel(
       price: 0.0,
@@ -36,18 +42,17 @@ class ProductVariantModel {
 
   // Factory constructor to create a variant model from a map
   factory ProductVariantModel.fromMap(Map<String, dynamic> data) {
-    Log.debug("Getting variant details for product: $data");
     return ProductVariantModel(
       price: getPriceValue(data[variantPriceKey]),
       sku: data[variantSkuKey] ?? "",
       stock: getStockValue(data[variantStockKey]),
       images: getImages(data[variantImagesKey]),
-      properties: getProperties(data[variantPropertiesKey]),
+      properties: Map.unmodifiable(_getProperties(data[variantPropertiesKey])),
       discountPercentage: getDiscountPercentage(data[discountMultiplierKey]),
     );
   }
 
-  static Map<String, String> getProperties(dynamic data) {
+  static Map<String, String> _getProperties(dynamic data) {
     Map<String, String> propertiesValue = {};
     if (data == null) {
       Log.warning("product properties is null!");
@@ -60,6 +65,7 @@ class ProductVariantModel {
     if (propertiesValue.isEmpty) {
       Log.warning("Product properties is empty: $propertiesValue");
     }
+
     return propertiesValue;
   }
 
@@ -134,7 +140,7 @@ class ProductVariantModel {
 
   @override
   String toString() {
-    return 'ProductVariantModel(price: $price, sku: $sku, stock: $stock, images: $images, properties: $properties)';
+    return 'ProductVariantModel(price: $price, sku: $sku, stock: $stock, properties: $properties)';
   }
 
   // =============== Constants ===============

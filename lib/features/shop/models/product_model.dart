@@ -3,6 +3,7 @@ import 'package:gshop/features/shop/models/product_variant_model.dart';
 import 'package:gshop/util/logger/logger.dart';
 
 class ProductModel {
+  final String id;
   final String brandId;
   final String title;
   final List<ProductVariantModel> variants;
@@ -10,6 +11,7 @@ class ProductModel {
   final Map<String, int>? ratings;
 
   ProductModel({
+    required this.id,
     required this.brandId,
     required this.title,
     required this.variants,
@@ -30,32 +32,42 @@ class ProductModel {
   }
 
   /// Returns a list of product variant property types from all variants.
-  List<String> getVariantPropertyKeys() {
+  Set<String> getAllVariantsPropertyKeys() {
     if (variants.isEmpty) {
-      return [];
+      return <String>{};
     }
 
-    Set<String> propertyKeys = {};
-
-    for (var variant in variants) {
-      propertyKeys.addAll(variant.properties.keys);
-    }
-
-    return propertyKeys.toList();
+    return variants.expand((variant) => variant.properties.keys).toSet();
   }
 
   /// Returns a list of all possible property value of [propertyKey] from all variants.
-  List<String> getVariantPropertyValues(String propertyKey) {
+  Set<String> getAllVariantsPropertyValues(String propertyKey) {
     if (variants.isEmpty) {
-      return [];
+      return <String>{};
     }
-    Set<String> propertyValues = {};
-    for (var variant in variants) {
-      if (variant.properties[propertyKey] != null) {
-        propertyValues.add(variant.properties[propertyKey]!);
+
+    return variants
+        .map((variant) => variant.properties[propertyKey]) // property values
+        .where((value) => value != null) // remove null values
+        .map((value) => value.toString())
+        .toSet();
+  }
+
+  /// Looks through each [variants] and matches if all of [propertyValues]
+  /// exists in the values field of [properties] of [ProductVariantModel]
+  ProductVariantModel? getProductVariantByPropertyValues(
+      Set<String> propertyValues) {
+    if (variants.isEmpty) {
+      return null;
+    }
+
+    for (final ProductVariantModel variant in variants) {
+      if (variant.allPropertyValues.containsAll(propertyValues)) {
+        return variant;
       }
     }
-    return propertyValues.toList();
+
+    return null;
   }
 
   int? get totalRatings {
@@ -87,7 +99,8 @@ class ProductModel {
 
     final data = document.data()!;
 
-    return ProductModel(
+    final product = ProductModel(
+      id: document.id,
       brandId: data[brandIdKey] ?? "",
       title: data[titleKey] ?? "",
       variants: (data[variantsKey] as List<dynamic>)
@@ -96,10 +109,16 @@ class ProductModel {
       offerText: data[offerTextKey],
       ratings: _getRatings(data[ratingsKey]),
     );
+
+    Log.debug("ProductModel created from Firestore: $product");
+    for (final variant in product.variants) {
+      Log.debug("Variant properties: ${variant.properties}");
+    }
+
+    return product;
   }
 
   static Map<String, int>? _getRatings(dynamic data) {
-    Log.debug("Parsing ratings from data: $data");
     if (data == null || data is! Map) {
       return null;
     }
@@ -123,11 +142,11 @@ class ProductModel {
       ratings[key] = ratingValue;
     });
 
-    Log.debug("Final parsed ratings: $ratings");
     return ratings;
   }
 
   static ProductModel empty() => ProductModel(
+        id: '',
         brandId: '',
         title: '',
         variants: [],

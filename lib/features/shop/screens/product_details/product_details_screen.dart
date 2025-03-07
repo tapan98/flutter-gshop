@@ -5,8 +5,6 @@ import 'package:gshop/common/widgets/appbar/sliver_appbar.dart';
 import 'package:gshop/common/widgets/shimmers/shimmer_widget.dart';
 import 'package:gshop/common/widgets/texts/section_heading.dart';
 import 'package:gshop/features/shop/controllers/products_controller.dart';
-import 'package:gshop/features/shop/models/product_model.dart';
-import 'package:gshop/features/shop/models/product_variant_model.dart';
 import 'package:gshop/features/shop/screens/product_details/widgets/product_deliver_widget.dart';
 import 'package:gshop/features/shop/screens/product_details/widgets/product_details_bottom_navigation_bar.dart';
 import 'package:gshop/features/shop/screens/product_details/widgets/product_details_images_slider.dart';
@@ -32,48 +30,43 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   final productsController = ProductsController.instance;
 
-  Future<ProductModel?>? _product;
-
   @override
   void initState() {
     super.initState();
-
-    _product = productsController.fetchProductById(widget.productId);
+    productsController.selectProductById(widget.productId);
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: _product,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return _buildErrorWidget(snapshot.error);
-          } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return _buildShimmerLoadingWidget();
-          } else if (snapshot.hasData && snapshot.data != null) {
-            return _buildProductDetails(snapshot.data!);
-          } else {
-            return _buildCouldNotLoadProductWidget();
-          }
-        });
+    return Obx(() {
+      if (productsController.productLoading.value) {
+        return _buildShimmerLoadingWidget();
+      } else if (productsController.product.value == null) {
+        return _buildCouldNotLoadProductWidget();
+      } else {
+        return _buildProductDetails();
+      }
+    });
   }
 
-  Widget _buildProductDetails(ProductModel product) {
-    if (product.variants.isEmpty) {
+  Widget _buildProductDetails() {
+    if (productsController.product.value == null ||
+        productsController.product.value!.variants.isEmpty ||
+        productsController.selectedVariantIndex.value == null) {
       return const Scaffold(
+        appBar: GAppBar(),
         body: Center(
-          child: Text("Product has no variants"),
+          child: Text(GTexts.couldNotLoadProduct),
         ),
       );
     }
-    final ProductVariantModel productVariant = product.variants.first;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           const GSliverAppBar(),
           // Images Slider
-          SliverToBoxAdapter(
-            child: ProductDetailsImagesSlider(images: productVariant.images),
+          const SliverToBoxAdapter(
+            child: ProductDetailsImagesSlider(),
           ),
 
           SliverToBoxAdapter(child: HelperFunctions.spaceBtwSectionsHeight()),
@@ -81,18 +74,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           // Product Details
           SliverToBoxAdapter(
             child: ProductDetailsWidget(
+              // TODO: get brand name
               brandTitle: 'SomeBrand',
-              productTitle: product.title,
-              price: productVariant.price,
-              averageRating: product.averageRating,
-              totalRatings: product.totalRatings,
+              productTitle: productsController.product.value?.title ?? "",
+              price: productsController
+                      .product
+                      .value!
+                      .variants[productsController.selectedVariantIndex.value!]
+                      .price,
+              averageRating: productsController.product.value?.averageRating,
+              totalRatings: productsController.product.value?.totalRatings,
             ),
           ),
 
           SliverToBoxAdapter(child: HelperFunctions.spaceBtwItemsHeight()),
 
           // Variation
-          SliverToBoxAdapter(child: ProductVariationsWidget(product: product)),
+          const SliverToBoxAdapter(child: ProductVariationsWidget()),
 
           SliverToBoxAdapter(child: HelperFunctions.spaceBtwItemsHeight()),
 
@@ -118,6 +116,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           // Ratings & Reviews
           SliverToBoxAdapter(
             child: SectionHeading(
+              // TODO: Get ratings and reviews count
               title: "${GTexts.ratingsAndReviews} (255)",
               onTap: () => Get.to(() => const ProductReviewsScreen()),
             ),
@@ -264,15 +263,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       appBar: GAppBar(),
       body: Center(
         child: Text(GTexts.couldNotLoadProduct, textAlign: TextAlign.center),
-      ),
-    );
-  }
-
-  Widget _buildErrorWidget(Object? error) {
-    return Scaffold(
-      appBar: const GAppBar(),
-      body: Center(
-        child: Text("Error: $error", textAlign: TextAlign.center),
       ),
     );
   }
