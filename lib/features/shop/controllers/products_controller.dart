@@ -3,7 +3,6 @@ import 'package:gshop/data/repositories/products_repository.dart';
 import 'package:gshop/features/shop/models/product_model.dart';
 import 'package:gshop/features/shop/screens/home/home_screen.dart';
 import 'package:gshop/features/shop/screens/product_details/product_details_screen.dart';
-import 'package:gshop/features/shop/screens/product_details/widgets/product_details_images_slider.dart';
 import 'package:gshop/util/constants/text_strings.dart';
 import 'package:gshop/util/helpers/snackbars.dart';
 import 'package:gshop/util/logger/logger.dart';
@@ -23,8 +22,6 @@ class ProductsController extends GetxController {
   RxList<String> popularProductIds = <String>[].obs;
   RxBool popularProductsLoading = false.obs;
 
-  /// index for Images slider in [ProductDetailsImagesSlider]
-  final RxInt imageIndex = 0.obs;
 
   /// Selected properties for product variant
   ///
@@ -108,7 +105,7 @@ class ProductsController extends GetxController {
       Log.error("selectedProperties value is null");
       return;
     } else if (selectedProperties.value!.isEmpty) {
-      Log.debug(
+      Log.warning(
           "Selected properties is empty! trying to assign a variant properties value...");
       selectedProperties.value = product.value!.variants.first.properties;
     }
@@ -132,7 +129,9 @@ class ProductsController extends GetxController {
     }
     return product.value!.getAllVariantsPropertyKeys();
   }
-  
+
+  /// Looks into all the variants of the product
+  /// and returns all the values of the given [propertyKey]
   Set<String> getAllVariantsPropertyValues(String propertyKey) {
     if (product.value == null) {
       return {};
@@ -168,9 +167,6 @@ class ProductsController extends GetxController {
 
     productLoading.value = false;
   }
-
-  /// for Images slider in [ProductDetailsScreen]
-  void updateCurrentImageIndex(int index) => imageIndex.value = index;
 
   @override
   void onInit() {

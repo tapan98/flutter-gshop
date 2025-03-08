@@ -13,7 +13,7 @@ class ProductVariationsWidget extends StatefulWidget {
       _ProductVariationsWidgetState();
 }
 
-/// Stateful widget is used to force rebuild of the widget
+/// Stateful widget is used to force rebuild child widgets
 /// because [Obx] doesn't rebuild widgets on deeply nested data changes
 class _ProductVariationsWidgetState extends State<ProductVariationsWidget> {
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gshop/common/widgets/products/rating/ratings_bar.dart';
-import 'package:gshop/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:gshop/common/widgets/texts/product_title_text.dart';
+import 'package:gshop/features/shop/screens/product_details/widgets/proudct_details_brand_name.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/helpers/helper_functions.dart';
 
@@ -9,14 +9,14 @@ import 'package:gshop/util/helpers/helper_functions.dart';
 class ProductDetailsWidget extends StatelessWidget {
   const ProductDetailsWidget({
     super.key,
-    required this.brandTitle,
+    required this.brandId,
     required this.productTitle,
     required this.price,
     this.averageRating,
     this.totalRatings,
   });
 
-  final String brandTitle, productTitle;
+  final String brandId, productTitle;
   final double price;
   final double? averageRating;
   final int? totalRatings;
@@ -34,7 +34,7 @@ class ProductDetailsWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                BrandTitleTextWithVerifiedIcon(title: brandTitle),
+                Flexible(child: ProductDetailsBrandName(brandId: brandId)),
 
                 // Rating Bar
                 if (averageRating != null && totalRatings != null)

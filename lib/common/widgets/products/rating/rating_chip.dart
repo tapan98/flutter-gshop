@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gshop/common/widgets/custom_shapes/container/rounded_corner_container.dart';
 import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/sizes.dart';
-import 'package:gshop/util/helpers/helper_functions.dart';
 
 class RatingChip extends StatelessWidget {
   const RatingChip({
@@ -19,11 +18,10 @@ class RatingChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = HelperFunctions.isDarkMode(context);
     return RoundedCornerContainer(
       padding: const EdgeInsets.all(GSizes.xs),
       radius: GSizes.xs,
-      backgroundColor: isDark ? GColors.grey : GColors.white,
+      backgroundColor: GColors.grey,
       child: Row(
         children: [
           Text("$rating ",

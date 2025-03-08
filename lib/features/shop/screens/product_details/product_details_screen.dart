@@ -4,6 +4,7 @@ import 'package:gshop/common/widgets/appbar/appbar.dart';
 import 'package:gshop/common/widgets/appbar/sliver_appbar.dart';
 import 'package:gshop/common/widgets/shimmers/shimmer_widget.dart';
 import 'package:gshop/common/widgets/texts/section_heading.dart';
+import 'package:gshop/features/shop/controllers/brands_controller.dart';
 import 'package:gshop/features/shop/controllers/products_controller.dart';
 import 'package:gshop/features/shop/screens/product_details/widgets/product_deliver_widget.dart';
 import 'package:gshop/features/shop/screens/product_details/widgets/product_details_bottom_navigation_bar.dart';
@@ -29,6 +30,7 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   final productsController = ProductsController.instance;
+  final brandsController = BrandsController.instance;
 
   @override
   void initState() {
@@ -73,17 +75,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
           // Product Details
           SliverToBoxAdapter(
-            child: ProductDetailsWidget(
-              // TODO: get brand name
-              brandTitle: 'SomeBrand',
-              productTitle: productsController.product.value?.title ?? "",
-              price: productsController
-                      .product
-                      .value!
-                      .variants[productsController.selectedVariantIndex.value!]
-                      .price,
-              averageRating: productsController.product.value?.averageRating,
-              totalRatings: productsController.product.value?.totalRatings,
+            child: Obx(
+              () => ProductDetailsWidget(
+                brandId: productsController.product.value!.brandId,
+                productTitle: productsController.product.value!.title,
+                price: productsController
+                        .product
+                        .value!
+                        .variants[productsController.selectedVariantIndex.value!]
+                        .price,
+                averageRating: productsController.product.value?.averageRating,
+                totalRatings: productsController.product.value?.totalRatings,
+              ),
             ),
           ),
 

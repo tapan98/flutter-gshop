@@ -20,7 +20,7 @@ class PromoRepository extends GetxController {
   Future<List<PromoModel>> getPromos() async {
     try {
       final snapshot = await _firestore
-          .collection(FirestoreCollections.firebasePromosCollection)
+          .collection(FirestoreCollections.promosCollection)
           .get();
 
       final List<PromoModel> promos = snapshot.docs

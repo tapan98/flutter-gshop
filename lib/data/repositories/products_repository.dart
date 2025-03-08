@@ -25,7 +25,7 @@ class ProductsRepository extends GetxController {
     Log.debug("Fetching product by id: $productId...");
     try {
       final DocumentSnapshot<Map<String, dynamic>> snapshot = await _firestore
-          .collection(FirestoreCollections.firebaseProductsCollection)
+          .collection(FirestoreCollections.productsCollection)
           .doc(productId)
           .get();
 
@@ -50,7 +50,7 @@ class ProductsRepository extends GetxController {
   Future<ProductModel?> getProductBySku(String sku) async {
     try {
       final QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
-          .collection(FirestoreCollections.firebaseProductsCollection)
+          .collection(FirestoreCollections.productsCollection)
           .where(ProductModel.variantsKey,
               arrayContains: {ProductVariantModel.variantSkuKey: sku}).get();
 
@@ -74,7 +74,7 @@ class ProductsRepository extends GetxController {
   Future<List<String>> getPopularProductIds() async {
     try {
       final QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
-          .collection(FirestoreCollections.firebasePopularProductsCollection)
+          .collection(FirestoreCollections.popularProductsCollection)
           .get();
 
       if (snapshot.docs.isEmpty) {

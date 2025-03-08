@@ -37,39 +37,41 @@ class RoundedCornerImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        padding: padding,
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          border: border,
-          borderRadius: BorderRadius.circular(borderRadius),
-          color: backgroundColor,
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(borderRadius),
-          child: showShimmer
-              ? const ShimmerWidget()
-              : (isNetworkImage
-                  ? CachedNetworkImage(
-                      imageUrl: imageUrl,
-                      fit: fit,
-                      progressIndicatorBuilder: (_, __, ___) =>
-                          const ShimmerWidget(),
-                      errorWidget: (_, __, ___) {
-                        Log.error("Failed to load network image: $imageUrl");
-                        return buildCouldNotLoadImage();
-                      },
-                    )
-                  : Image(
-                      image: AssetImage(imageUrl),
-                      fit: fit,
-                      errorBuilder: (_, error, stackTrace) {
-                        Log.error(error);
-                        Log.error(stackTrace);
-                        return buildCouldNotLoadImage();
-                      },
-                    )),
+      child: Center(
+        child: Container(
+          padding: padding,
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            border: border,
+            borderRadius: BorderRadius.circular(borderRadius),
+            color: backgroundColor,
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(borderRadius),
+            child: showShimmer
+                ? const ShimmerWidget()
+                : (isNetworkImage
+                    ? CachedNetworkImage(
+                        imageUrl: imageUrl,
+                        fit: fit,
+                        progressIndicatorBuilder: (_, __, ___) =>
+                            const ShimmerWidget(),
+                        errorWidget: (_, __, ___) {
+                          Log.error("Failed to load network image: $imageUrl");
+                          return buildCouldNotLoadImage();
+                        },
+                      )
+                    : Image(
+                        image: AssetImage(imageUrl),
+                        fit: fit,
+                        errorBuilder: (_, error, stackTrace) {
+                          Log.error(error);
+                          Log.error(stackTrace);
+                          return buildCouldNotLoadImage();
+                        },
+                      )),
+          ),
         ),
       ),
     );

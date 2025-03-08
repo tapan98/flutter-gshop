@@ -13,6 +13,7 @@ class PromoSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
+    RxInt carouselCurrentIndex = 0.obs;
     return Column(
       children: [
         // Slider Images
@@ -22,7 +23,7 @@ class PromoSlider extends StatelessWidget {
               autoPlay: true,
               autoPlayInterval: const Duration(seconds: 10),
               onPageChanged: (index, _) =>
-                  controller.updateCarouselCurrentIndex(index),
+                  carouselCurrentIndex.value = index,
               viewportFraction: 1,
               aspectRatio: 1.9,
 
@@ -53,7 +54,7 @@ class PromoSlider extends StatelessWidget {
                   margin: const EdgeInsets.only(right: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    color: controller.carouselCurrentIndex.value == i
+                    color: carouselCurrentIndex.value == i
                         ? GColors.primary
                         : Colors.grey,
                   ),

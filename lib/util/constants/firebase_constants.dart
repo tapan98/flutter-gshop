@@ -1,14 +1,15 @@
 class FirestoreCollections {
   // ============== Top-level collections ==============
-  static const String firestoreUsersCollection = "Users";
-  static const String firebaseCategoriesCollection = "Categories";
-  static const String firebasePromosCollection = "PromoBanners";
-  static const String firebaseProductsCollection = "Products";
-  static const String firebasePopularProductsCollection = "PopularProducts";
+  static const String usersCollection = "Users";
+  static const String categoriesCollection = "Categories";
+  static const String promosCollection = "PromoBanners";
+  static const String productsCollection = "Products";
+  static const String popularProductsCollection = "PopularProducts";
+  static const String brandsCollection = "Brands";
 
   // ==============  Sub-collections ==============
-  static const String firebaseSubCategoriesCollectionString = "SubCategories";
-  static const String firebaseSubCategoryItemsCollectionString = "SubCategoryItems";
+  static const String subCategoriesCollectionString = "SubCategories";
+  static const String subCategoryItemsCollectionString = "SubCategoryItems";
 
 
   FirestoreCollections._();
@@ -16,7 +17,7 @@ class FirestoreCollections {
 
 class FirebaseStoragePaths {
   static final String firebaseStorageUsersProfilePicturesPath =
-      "${FirestoreCollections.firestoreUsersCollection}/ProfilePictures/";
+      "${FirestoreCollections.usersCollection}/ProfilePictures/";
 
   FirebaseStoragePaths._();
 }

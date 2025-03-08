@@ -9,8 +9,10 @@ import 'package:gshop/features/shop/controllers/products_controller.dart';
 import 'package:gshop/features/shop/models/product_model.dart';
 import 'package:gshop/features/shop/models/product_variant_model.dart';
 import 'package:gshop/features/shop/screens/product_details/product_details_screen.dart';
+import 'package:gshop/util/constants/colors.dart';
 import 'package:gshop/util/constants/sizes.dart';
 import 'package:gshop/util/constants/text_strings.dart';
+import 'package:gshop/util/helpers/helper_functions.dart';
 
 class ProductCardVertical extends StatefulWidget {
   const ProductCardVertical({
@@ -54,6 +56,7 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
   }
 
   Widget _buildProductCard(ProductModel product) {
+    final isDark = HelperFunctions.isDarkMode(context);
     final imageBackgroundColor = Colors.white;
 
     // Check if there are any variants
@@ -66,88 +69,93 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
         firstVariant != null && firstVariant.isDiscountApplicable;
 
     return InkWell(
-      // TODO: Route to correct product details
       onTap: () => Get.to(
         () => ProductDetailsScreen(productId: widget.productId),
       ),
       child: SizedBox(
         width: 140,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Image & Rating on bottom left
-            RoundedCornerContainer(
-              height: 190,
-              backgroundColor: imageBackgroundColor,
-              child: Stack(
-                children: [
-                  // Image
-                  RoundedCornerImage(
-                    imageUrl: product.firstImage,
-                    isNetworkImage: true,
-                  ),
-                  // Rating on Bottom left
-                  const Positioned(
-                    bottom: 12,
-                    left: 12,
-                    // TODO: Get ratings
-                    child: RatingChip(
-                      rating: "4.5",
-                      totalRatings: null,
+        child: RoundedCornerContainer(
+          backgroundColor: isDark ? GColors.dark : GColors.light,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Image & Rating on bottom left
+              RoundedCornerContainer(
+                height: 190,
+                backgroundColor: imageBackgroundColor,
+                child: Stack(
+                  children: [
+                    // Image
+                    RoundedCornerImage(
+                      imageUrl: product.firstImage,
+                      isNetworkImage: true,
                     ),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: GSizes.spaceBtwItems / 2),
-
-            // Title, Price & Offer texts
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Product Details
-                Text(
-                  product.title,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                    // Rating on Bottom left
+                    const Positioned(
+                      bottom: 12,
+                      left: 12,
+                      // TODO: Get ratings
+                      child: RatingChip(
+                        rating: "4.5",
+                        totalRatings: null,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: GSizes.spaceBtwItems / 2),
+              ),
 
-                // Price
-                if (firstVariant != null)
-                  Wrap(
-                    children: [
-                      // calculate discounted price from discount percentage
-                      ProductPriceText(
-                          price: _getFormattedDiscountedPrice(
-                            variant: firstVariant,
-                          ),
-                          isLarge: true),
+              const SizedBox(height: GSizes.spaceBtwItems / 2),
 
-                      // actual price strikethrough
-                      if (shouldShowOriginalPrice)
-                        ProductPriceText(
-                            price: firstVariant.price.toStringAsFixed(2),
-                            lineThrough: true),
-                    ],
-                  ),
+              // Title, Price & Offer texts
+              Padding(
+                padding: const EdgeInsets.all(GSizes.xs),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Product Details
+                    Text(
+                      product.title,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: GSizes.spaceBtwItems / 2),
 
-                const SizedBox(height: GSizes.spaceBtwItems / 2),
+                    // Price
+                    if (firstVariant != null)
+                      Wrap(
+                        children: [
+                          // calculate discounted price from discount percentage
+                          ProductPriceText(
+                              price: _getFormattedDiscountedPrice(
+                                variant: firstVariant,
+                              ),
+                              isLarge: true),
 
-                // offer text
-                if (product.offerText != null)
-                  Text(
-                    product.offerText!,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-              ],
-            ),
-          ],
+                          // actual price strikethrough
+                          if (shouldShowOriginalPrice)
+                            ProductPriceText(
+                                price: firstVariant.price.toStringAsFixed(2),
+                                lineThrough: true),
+                        ],
+                      ),
+
+                    const SizedBox(height: GSizes.spaceBtwItems / 2),
+
+                    // offer text
+                    if (product.offerText != null)
+                      Text(
+                        product.offerText!,
+                        style: Theme.of(context).textTheme.labelLarge,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

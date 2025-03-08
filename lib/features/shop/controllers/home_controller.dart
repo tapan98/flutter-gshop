@@ -10,18 +10,13 @@ import 'package:gshop/util/logger/logger.dart';
 class HomeController extends GetxController {
   static HomeController get instance => Get.find();
 
-  final RxInt carouselCurrentIndex = 0.obs;
+  // ==================== Data ====================
   final carouselController = PageController();
   final RxList<PromoModel> promos = <PromoModel>[].obs;
   final _promoRepository = Get.put(PromoRepository());
   final RxBool isLoading = false.obs;
 
-  // Methods
-
-  void updateCarouselCurrentIndex(int index) {
-    carouselCurrentIndex.value = index;
-  }
-
+  // ==================== Methods ====================
   Future<void> fetchPromos() async {
     Log.debug("Fetching promo banners...");
     try {

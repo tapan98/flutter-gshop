@@ -25,7 +25,7 @@ class CategoryRepository extends GetxController {
   Future<List<CategoryModel>> getCategories() async {
     try {
       final QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
-          .collection(FirestoreCollections.firebaseCategoriesCollection)
+          .collection(FirestoreCollections.categoriesCollection)
           .get();
       final List<CategoryModel> categories = snapshot.docs
           .map((category) => CategoryModel.fromDocumentSnapshot(category))
@@ -45,10 +45,10 @@ class CategoryRepository extends GetxController {
       // Get Sub category documents
       final QuerySnapshot<Map<String, dynamic>> subCategorySnapshot =
           await _firestore
-              .collection(FirestoreCollections.firebaseCategoriesCollection)
+              .collection(FirestoreCollections.categoriesCollection)
               .doc(categoryId)
               .collection(
-                  FirestoreCollections.firebaseSubCategoriesCollectionString)
+                  FirestoreCollections.subCategoriesCollectionString)
               .get();
 
       // Create a list of SubCategoryModel from documents
@@ -61,13 +61,13 @@ class CategoryRepository extends GetxController {
         final QuerySnapshot<Map<String, dynamic>> subCategoryItemsSnapshot =
             await _firestore
                 .collection(FirestoreCollections
-                    .firebaseCategoriesCollection) // in categories collection
+                    .categoriesCollection) // in categories collection
                 .doc(categoryId) // in category document
                 .collection(FirestoreCollections
-                    .firebaseSubCategoriesCollectionString) // in subcategories collection
+                    .subCategoriesCollectionString) // in subcategories collection
                 .doc(subCategory.id) // in sub category document
                 .collection(FirestoreCollections
-                    .firebaseSubCategoryItemsCollectionString) // in sub category items collection
+                    .subCategoryItemsCollectionString) // in sub category items collection
                 .get(); // get sub category items
 
         // Create a list of SubCategoryItemModel

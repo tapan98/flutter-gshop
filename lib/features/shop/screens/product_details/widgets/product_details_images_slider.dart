@@ -17,6 +17,7 @@ class ProductDetailsImagesSlider extends StatelessWidget {
     final controller = ProductsController.instance;
     final Rx<ProductModel?> product = controller.product;
     final Color backgroundColor = Colors.white;
+    RxInt imageIndex = 0.obs;
     return Column(
       children: [
         Container(
@@ -34,7 +35,8 @@ class ProductDetailsImagesSlider extends StatelessWidget {
                         return CarouselSlider(
                           options: CarouselOptions(
                             onPageChanged: (index, _) =>
-                                controller.updateCurrentImageIndex(index),
+                                imageIndex.value = index,
+                                // controller.updateCurrentImageIndex(index),
                           ),
                           items: product
                               .value!
@@ -85,7 +87,7 @@ class ProductDetailsImagesSlider extends StatelessWidget {
                               margin: const EdgeInsets.only(right: 10),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
-                                color: controller.imageIndex.value == i
+                                color: imageIndex.value == i
                                     ? GColors.primary
                                     : GColors.grey,
                               ),

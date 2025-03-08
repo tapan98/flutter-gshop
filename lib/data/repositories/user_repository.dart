@@ -42,7 +42,7 @@ class UserRepository extends GetxController {
       }
 
       await _firestore
-          .collection(FirestoreCollections.firestoreUsersCollection)
+          .collection(FirestoreCollections.usersCollection)
           .doc(user.uid)
           .update(data);
     } on FirebaseException catch (e) {
@@ -68,7 +68,7 @@ class UserRepository extends GetxController {
       user.reload();
 
       final DocumentSnapshot<Map<String, dynamic>> snapshot = await _firestore
-          .collection(FirestoreCollections.firestoreUsersCollection)
+          .collection(FirestoreCollections.usersCollection)
           .doc(user.uid)
           .get();
 
@@ -95,7 +95,7 @@ class UserRepository extends GetxController {
   Future<void> saveUserRecord(UserModel user) async {
     try {
       await _firestore
-          .collection(FirestoreCollections.firestoreUsersCollection)
+          .collection(FirestoreCollections.usersCollection)
           .doc(user.userId)
           .set(user.toMap());
     } on FirebaseException catch (e) {
@@ -109,7 +109,7 @@ class UserRepository extends GetxController {
   Future<bool> isUserIdRegistered(String userId) async {
     try {
       final documentSnapshot = await _firestore
-          .collection(FirestoreCollections.firestoreUsersCollection)
+          .collection(FirestoreCollections.usersCollection)
           .doc(userId)
           .get();
 
@@ -124,7 +124,7 @@ class UserRepository extends GetxController {
     try {
       // check if email exists in Firestore Database
       final querySnapshot = await _firestore
-          .collection(FirestoreCollections.firestoreUsersCollection)
+          .collection(FirestoreCollections.usersCollection)
           .where(UserModel.emailKey, isEqualTo: email)
           .get();
       return querySnapshot.docs.isNotEmpty;
@@ -141,7 +141,7 @@ class UserRepository extends GetxController {
     try {
       // check if username exists in Firestore Database
       final querySnapshot = await _firestore
-          .collection(FirestoreCollections.firestoreUsersCollection)
+          .collection(FirestoreCollections.usersCollection)
           .where(UserModel.usernameKey, isEqualTo: username)
           .get();
       return querySnapshot.docs.isEmpty;
@@ -219,7 +219,7 @@ class UserRepository extends GetxController {
     try {
       // Delete user document from Firestore
       await _firestore
-          .collection(FirestoreCollections.firestoreUsersCollection)
+          .collection(FirestoreCollections.usersCollection)
           .doc(userId)
           .delete();
     } on FirebaseException catch (e) {

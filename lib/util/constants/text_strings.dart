@@ -123,6 +123,7 @@ class GTexts {
   static const String noCategoriesAvailable = "No categories available";
   static const String couldNotLoadProduct = "Couldn't load product";
   static const String popularProducts = "Popular Products";
+  static const String couldNotLoadBrandName = "Couldn't load brand name";
 
   // Settings
   static const String orders = "orders";
