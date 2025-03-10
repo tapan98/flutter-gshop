@@ -75,7 +75,9 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
       child: SizedBox(
         width: 140,
         child: RoundedCornerContainer(
-          backgroundColor: isDark ? GColors.dark : GColors.light,
+          backgroundColor: isDark
+              ? GColors.dark.withValues(alpha: 0.5)
+              : GColors.light.withValues(alpha: 0.5),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,9 +131,8 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
                         children: [
                           // calculate discounted price from discount percentage
                           ProductPriceText(
-                              price: _getFormattedDiscountedPrice(
-                                variant: firstVariant,
-                              ),
+                              price: firstVariant.discountedPrice
+                                  .toStringAsFixed(2),
                               isLarge: true),
 
                           // actual price strikethrough
@@ -159,15 +160,6 @@ class _ProductCardVerticalState extends State<ProductCardVertical> {
         ),
       ),
     );
-  }
-
-  String _getFormattedDiscountedPrice({required ProductVariantModel variant}) {
-    if (!variant.isDiscountApplicable || variant.discountPercentage == 1) {
-      return variant.price.toStringAsFixed(2);
-    }
-
-    return (variant.price * (1 - variant.discountPercentage))
-        .toStringAsFixed(2);
   }
 
   Widget _buildErrorWidget(Object? error) {

@@ -6,6 +6,7 @@ import 'package:gshop/common/widgets/shimmers/shimmer_widget.dart';
 import 'package:gshop/common/widgets/texts/section_heading.dart';
 import 'package:gshop/features/shop/controllers/brands_controller.dart';
 import 'package:gshop/features/shop/controllers/products_controller.dart';
+import 'package:gshop/features/shop/models/product_model.dart';
 import 'package:gshop/features/shop/screens/product_details/widgets/product_deliver_widget.dart';
 import 'package:gshop/features/shop/screens/product_details/widgets/product_details_bottom_navigation_bar.dart';
 import 'package:gshop/features/shop/screens/product_details/widgets/product_details_images_slider.dart';
@@ -62,13 +63,22 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
       );
     }
+
+    final Rx<ProductModel?> product = productsController.product;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           const GSliverAppBar(),
           // Images Slider
-          const SliverToBoxAdapter(
-            child: ProductDetailsImagesSlider(),
+          SliverToBoxAdapter(
+            child: Obx(
+              () => ProductDetailsImagesSlider(
+                images: product
+                    .value!
+                    .variants[productsController.selectedVariantIndex.value!]
+                    .images,
+              ),
+            ),
           ),
 
           SliverToBoxAdapter(child: HelperFunctions.spaceBtwSectionsHeight()),
@@ -77,15 +87,25 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           SliverToBoxAdapter(
             child: Obx(
               () => ProductDetailsWidget(
-                brandId: productsController.product.value!.brandId,
-                productTitle: productsController.product.value!.title,
-                price: productsController
-                        .product
+                brandId: product.value!.brandId,
+                productTitle: product.value!.title,
+                price: product
+                    .value!
+                    .variants[productsController.selectedVariantIndex.value!]
+                    .price,
+                discountedPrice: (product
                         .value!
-                        .variants[productsController.selectedVariantIndex.value!]
-                        .price,
-                averageRating: productsController.product.value?.averageRating,
-                totalRatings: productsController.product.value?.totalRatings,
+                        .variants[
+                            productsController.selectedVariantIndex.value!]
+                        .isDiscountApplicable) // if discount applicable
+                    ? product
+                        .value!
+                        .variants[
+                            productsController.selectedVariantIndex.value!]
+                        .discountedPrice // pass discounted price
+                    : null,
+                averageRating: product.value?.averageRating,
+                totalRatings: product.value?.totalRatings,
               ),
             ),
           ),

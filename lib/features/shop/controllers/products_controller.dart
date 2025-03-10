@@ -22,7 +22,6 @@ class ProductsController extends GetxController {
   RxList<String> popularProductIds = <String>[].obs;
   RxBool popularProductsLoading = false.obs;
 
-
   /// Selected properties for product variant
   ///
   /// Used in [ProductDetailsScreen]
@@ -96,7 +95,7 @@ class ProductsController extends GetxController {
     }
   }
 
-  /// Updates the product variants based on the values of [selectedProperties]
+  /// Updates the value of [selectedVariantIndex] based on the values of [selectedProperties]
   void updateProductVariant() {
     if (product.value == null) {
       Log.error("product value is null");
@@ -115,6 +114,7 @@ class ProductsController extends GetxController {
       if (variant.allPropertyValues
           .containsAll(selectedProperties.value!.values)) {
         selectedVariantIndex.value = i;
+        return;
       }
     }
 
@@ -122,7 +122,7 @@ class ProductsController extends GetxController {
       Log.warning("productVariant index is null");
     }
   }
-  
+
   Set<String> get allVariantsPropertyKeys {
     if (product.value == null) {
       return {};
@@ -137,7 +137,6 @@ class ProductsController extends GetxController {
       return {};
     }
     return product.value!.getAllVariantsPropertyValues(propertyKey);
-
   }
 
   /// Calls [fetchProductById] to set the value of [product]
@@ -146,7 +145,6 @@ class ProductsController extends GetxController {
   ///
   /// Also updates [selectedProperties] using the property values of [productVariant]
   Future<void> selectProductById(String productId) async {
-
     productLoading.value = true;
     product.value = await fetchProductById(productId);
 

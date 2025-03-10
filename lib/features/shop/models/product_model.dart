@@ -99,15 +99,18 @@ class ProductModel {
 
     final data = document.data()!;
 
+    final Map<String, int>? ratings = _getRatings(data[ratingsKey]);
+
     final product = ProductModel(
       id: document.id,
       brandId: data[brandIdKey] ?? "",
       title: data[titleKey] ?? "",
-      variants: (data[variantsKey] as List<dynamic>)
-          .map((e) => ProductVariantModel.fromMap(e))
-          .toList(),
+      variants: List<ProductVariantModel>.unmodifiable(
+          (data[variantsKey] as List<dynamic>)
+              .map((e) => ProductVariantModel.fromMap(e))
+              .toList()),
       offerText: data[offerTextKey],
-      ratings: _getRatings(data[ratingsKey]),
+      ratings: ratings != null ? Map<String, int>.unmodifiable(ratings) : null,
     );
 
     Log.debug("ProductModel created from Firestore: $product");

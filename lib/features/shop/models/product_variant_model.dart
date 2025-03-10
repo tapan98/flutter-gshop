@@ -43,12 +43,12 @@ class ProductVariantModel {
   // Factory constructor to create a variant model from a map
   factory ProductVariantModel.fromMap(Map<String, dynamic> data) {
     return ProductVariantModel(
-      price: getPriceValue(data[variantPriceKey]),
+      price: _getPriceValue(data[variantPriceKey]),
       sku: data[variantSkuKey] ?? "",
-      stock: getStockValue(data[variantStockKey]),
-      images: getImages(data[variantImagesKey]),
+      stock: _getStockValue(data[variantStockKey]),
+      images: List<String>.unmodifiable(_getImages(data[variantImagesKey])),
       properties: Map.unmodifiable(_getProperties(data[variantPropertiesKey])),
-      discountPercentage: getDiscountPercentage(data[discountMultiplierKey]),
+      discountPercentage: _getDiscountPercentage(data[discountMultiplierKey]),
     );
   }
 
@@ -69,7 +69,30 @@ class ProductVariantModel {
     return propertiesValue;
   }
 
-  static double getDiscountPercentage(dynamic data) {
+  /// Returns [true] if discounted price > 0 & <= 1
+  ///
+  /// Otherwise, [false]
+  bool get isDiscountApplicable {
+    if (discountPercentage > 0 && discountPercentage <= 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /// Calculates discounted price (if applicable)
+  /// and returns the discounted price
+  ///
+  /// Note: use .toStringAsFixed(x) to display the price with x decimal places
+  double get discountedPrice {
+    if (!isDiscountApplicable || discountPercentage == 1) {
+      return price;
+    } else {
+      return (price * (1 - discountPercentage));
+    }
+  }
+
+  static double _getDiscountPercentage(dynamic data) {
     if (data == null) {
       return 0;
     }
@@ -91,15 +114,7 @@ class ProductVariantModel {
     return discountValue;
   }
 
-  bool get isDiscountApplicable {
-    if (discountPercentage > 0 && discountPercentage <= 1) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  static List<String> getImages(List<dynamic>? imagesData) {
+  static List<String> _getImages(List<dynamic>? imagesData) {
     if (imagesData == null) {
       return [];
     }
@@ -114,7 +129,7 @@ class ProductVariantModel {
     return images;
   }
 
-  static int getStockValue(dynamic stockData) {
+  static int _getStockValue(dynamic stockData) {
     if (stockData is double) {
       return stockData.toInt();
     } else if (stockData is int) {
@@ -127,7 +142,7 @@ class ProductVariantModel {
     }
   }
 
-  static double getPriceValue(dynamic priceData) {
+  static double _getPriceValue(dynamic priceData) {
     if (priceData is double) {
       return priceData;
     } else if (priceData is int) {

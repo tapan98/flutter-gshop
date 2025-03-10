@@ -3,8 +3,8 @@ import 'package:gshop/features/shop/models/sub_category_item_model.dart';
 
 /// Represents second-level category
 class SubCategoryModel {
-  String id;
-  String title;
+  final String id;
+  final String title;
   List<SubCategoryItemModel> items;
 
   SubCategoryModel({
